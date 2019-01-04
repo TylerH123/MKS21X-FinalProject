@@ -1,6 +1,7 @@
-public abstract class fourBlock{
+public interface fourBlock{
 
-  public fourBlock(block a, block b, block c, block d){
-  }
-
+  void moveRight();
+  void moveLeft();
+  void descend();
+  
 }
