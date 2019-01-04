@@ -22,5 +22,25 @@ public class Block{
     return ycor;
   }
 
-  
+  public int setY(int g){
+    int storage = ycor;
+    ycor = g;
+    return storage;
+  }
+
+  public int setX(int g){
+    int storage = xcor;
+    xcor = g;
+    return storage;
+  }
+//Basic ToString BlockShape
+  public String toString(){
+    String ans = "_\n";
+   if(x == 0){
+      ans += "| |";
+    } else{
+      ans += " |";
+  }
+  if(y == 0) ans += "\n_";
+  return ans;
 }
