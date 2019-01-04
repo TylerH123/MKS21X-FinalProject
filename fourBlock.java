@@ -5,5 +5,5 @@ public interface fourBlock{
   void descend();
   void rotateRight();
   void rotateLeft();
-  
+  String toString();
 }
