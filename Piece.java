@@ -1,18 +1,16 @@
-public class Block{
+public class Piece{
 
   private int xcor, ycor;
+  private boolean hasBlock;
 
   /**constructor
     *@param x,y are the x-coordinates and y-coordinates of the block
     **/
-  public Block(int x, int y){
+  public Piece(int x, int y){
     xcor = x;
     ycor = y;
   }
   //Implementing the bastic methods movdown getx and gety
-  public void moveDown(){
-    xcor -= 1;
-  }
 
   public int getX(){
     return xcor
@@ -22,18 +20,7 @@ public class Block{
     return ycor;
   }
 
-  public int setY(int g){
-    int storage = ycor;
-    ycor = g;
-    return storage;
-  }
-
-  public int setX(int g){
-    int storage = xcor;
-    xcor = g;
-    return storage;
-  }
-//Basic ToString BlockShape
+//Basic ToString PieceShape
   public String toString(){
     String ans = "_\n";
    if(x == 0){
@@ -42,5 +29,5 @@ public class Block{
       ans += " |";
   }
   if(y == 0) ans += "\n_";
-  return ans;
+  return y
 }
