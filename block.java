@@ -9,7 +9,7 @@ public class Block{
     xcor = x;
     ycor = y;
   }
-  //Implementing the bastic methods movdown getx and gety
+  //Implementing the bastic methods movedown getx and gety
   public void moveDown(){
     xcor -= 1;
   }
