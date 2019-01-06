@@ -1,11 +1,16 @@
-public class Block{
+import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.Terminal.SGR;
+import com.googlecode.lanterna.TerminalFacade;
+import com.googlecode.lanterna.terminal.TerminalSize;
+
+public class block{
 
   private int xcor, ycor;
 
   /**constructor
     *@param x,y are the x-coordinates and y-coordinates of the block
     **/
-  public Block(int x, int y){
+  public block(int x, int y){
     xcor = x;
     ycor = y;
   }
@@ -15,7 +20,7 @@ public class Block{
   }
 
   public int getX(){
-    return xcor
+    return xcor;
   }
 
   public int getY(){
@@ -33,14 +38,17 @@ public class Block{
     xcor = g;
     return storage;
   }
-//Basic ToString BlockShape
-  public String toString(){
-    String ans = "_\n";
-   if(x == 0){
-      ans += "| |";
-    } else{
-      ans += " |";
+//Basic toString BlockShape
+  public void toString(){
+    Terminal terminal = TerminalFacade.createTextTerminal();
+    terminal.enterPrivateMode();
+		TerminalSize size = terminal.getTerminalSize();
+		terminal.setCursorVisible(false);
+    terminal.putCharacter(' ');
   }
-  if(y == 0) ans += "\n_";
-  return ans;
+
+  public static void main(String[] args){
+    block d = new block(1, 1);
+    System.out.println(d.toString());
+  }
 }
