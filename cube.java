@@ -9,13 +9,11 @@ public class cube implements fourBlock {
     block c = new block(midWidth,maxHeight-1);
     block d = new block(midWidth+1,maxHeight);
   }
-  public void moveRight(){};
-  public void moveLeft(){};
-  public void descend(){};
-  public void rotateRight(){};
-  public void rotateLeft(){};
-  public String toString(){
-    return "";
-  };
+  public void moveRight(){
 
+  }
+  public void moveLeft(){}
+  public void descend(){}
+  public void rotateRight(){}
+  public void rotateLeft(){}
 }
