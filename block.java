@@ -15,7 +15,7 @@ public class Block{
   }
 
   public int getX(){
-    return xcor
+    return xcor;
   }
 
   public int getY(){
@@ -36,11 +36,12 @@ public class Block{
 //Basic ToString BlockShape
   public String toString(){
     String ans = "_\n";
-   if(x == 0){
+   if(xcor == 0){
       ans += "| |";
     } else{
       ans += " |";
   }
-  if(y == 0) ans += "\n_";
+  if(ycor == 0) ans += "\n_";
   return ans;
+}
 }
