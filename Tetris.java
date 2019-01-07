@@ -40,18 +40,13 @@ public class Tetris{
         pieces[i][j] = false;
       }
     }
-    size = terminal.getTerminalSize();
-    terminal.setCursorVisible(true);
-    size.setColumns(10);
-    size.setRows(24);
   }
 
-  TerminalSize size = terminal.getTerminalSize();
-  terminal.setCursorVisible(true);
-  size.setColumns(10);
-  size.setRows(24);
-  public void printBoard(){
-
+  public static void putString(int r, int c,Terminal t, String s){
+    t.moveCursor(r,c);
+    for(int i = 0; i < s.length();i++){
+      t.putCharacter(s.charAt(i));
+    }
   }
 
     //Note that these coordinates are (row column), which are (y, x), not (x, y)
@@ -63,7 +58,34 @@ public class Tetris{
 
   public static void main(String args[]){
     Tetris ans = new Tetris();
+    Terminal terminal = TerminalFacade.createTextTerminal();
+    terminal.enterPrivateMode();
+
+    TerminalSize size = terminal.getTerminalSize();
+    terminal.setCursorVisible(false);
+
+      boolean running = true;
+
+      long tStart = System.currentTimeMillis();
+      long lastSecond = 0;
+
+    while(running){
+      terminal.applyBackgroundColor(Terminal.Color.BLACK);
+      Key key = terminal.readInput();
+      if (key != null)
+      {
+
+        if (key.getKind() == Key.Kind.Escape) {
+
+          terminal.exitPrivateMode();
+          running = false;
+        }
+
+    }
+
+
 
 
   }
+}
 }
