@@ -5,7 +5,7 @@ public class Tetris{
   private ArrayList blocks;
   //This can be a 1D version of a 2D array of all the blocks. The coordinates is x = index% width y = index/width
   private int score;
-  private boolean running = true
+  private boolean running = true;
   //Blocks is an array of all the coordinates in the tetris board, each index in the 2d array representaing
   //a coordinate. False means there is no block on the piece while
   public boolean isRunning(){
@@ -22,6 +22,10 @@ public class Tetris{
         pieces[i][j] = false;
       }
     }
+  }
+
+  public printBoard(){
+    
   }
 
     //Note that these coordinates are (row column), which are (y, x), not (x, y)
