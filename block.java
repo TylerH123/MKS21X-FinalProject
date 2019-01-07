@@ -38,17 +38,4 @@ public class block{
     xcor = g;
     return storage;
   }
-//Basic toString BlockShape
-  public void toString(){
-    Terminal terminal = TerminalFacade.createTextTerminal();
-    terminal.enterPrivateMode();
-		TerminalSize size = terminal.getTerminalSize();
-		terminal.setCursorVisible(false);
-    terminal.putCharacter(' ');
-  }
-
-  public static void main(String[] args){
-    block d = new block(1, 1);
-    System.out.println(d.toString());
-  }
 }
