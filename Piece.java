@@ -13,7 +13,7 @@ public class Piece{
   //Implementing the bastic methods movdown getx and gety
 
   public int getX(){
-    return xcor
+    return xcor;
   }
 
   public int getY(){
@@ -23,11 +23,12 @@ public class Piece{
 //Basic ToString PieceShape
   public String toString(){
     String ans = "_\n";
-   if(x == 0){
+   if(xcor == 0){
       ans += "| |";
     } else{
       ans += " |";
   }
-  if(y == 0) ans += "\n_";
-  return y
+  if(ycor == 0) ans += "\n_";
+  return ans;
+}
 }
