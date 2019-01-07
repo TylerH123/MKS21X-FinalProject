@@ -48,22 +48,22 @@ public class TerminalDemo {
 			terminal.applyForegroundColor(Terminal.Color.BLACK);
 			//applySGR(a,b) for multiple modifiers (bold,blink) etc.
 			terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);
-			terminal.putCharacter('\u00a4');
+			terminal.putCharacter('l');
 			//terminal.putCharacter(' ');
 			terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
 			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
 			terminal.applySGR(Terminal.SGR.RESET_ALL);
 
 
-			terminal.moveCursor(size.getColumns()-5,5);
+			terminal.moveCursor(size.getColumns()-5,-10);
 			terminal.applyBackgroundColor(Terminal.Color.RED);
 			terminal.applyForegroundColor(Terminal.Color.YELLOW);
 			terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 			terminal.putCharacter(' ');
 			terminal.putCharacter(' ');
-			terminal.putCharacter('\u262d');
+			terminal.putCharacter('X');
 			terminal.putCharacter(' ');
-			terminal.moveCursor(size.getColumns()-5,6);
+			terminal.moveCursor(size.getColumns()-5,-10);
 			terminal.putCharacter(' ');
 			terminal.putCharacter(' ');
 			terminal.putCharacter(' ');
