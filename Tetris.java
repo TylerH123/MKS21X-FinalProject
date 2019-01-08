@@ -18,7 +18,7 @@ import com.googlecode.lanterna.input.KeyMappingProfile;
 
 public class Tetris{
   private int height, width;
-  private boolean[][] pieces;
+  private int[][] pieces;
   private ArrayList blocks;
   //This can be a 1D version of a 2D array of all the blocks. The coordinates is x = index% width y = index/width
   private int score;
@@ -52,7 +52,15 @@ public class Tetris{
     //Note that these coordinates are (row column), which are (y, x), not (x, y)
 
 
-
+public static printBoard(){
+  for(int i = 0; i < height; i++){
+    for(int j = 0; j < width; j ++){
+      terminal.moveCursor(size.getColumns()-j,-i);
+			terminal.applyBackgroundColor(Terminal.Color.BLACK);
+			terminal.applyForegroundColor(Terminal.Color.WHITE);
+      }
+    }
+  }
 
 
 
@@ -60,7 +68,6 @@ public class Tetris{
     Tetris ans = new Tetris();
     Terminal terminal = TerminalFacade.createTextTerminal();
     terminal.enterPrivateMode();
-
     TerminalSize size = terminal.getTerminalSize();
     terminal.setCursorVisible(false);
 
@@ -70,6 +77,7 @@ public class Tetris{
       long lastSecond = 0;
 
     while(running){
+      Tetris.printBoard
       for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j ++){
       terminal.applyBackgroundColor(Terminal.Color.BLACK);
