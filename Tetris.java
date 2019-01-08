@@ -63,9 +63,9 @@ public void printBoard(){
 
   public static void main(String args[]){
     Tetris ans = new Tetris();
-    Terminal terminal = TerminalFacade.createTextTerminal();
+    terminal = TerminalFacade.createTextTerminal();
     terminal.enterPrivateMode();
-    TerminalSize size = terminal.getTerminalSize();
+    size = terminal.getTerminalSize();
     terminal.setCursorVisible(false);
 
       boolean running = true;
