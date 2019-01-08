@@ -18,25 +18,21 @@ public class block{
   public void moveDown(){
     ycor--;
   }
-
+  //return xcor
   public int getX(){
     return xcor;
   }
-
+  //return ycor
   public int getY(){
     return ycor;
   }
-
-  public int setY(int g){
-    int storage = ycor;
+  //set the ycor
+  public void setY(int g){
     ycor = g;
-    return storage;
   }
-
-  public int setX(int g){
-    int storage = xcor;
+  //set xcor
+  public void setX(int g){
     xcor = g;
-    return storage;
   }
   //add to the xcor to move right
   public void moveRight(){
