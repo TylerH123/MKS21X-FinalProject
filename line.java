@@ -1,16 +1,15 @@
-public class cube implements fourBlock {
-
-    block a,b,c,d;
+public class line implements fourBlock{
+  block a,b,c,d;
   /**constructor
     *@param maxHeight is the maximum hieght of the board
     *@param midWidth is half of the width of the board
-    *creates the cube piece using 4 blocks placed accordingly
-    **/
-  public cube(int maxHeight, int midWidth){
+    *creates the line piece using 4 blocks placed in a line
+  **/
+  public line(int maxHeight, int midWidth){
     a = new block(midWidth,maxHeight);
-    b = new block(midWidth+1,maxHeight-1);
-    c = new block(midWidth,maxHeight-1);
-    d = new block(midWidth+1,maxHeight);
+    b = new block(midWidth,maxHeight-1);
+    c = new block(midWidth,maxHeight-2);
+    d = new block(midWidth,maxHeight-3);
   }
   //makes all the blocks in the cube move right
   public void moveRight(){

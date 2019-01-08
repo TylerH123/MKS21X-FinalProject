@@ -16,39 +16,30 @@ public class block{
   }
   //Implementing the bastic methods movedown getx and gety
   public void moveDown(){
-    xcor -= 1;
+    ycor--;
   }
-
+  //return xcor
   public int getX(){
     return xcor;
   }
-
+  //return ycor
   public int getY(){
     return ycor;
   }
-
-  public int setY(int g){
-    int storage = ycor;
+  //set the ycor
+  public void setY(int g){
     ycor = g;
-    return storage;
   }
-
-  public int setX(int g){
-    int storage = xcor;
+  //set xcor
+  public void setX(int g){
     xcor = g;
-    return storage;
   }
-//Basic toString BlockShape
-  public void toString(){
-    Terminal terminal = TerminalFacade.createTextTerminal();
-    terminal.enterPrivateMode();
-		TerminalSize size = terminal.getTerminalSize();
-		terminal.setCursorVisible(false);
-    terminal.putCharacter(' ');
+  //add to the xcor to move right
+  public void moveRight(){
+    xcor++;
   }
-
-  public static void main(String[] args){
-    block d = new block(1, 1);
-    System.out.println(d.toString());
+  //subtract from the xcor to move left
+  public void moveLeft(){
+    xcoor--;
   }
 }
