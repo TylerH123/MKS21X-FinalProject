@@ -24,6 +24,7 @@ public class Tetris{
   private int score;
   private boolean running = true;
   private TerminalSize size;
+  private Terminal terminal;
   //Blocks is an array of all the coordinates in the tetris board, each index in the 2d array representaing
   //a coordinate. False means there is no block on the piece while
   public boolean isRunning(){
@@ -33,11 +34,11 @@ public class Tetris{
   public Tetris(){
     height = 24;
     width = 10;
-    pieces = new boolean[height][width];
+    pieces = new int[height][width];
     //at the default the board has no blocks
     for(int i = 0; i < height; i++){
       for(int j = 0; j < width; j ++){
-        pieces[i][j] = false;
+        pieces[i][j] = 0;
       }
     }
   }
@@ -52,7 +53,7 @@ public class Tetris{
     //Note that these coordinates are (row column), which are (y, x), not (x, y)
 
 
-public static printBoard(){
+public void printBoard(){
   for(int i = 0; i < height; i++){
     for(int j = 0; j < width; j ++){
       terminal.moveCursor(size.getColumns()-j,-i);
@@ -77,9 +78,9 @@ public static printBoard(){
       long lastSecond = 0;
 
     while(running){
-      Tetris.printBoard
-      for(int i = 0; i < height; i++){
-        for(int j = 0; j < width; j ++){
+      ans.printBoard();
+      for(int i = 0; i < 24; i++){
+        for(int j = 0; j < 10; j ++){
       terminal.applyBackgroundColor(Terminal.Color.BLACK);
       Key key = terminal.readInput();
       if (key != null)
