@@ -36,13 +36,13 @@ public class Tetris{
     pieces = new boolean[height][width];
     //at the default the board has no blocks
     for(int i = 0; i < height; i++){
-      for(int j = 0; j < width; j ++){
+      for(int j = 0; j < width; j++){
         pieces[i][j] = false;
       }
     }
   }
 
-  public static void putString(int r, int c,Terminal t, String s){
+  public void putString(int r, int c,Terminal t, String s){
     t.moveCursor(r,c);
     for(int i = 0; i < s.length();i++){
       t.putCharacter(s.charAt(i));
@@ -57,6 +57,7 @@ public class Tetris{
 
 
   public static void main(String args[]){
+
     Tetris ans = new Tetris();
     Terminal terminal = TerminalFacade.createTextTerminal();
     terminal.enterPrivateMode();
@@ -70,26 +71,22 @@ public class Tetris{
       long lastSecond = 0;
 
     while(running){
-      for(int i = 0; i < height; i++){
-        for(int j = 0; j < width; j ++){
-      terminal.applyBackgroundColor(Terminal.Color.BLACK);
-      Key key = terminal.readInput();
-      if (key != null)
-      {
+      for(int i = 0; i < 24; i++){
+        for(int j = 0; j < 10; j ++){
+          terminal.applyBackgroundColor(Terminal.Color.BLACK);
+          Key key = terminal.readInput();
+          if (key != null)
+          {
 
-        if (key.getKind() == Key.Kind.Escape) {
+            if (key.getKind() == Key.Kind.Escape) {
 
-          terminal.exitPrivateMode();
-          running = false;
+              terminal.exitPrivateMode();
+              running = false;
+            }
+
+          }
         }
-
+      }
     }
-
-
-
-
   }
-}
-}
-}
 }
