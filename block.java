@@ -16,7 +16,7 @@ public class block{
   }
   //Implementing the bastic methods movedown getx and gety
   public void moveDown(){
-    xcor -= 1;
+    ycor--;
   }
 
   public int getX(){
@@ -37,5 +37,13 @@ public class block{
     int storage = xcor;
     xcor = g;
     return storage;
+  }
+  //add to the xcor to move right
+  public void moveRight(){
+    xcor++;
+  }
+  //subtract from the xcor to move left
+  public void moveLeft(){
+    xcoor--;
   }
 }
