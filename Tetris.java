@@ -70,6 +70,8 @@ public class Tetris{
       long lastSecond = 0;
 
     while(running){
+      for(int i = 0; i < height; i++){
+        for(int j = 0; j < width; j ++){
       terminal.applyBackgroundColor(Terminal.Color.BLACK);
       Key key = terminal.readInput();
       if (key != null)
@@ -87,5 +89,7 @@ public class Tetris{
 
 
   }
+}
+}
 }
 }
