@@ -12,11 +12,30 @@ public class cube implements fourBlock {
     c = new block(midWidth,maxHeight-1);
     d = new block(midWidth+1,maxHeight);
   }
+  //makes all the blocks in the cube move right
   public void moveRight(){
-    a.
+    a.moveRight();
+    b.moveRight();
+    c.moveRight();
+    d.moveRight();
   }
-  public void moveLeft(){}
-  public void descend(){}
-  public void rotateRight(){}
-  public void rotateLeft(){}
+  //makes all the blocks in the cube move left
+  public void moveLeft(){
+    a.moveLeft();
+    b.moveLeft();
+    c.moveLeft();
+    d.moveLeft();
+  }
+  //makes all the blocks in the cube move down
+  public void descend(){
+    a.moveDown();
+    b.moveDown();
+    c.moveDown();
+    d.moveDown();
+  }
+  //since a cube retains its shape after rotation, the next 2 methods will do nothing
+  public void rotateRight(){
+  }
+  public void rotateLeft(){
+  }
 }
