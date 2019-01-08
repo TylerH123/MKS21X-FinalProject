@@ -1,4 +1,4 @@
-wwwwwww
+
 
 //API : http://mabe02.github.io/lanterna/apidocs/2.1/
 import com.googlecode.lanterna.terminal.Terminal.SGR;
@@ -34,7 +34,7 @@ public class TerminalDemo {
 		terminal.enterPrivateMode();
 
 		TerminalSize size = terminal.getTerminalSize();
-		terminal.setCursorVisible(false);
+		terminal.setCursorVisible(true);
 
 		boolean running = true;
 
@@ -55,7 +55,7 @@ public class TerminalDemo {
 			terminal.applySGR(Terminal.SGR.RESET_ALL);
 
 
-			terminal.moveCursor(size.getColumns()-5,-10);
+			terminal.moveCursor(size.getColumns()-15,-10);
 			terminal.applyBackgroundColor(Terminal.Color.RED);
 			terminal.applyForegroundColor(Terminal.Color.YELLOW);
 			terminal.applySGR(Terminal.SGR.ENTER_BOLD);
@@ -64,6 +64,23 @@ public class TerminalDemo {
 			terminal.putCharacter('X');
 			terminal.putCharacter(' ');
 			terminal.moveCursor(size.getColumns()-5,-10);
+			terminal.putCharacter(' ');
+			terminal.putCharacter(' ');
+			terminal.putCharacter(' ');
+			terminal.putCharacter(' ');
+			terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
+			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
+
+
+			terminal.moveCursor(size.getColumns()-10,-20);
+			terminal.applyBackgroundColor(Terminal.Color.RED);
+			terminal.applyForegroundColor(Terminal.Color.YELLOW);
+			terminal.applySGR(Terminal.SGR.ENTER_BOLD);
+			terminal.putCharacter(' ');
+			terminal.putCharacter(' ');
+			terminal.putCharacter('X');
+			terminal.putCharacter(' ');
+			terminal.moveCursor(size.getColumns()-10,-20);
 			terminal.putCharacter(' ');
 			terminal.putCharacter(' ');
 			terminal.putCharacter(' ');

@@ -54,13 +54,23 @@ public class Tetris{
 
 
 public void printBoard(){
-  for(int i = 0; i < height; i++){
-    for(int j = 0; j < width; j ++){
-      terminal.moveCursor(size.getColumns()-j,-i);
-			terminal.applyBackgroundColor(Terminal.Color.BLACK);
-			terminal.applyForegroundColor(Terminal.Color.WHITE);
-      }
-    }
+  terminal.moveCursor(size.getColumns()-5,-10);
+  terminal.applyBackgroundColor(Terminal.Color.RED);
+  terminal.applyForegroundColor(Terminal.Color.YELLOW);
+  terminal.applySGR(Terminal.SGR.ENTER_BOLD);
+  terminal.putCharacter(' ');
+  terminal.putCharacter(' ');
+  terminal.putCharacter('X');
+  terminal.putCharacter(' ');
+  terminal.moveCursor(size.getColumns()-5,-10);
+  terminal.putCharacter(' ');
+  terminal.putCharacter(' ');
+  terminal.putCharacter(' ');
+  terminal.putCharacter(' ');
+  terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
+  terminal.applyForegroundColor(Terminal.Color.DEFAULT);
+
+
   }
 
 
@@ -78,6 +88,7 @@ public void printBoard(){
       long lastSecond = 0;
 
     while(running){
+
       ans.printBoard();
       for(int i = 0; i < 24; i++){
         for(int j = 0; j < 10; j ++){
