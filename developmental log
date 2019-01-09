@@ -10,3 +10,5 @@
   Tyler: finished cube class, started on line class, got stuck on rotation methods, deleted piece class because it was useless.
          Also, deleted toString for block because toString should only be in tetris class.
   Jude: made the board for tetris
+1/8/19
+  Tyler: finished adding all the piece classes, still need to work on the rotation algorithm 
