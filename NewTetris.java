@@ -16,15 +16,22 @@ import com.googlecode.lanterna.screen.Screen;
 
 public class NewTetris {
 
+  //This used in the arrayList of ints, if the coordinate has a block on the coordinate
+  // - since the color is a thing and not just 0, then it uses returns true
+  public static boolean hasBlock(int[][] blocks, int col, int row){
+    if(blocks[row][col] > 0) return true;
+    return false;
+  }
 
+  //This use
   public static void main(String[] args) throws InterruptedException{
-    Screen screen = TerminalFacade.createScreen(10, 24);
+    Screen screen = TerminalFacade.createScreen();
     int score = 0;
     boolean running = true;
     //initiate new screen for terminal
 
     screen.startScreen();
-    screen.putString(10, 5, "Score: " + score, Terminal.Color.BLACK, Terminal.Color.WHITE);
+    screen.putString(20, 0, "Score: " + score, Terminal.Color.WHITE, Terminal.Color.BLACK);
     //Putting the score at the top
     screen.refresh();
 
@@ -33,9 +40,9 @@ public class NewTetris {
     int c = 0;
     while(running){
 
-      screen.moveCursor(c, r)
+      screen.setCursorPosition(c, r);
       Key key = screen.readInput();
-      screen.setCursorVisible(true);
+
 
       while(key == null){
         key = screen.readInput();
