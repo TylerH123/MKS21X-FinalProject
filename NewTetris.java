@@ -62,7 +62,7 @@ public class NewTetris {
     //initiate new screen for terminal
 
     screen.startScreen();
-    screen.putString(20, 0, "Score: " + score, Terminal.Color.WHITE, Terminal.Color.BLACK);
+    screen.putString(40, 0, "Score: " + score, Terminal.Color.WHITE, Terminal.Color.BLACK);
     //Putting the score at the top
     screen.refresh();
 
