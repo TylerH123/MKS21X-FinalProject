@@ -42,8 +42,20 @@ public class NewTetris {
 
     }
   }
+
+  public static void clear(int[][] blocks){
+    for(int r = 0; r < blocks.length; r++){
+      for(int c = 0; c < blocks[r].length; c++){
+        blocks[r][c] = 0;
+      }
+    }
+  }
+
+
   //This use
   public static void main(String[] args) throws InterruptedException{
+    int[][] blocks = new int[10][24];
+    NewTetris.clear(blocks);
     Screen screen = TerminalFacade.createScreen();
     int score = 0;
     boolean running = true;
@@ -78,6 +90,7 @@ public class NewTetris {
         break;
 
         case ArrowRight:
+
         //move cursor to block
         //(hasBlock (getTerminalPosition.x, getTerminalPosition.y)) --> check screen documentation
         //  blockAt(terminalpostion).rotateRight
