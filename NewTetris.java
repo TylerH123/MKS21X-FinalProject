@@ -16,6 +16,10 @@ import com.googlecode.lanterna.screen.Screen;
 
 public class NewTetris {
 
+  public static boolean GenerateFourBlock(){
+    return true;
+    //uptade when arrayList of fourblocks in implemented
+  }
   //This used in the arrayList of ints, if the coordinate has a block on the coordinate
   // - since the color is a thing and not just 0, then it uses returns true
   public static boolean hasBlock(int[][] blocks, int col, int row){
@@ -23,6 +27,21 @@ public class NewTetris {
     return false;
   }
 
+
+  public static void clearRows(int[][] blocks){
+    for(int r = 0; r < blocks.length; r++){
+      boolean filledIn = true;
+      for(int c = 0; c < blocks[r].length; c++){
+        if(!hasBlock(blocks, c, r)) filledIn = false;
+      }
+      if (filledIn){
+        for(int c = 0; c < blocks[r].length; c++){
+          blocks[r][c] = 0;
+        }
+      }
+
+    }
+  }
   //This use
   public static void main(String[] args) throws InterruptedException{
     Screen screen = TerminalFacade.createScreen();
@@ -52,14 +71,27 @@ public class NewTetris {
 
       switch(key.getKind()){
         case Escape:
-        screen.putString(5, 10, "You have exited the game, your score is: " + score, Terminal.Color.BLACK, Terminal.Color.WHITE);
+        screen.putString(5, 10, "You have exited the game, your score is: " + score, Terminal.Color.WHITE, Terminal.Color.BLACK);
         screen.refresh();
         Thread.sleep(3000);
         running = false;
         break;
-        case ArrowRight:
 
+        case ArrowRight:
+        //move cursor to block
+        //(hasBlock (getTerminalPosition.x, getTerminalPosition.y)) --> check screen documentation
+        //  blockAt(terminalpostion).rotateRight
         break;
+
+        case ArrowLeft:
+
+      //same as ArrowRight
+        break;
+        case ArrowDown:
+        //fourBlockAt.movedDown()
+        break;
+
+
       }
     }
     Thread.sleep(3000);
