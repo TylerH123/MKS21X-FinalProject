@@ -27,10 +27,6 @@ public class Tetris{
   private Terminal terminal;
   //Blocks is an array of all the coordinates in the tetris board, each index in the 2d array representaing
   //a coordinate. False means there is no block on the piece while
-  public boolean isRunning(){
-    return running;
-  }
-
   public Tetris(){
     height = 24;
     width = 10;
@@ -77,9 +73,9 @@ public void printBoard(){
 
   public static void main(String args[]){
     Tetris ans = new Tetris();
-    Terminal terminal = TerminalFacade.createTextTerminal();
+    terminal = TerminalFacade.createTextTerminal();
     terminal.enterPrivateMode();
-    TerminalSize size = terminal.getTerminalSize();
+    size = terminal.getTerminalSize();
     terminal.setCursorVisible(false);
 
       boolean running = true;
@@ -102,14 +98,9 @@ public void printBoard(){
           terminal.exitPrivateMode();
           running = false;
         }
-
+      }
     }
-
-
-
-
   }
-}
-}
-}
+  }
+  }
 }
