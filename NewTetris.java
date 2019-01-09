@@ -12,67 +12,37 @@ import com.googlecode.lanterna.input.InputDecoder;
 import com.googlecode.lanterna.input.InputProvider;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
+import com.googlecode.lanterna.screen.Screen;
 
-public class NewTetris{
-  private int[][] blocks;
-  private ArrayList pieces;
-
-  //Stuff from the terminal demo
-  public static void putString(int r, int c,Terminal t, String s){
-		t.moveCursor(r,c);
-		for(int i = 0; i < s.length();i++){
-			t.putCharacter(s.charAt(i));
-		}
-	}
+public class NewTetris {
 
 
 
-  public static void main(String args[]){
-    int x = 10;
-		int y = 10;
+  public static void main(String[] args) throws InterruptedException{
+    Screen screen = TerminalFacade.createScreen();
+    int score = 0;
+    boolean running = true;
+    //initiate new screen for terminal
 
-		Terminal terminal = TerminalFacade.createTextTerminal();
-		terminal.enterPrivateMode();
-
-
-		TerminalSize size = terminal.getTerminalSize();
-		terminal.setCursorVisible(false);
-    size.setColumns(10);
-    size.setRows(24);
-
-		boolean running = true;
+    screen.startScreen();
+    screen.putString(10, 5, "Score: " + score, Terminal.Color.BLACK, Terminal.Color.WHITE);
+    //Putting the score at the top
+    screen.refresh();
     while(running){
-      for(int i = 0; i > -10; i --){
-        for(int j = 0; j > -24; j--){
-          terminal.moveCursor(i, j );
-          terminal.applyBackgroundColor(Terminal.Color.BLACK);
-          terminal.applyForegroundColor(Terminal.Color.YELLOW);
-          terminal.applySGR(Terminal.SGR.ENTER_BOLD);
-          terminal.putCharacter(' ');
-          terminal.putCharacter(' ');
-          terminal.putCharacter(' ');
-          terminal.putCharacter(' ');
-          terminal.moveCursor(i,j);
-          terminal.putCharacter(' ');
-          terminal.putCharacter(' ');
-          terminal.putCharacter(' ');
-          terminal.putCharacter(' ');
-          terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
-          terminal.applyForegroundColor(Terminal.Color.DEFAULT);
-        }
-      }
-      Key key = terminal.readInput();
-
-      if (key != null)
-      {
-
-        if (key.getKind() == Key.Kind.Escape) {
-
-          terminal.exitPrivateMode();
-          running = false;
-        }
+      Key key = screen.readInput();
+      while(key == null){
+        key = screen.readInput();
       }
 
-  }
+      switch(key.getKind()){
+        case Escape:
+        screen.putString(5, 10, "You have exited the game, your score is: " + score, Terminal.Color.BLACK, Terminal.Color.WHITE);
+        Thread.sleep(5000);
+        running = false;
+      }
+    }
+    Thread.sleep(3000);
+    System.exit(0);
+
   }
 }
