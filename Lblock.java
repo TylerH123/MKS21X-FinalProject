@@ -1,11 +1,11 @@
-public class Lblock implements fourBlock{
+public class lBlock extends block{
   block a,b,c,d;
   /**constructor
     *@param maxHeight is the maximum hieght of the board
     *@param midWidth is half of the width of the board
     *creates the L-shaped piece using 4 blocks placed accordingly
   **/
-  public Lblock(int maxHeight, int midWidth){
+  public lBlock(int maxHeight, int midWidth){
     a = new block(midWidth,maxHeight);
     b = new block(midWidth,maxHeight-1);
     c = new block(midWidth-1,maxHeight-1);

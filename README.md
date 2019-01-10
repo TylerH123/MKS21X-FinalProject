@@ -14,3 +14,7 @@ tetris
 1/8/19
   Tyler: finished adding all the piece classes, still need to work on the rotation algorithm
   Jude: Made a new terminal window with score variable and message when the program runs, need to print blocks on board
+1/9/19
+  Tyler: changed how the shapes are created. shapes are now created using direction and relative locations. also added
+         clear method
+  Jude: added more methods to the new terminal window and added a switch statement

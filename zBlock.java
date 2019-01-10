@@ -1,5 +1,7 @@
-public class sBlock implements fourBlock{
+public class zBlock extends block{
   block a,b,c,d;
+  //dist is a 2d array containing the locations of block b,c,d respectively relative to block a
+  private int[][] dist = new int[][]{{-1,-1},{-1,0},{0,1}};
   /**constructor
     *@param maxHeight is the maximum hieght of the board
     *@param midWidth is half of the width of the board
@@ -7,9 +9,6 @@ public class sBlock implements fourBlock{
   **/
   public zBlock(int maxHeight, int midWidth){
     a = new block(midWidth,maxHeight);
-    b = new block(midWidth-1,maxHeight);
-    c = new block(midWidth,maxHeight-1);
-    d = new block(midWidth+1,maxHeight-1);
   }
   //makes all the blocks in the Z-block piece move right
   public void moveRight(){
@@ -31,6 +30,9 @@ public class sBlock implements fourBlock{
     b.moveDown();
     c.moveDown();
     d.moveDown();
+  }
+  public void createZBlock(){
+     
   }
   //
   public void rotateLeft(){

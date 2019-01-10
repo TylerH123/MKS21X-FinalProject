@@ -1,4 +1,4 @@
-public class jBlock implements fourBlock{
+public class jBlock extends block{
 
   block a,b,c,d;
   /**constructor
