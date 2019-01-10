@@ -16,7 +16,8 @@ import com.googlecode.lanterna.screen.Screen;
 
 public class NewTetris {
 
-  public static boolean GenerateFourBlock(){
+  public static boolean GenerateFourBlock(ArrayList<block> Pieces){
+
     return true;
     //uptade when arrayList of fourblocks in implemented
   }
@@ -52,9 +53,12 @@ public class NewTetris {
   }
 
 
+
+
   //This use
   public static void main(String[] args) throws InterruptedException{
     int[][] blocks = new int[10][24];
+    ArrayList<block> wordsToAdd = new ArrayList<block>();
     NewTetris.clear(blocks);
     Screen screen = TerminalFacade.createScreen();
     int score = 0;
@@ -70,6 +74,15 @@ public class NewTetris {
     int r = 0;
     int c = 0;
     while(running){
+    NewTetris.clearRows(blocks);
+      //Filling the board
+      for(int ro = 0; r < blocks.length; ro++){
+        for(int co = 0; c < blocks[r].length; co++){
+          Integer u = new Integer(blocks[c][r]);
+          screen.putChar(co,ro, u.toString(), Terminal.Color.WHITE, Terminal.Color.BLACK);
+        }
+      }
+
 
       screen.setCursorPosition(c, r);
       Key key = screen.readInput();
