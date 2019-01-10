@@ -16,7 +16,8 @@ public class block{
   //left shows the direction if turnLeft happens
   //right shows the direction if turnRight happens
   //current is the current direction
-  private String left,right, current;
+  //piece stores the shape of the piece for later uses
+  private String left,right, current, piece;
   private String[] direction = new String[]{"down", "right", "up", "left"};
   //location is a 2d array which contain the coordinates of each block
   public int[][] location = new int[4][2];
@@ -30,12 +31,7 @@ public class block{
     current = "down";
     left = direction[leftIdx];
     right = direction[rightIdx];
-    if (type.equals("o")){
-      createOBlock();
-    }
-    else{
-      createBlock(type);
-    }
+    createBlock(type);
   }
   //clears the piece by replacing all locations with null
   public void clear(){
@@ -89,6 +85,8 @@ public class block{
       rightIdx++;
     }
     right = direction[rightIdx];
+    clear();
+    createBlock(piece);
   }
   //changes the current block location to the location of the left string
   //left string gets replaced by the previous direction in the array
@@ -104,7 +102,7 @@ public class block{
     }
     left = direction[leftIdx];
     clear();
-    createBlock();
+    createBlock(piece);
   }
 
   /******************************************************************************
