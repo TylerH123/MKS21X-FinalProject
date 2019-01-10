@@ -1,4 +1,4 @@
-public class tBlock implements fourBlock{
+public class tBlock extends block{
   block a,b,c,d;
   /**constructor
     *@param maxHeight is the maximum hieght of the board

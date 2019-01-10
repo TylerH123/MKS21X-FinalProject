@@ -1,4 +1,4 @@
-public class Lblock implements fourBlock{
+public class Lblock extends block{
   block a,b,c,d;
   /**constructor
     *@param maxHeight is the maximum hieght of the board

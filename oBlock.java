@@ -1,4 +1,4 @@
-public class oBlock implements fourBlock {
+public class oBlock extends block{
 
     block a,b,c,d;
   /**constructor
