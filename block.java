@@ -1,6 +1,8 @@
 public class block{
 
   private int xcor, ycor;
+  private String left,right;
+  private String[] direction = new String[]{"botton", "right", "top", "left"};
 
   /**constructor
     *@param x,y are the x-coordinates and y-coordinates of the block
@@ -36,5 +38,11 @@ public class block{
   //subtract from the xcor to move left
   public void moveLeft(){
     xcor--;
+  }
+  public void rotateRight(){
+
+  }
+  public void rotateLeft(){
+
   }
 }
