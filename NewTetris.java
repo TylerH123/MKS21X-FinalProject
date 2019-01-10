@@ -74,11 +74,12 @@ public class NewTetris {
     int r = 0;
     int c = 0;
     while(running){
-    NewTetris.clearRows(Blocks);
+    NewTetris.clearRows(blocks);
       //Filling the board
       for(int ro = 0; r < blocks.length; ro++){
         for(int co = 0; c < blocks[r].length; co++){
-          screen.putChar(co,ro, blocks[co][ro].toString(), Terminal.Color.WHITE, Terminal.Color.BLACK);
+          Integer u = new Integer(blocks[c][r]);
+          screen.putChar(co,ro, u.toString(), Terminal.Color.WHITE, Terminal.Color.BLACK);
         }
       }
 
