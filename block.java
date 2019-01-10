@@ -1,5 +1,8 @@
 public class block{
 
+  //dist variables are 2d arrays containing the locations of the other 3 blocks relative to one block
+  //each of these varaibles are for different pieces
+  private int[][] zDist = new int[][]{{-1,-1},{0,-1},{1,0}};
   //rightIdx is the index in direction thatright variable uses
   private int rightIdx = 1;
   //leftIdx is the index of direction that left variable uses
@@ -10,6 +13,8 @@ public class block{
   //current is the current direction
   private String left,right, current;
   private String[] direction = new String[]{"down", "right", "up", "left"};
+  //location is a 2d array which contain the coordinates of each block
+  public int[][] location = new int[4][2];
 
   /**constructor
     *@param x,y are the x-coordinates and y-coordinates of the block
@@ -62,6 +67,8 @@ public class block{
     }
     right = direction[rightIdx];
   }
+  //changes the current block location to the location of the left string
+  //left string gets replaced by the next direction in the array
   public void rotateLeft(){
     current = left;
     if (leftIdx == 0){
@@ -71,5 +78,33 @@ public class block{
       leftIdx++;
     }
     left = direction[leftIdx];
+  }
+  public void createZblock(){
+    location[0][0] = xcor;
+    location[0][1] = ycor;
+    if (current.equals("down")){
+      for (int i = 1; i < location.length; i++){
+          location[i][0] = xcor + zDist[i-1][0];
+          location[i][1] = ycor + zDist[i-1][1];
+      }
+    }
+    if (current.equals("right")){
+      for (int i = 1; i < location.length; i++){
+          location[i][0] = xcor + zDist[i-1][1];
+          location[i][1] = ycor + zDist[i-1][0];
+      }
+    }
+    if (current.equals("up")){
+      for (int i = 1; i < location.length; i++){
+          location[i][0] = xcor + zDist[i-1][0] * -1;
+          location[i][1] = ycor + zDist[i-1][1] * -1;
+      }
+    }
+    if (current.equals("left")){
+      for (int i = 1; i < location.length; i++){
+          location[i][0] = xcor + zDist[i-1][1] * -1;
+          location[i][1] = ycor + zDist[i-1][0] * -1;
+      }
+    }
   }
 }
