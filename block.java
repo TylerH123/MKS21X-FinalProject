@@ -1,8 +1,10 @@
 public class block{
 
   //rightIdx is the index in direction thatright variable uses
+  private int rightIdx = 1;
   //leftIdx is the index of direction that left variable uses
-  private int xcor, ycor, leftIdx, rightIdx;
+  private int leftIdx = 3;
+  private int xcor, ycor;
   //left shows the direction if turnLeft happens
   //right shows the direction if turnRight happens
   //current is the current direction
@@ -16,8 +18,6 @@ public class block{
     xcor = x;
     ycor = y;
     current = "down";
-    rightIdx = 1;
-    leftIdx = 3;
     left = direction[leftIdx];
     right = direction[rightIdx];
   }
@@ -63,7 +63,7 @@ public class block{
     right = direction[rightIdx];
   }
   public void rotateLeft(){
-    current = right;
+    current = left;
     if (leftIdx == 0){
       leftIdx = 3;
     }
