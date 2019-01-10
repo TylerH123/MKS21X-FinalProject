@@ -2,6 +2,7 @@ public class block{
 
   //dist variables are 2d arrays containing the locations of the other 3 blocks relative to one block
   //each of these varaibles are for different pieces
+  //first value is the change in x-cor, second value is the change in y-cor
   private int[][] zDist = new int[][]{{-1,0},{1,0},{1,1}};
   private int[][] iDist = new int[][]{{0,1},{0,2},{0,3},{0,4}};
   private int[][] sDist = new int[][]{{1,0},{1,0},{-1,1}};
@@ -69,6 +70,7 @@ public class block{
   public void moveLeft(){
     xcor--;
   }
+  //returns the current direction
   public String currentDirec(){
     return current;
   }
