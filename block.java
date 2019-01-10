@@ -79,6 +79,9 @@ public class block{
     }
     left = direction[leftIdx];
   }
+  //this creates a Z-shaped block
+  //the first element of the array is the first block
+  //the next elements are determined using the position of the first block and adding to the xcor and ycor depending on direction
   public void createZblock(){
     location[0][0] = xcor;
     location[0][1] = ycor;
@@ -106,5 +109,16 @@ public class block{
           location[i][1] = ycor + zDist[i-1][0] * -1;
       }
     }
+  }
+  //since cube does not change shape no matter how you rotate it, the location is not as dependent on direction
+  public void createOBlock(){
+    location[0][0] = xcor;
+    location[0][1] = ycor;
+    location[1][0] = xcor+1;
+    location[1][1] = ycor;
+    location[2][0] = xcor;
+    location[2][1] = ycor+1;
+    location[3][0] = xcor+1;
+    location[3][1] = ycor+1;
   }
 }
