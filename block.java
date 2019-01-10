@@ -37,6 +37,14 @@ public class block{
       createBlock(type);
     }
   }
+  //clears the piece by replacing all locations with null
+  public void clear(){
+    for (int i = 0; i < location.length; i++){
+      for (int j = 0; j < location[i].length; j++){
+        location[i][j] = null;
+      }
+    }
+  }
   //Implementing the bastic methods movedown getx and gety
   public void moveDown(){
     ycor--;
@@ -68,6 +76,10 @@ public class block{
   public String currentDirec(){
     return current;
   }
+  //changes the current block location to the location of the right string
+  //right string gets replaced by the next direction in the array
+  //loops to the beginnning if at the end
+  //after rotation, clear the piece and then redraw using new location
   public void turnRight(){
     current = right;
     if (rightIdx == 3){
@@ -79,7 +91,9 @@ public class block{
     right = direction[rightIdx];
   }
   //changes the current block location to the location of the left string
-  //left string gets replaced by the next direction in the array
+  //left string gets replaced by the previous direction in the array
+  //loops to the end if at the beginning
+  //after rotation, clear the piece and then redraw using new location
   public void rotateLeft(){
     current = left;
     if (leftIdx == 0){
@@ -89,6 +103,8 @@ public class block{
       leftIdx++;
     }
     left = direction[leftIdx];
+    clear();
+    createBlock();
   }
 
   /******************************************************************************
@@ -98,40 +114,45 @@ public class block{
   //the first element of the array is the first block
   //the next elements are determined using the position of the first block and adding to the xcor and ycor depending on direction
   public void createblock(String shape){
-    int[][] whichAry = new int[4][2];
-    if (shape.equals("z")){
-      whichAry = zDist;
+    if (shape.equals("o")){
+      createOBlock();
     }
-    if (shape.equals("i")){
-      whichAry = iDist;
-    }
-    if (shape.equals("s")){
-      whichAry = sDist;
-    }
-    location[0][0] = xcor;
-    location[0][1] = ycor;
-    if (current.equals("down")){
-      for (int i = 1; i < location.length; i++){
+    else{
+      int[][] whichAry = new int[4][2];
+      if (shape.equals("z")){
+        whichAry = zDist;
+      }
+      if (shape.equals("i")){
+        whichAry = iDist;
+      }
+      if (shape.equals("s")){
+        whichAry = sDist;
+      }
+      location[0][0] = xcor;
+      location[0][1] = ycor;
+      if (current.equals("down")){
+        for (int i = 1; i < location.length; i++){
           location[i][0] = xcor + whichAry[i-1][0];
           location[i][1] = ycor + whichAry[i-1][1];
+        }
       }
-    }
-    if (current.equals("right")){
-      for (int i = 1; i < location.length; i++){
+      if (current.equals("right")){
+        for (int i = 1; i < location.length; i++){
           location[i][0] = xcor + whichAry[i-1][1];
           location[i][1] = ycor + whichAry[i-1][0];
+        }
       }
-    }
-    if (current.equals("up")){
-      for (int i = 1; i < location.length; i++){
+      if (current.equals("up")){
+        for (int i = 1; i < location.length; i++){
           location[i][0] = xcor + whichAry[i-1][0] * -1;
           location[i][1] = ycor + whichAry[i-1][1] * -1;
+        }
       }
-    }
-    if (current.equals("left")){
-      for (int i = 1; i < location.length; i++){
+      if (current.equals("left")){
+        for (int i = 1; i < location.length; i++){
           location[i][0] = xcor + whichAry[i-1][1] * -1;
           location[i][1] = ycor + whichAry[i-1][0] * -1;
+        }
       }
     }
   }
