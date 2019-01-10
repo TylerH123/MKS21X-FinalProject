@@ -36,15 +36,16 @@ public class block{
     current = "down";
     left = direction[leftIdx];
     right = direction[rightIdx];
-    createBlock(type);
+    piece = type;
+    createBlock(piece);
     maxX = maxWidth;
     maxY = maxHeight;
   }
-  //clears the piece by replacing all locations with null
+  //clears the piece by replacing all locations with -1
   public void clear(){
     for (int i = 0; i < location.length; i++){
       for (int j = 0; j < location[i].length; j++){
-        location[i][j] = null;
+        location[i][j] = -1;
       }
     }
   }
@@ -129,7 +130,7 @@ public class block{
   //this creates the different shaped blocks
   //the first element of the array is the first block
   //the next elements are determined using the position of the first block and adding to the xcor and ycor depending on direction
-  public void createblock(String shape){
+  public void createBlock(String shape){
     if (shape.equals("o")){
       createOBlock();
     }
