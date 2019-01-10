@@ -2,7 +2,12 @@ public class block{
 
   //dist variables are 2d arrays containing the locations of the other 3 blocks relative to one block
   //each of these varaibles are for different pieces
-  private int[][] zDist = new int[][]{{-1,-1},{0,-1},{1,0}};
+  private int[][] zDist = new int[][]{{-1,0},{1,0},{1,1}};
+  private int[][] iDist = new int[][]{{0,1},{0,2},{0,3},{0,4}};
+  private int[][] sDist = new int[][]{{1,0},{1,0},{-1,1}};
+  private int[][] lDist = new int[][]{{0,1},{1,1},{2,1}};
+  private int[][] jDist = new int[][]{{0,1},{-1,1},{-2,1}};
+  private int[][] tDist = new int[][]{{0,1},{1,1},{-1,1}};
   //rightIdx is the index in direction thatright variable uses
   private int rightIdx = 1;
   //leftIdx is the index of direction that left variable uses
@@ -19,12 +24,18 @@ public class block{
   /**constructor
     *@param x,y are the x-coordinates and y-coordinates of the block
     **/
-  public block(int x, int y){
+  public block(int x, int y, String type){
     xcor = x;
     ycor = y;
     current = "down";
     left = direction[leftIdx];
     right = direction[rightIdx];
+    if (type.equals("o")){
+      createOBlock();
+    }
+    else{
+      createBlock(type);
+    }
   }
   //Implementing the bastic methods movedown getx and gety
   public void moveDown(){
@@ -79,34 +90,48 @@ public class block{
     }
     left = direction[leftIdx];
   }
-  //this creates a Z-shaped block
+
+  /******************************************************************************
+  test code
+  ******************************************************************************/
+  //this creates the different shaped blocks
   //the first element of the array is the first block
   //the next elements are determined using the position of the first block and adding to the xcor and ycor depending on direction
-  public void createZblock(){
+  public void createblock(String shape){
+    int[][] whichAry = new int[4][2];
+    if (shape.equals("z")){
+      whichAry = zDist;
+    }
+    if (shape.equals("i")){
+      whichAry = iDist;
+    }
+    if (shape.equals("s")){
+      whichAry = sDist;
+    }
     location[0][0] = xcor;
     location[0][1] = ycor;
     if (current.equals("down")){
       for (int i = 1; i < location.length; i++){
-          location[i][0] = xcor + zDist[i-1][0];
-          location[i][1] = ycor + zDist[i-1][1];
+          location[i][0] = xcor + whichAry[i-1][0];
+          location[i][1] = ycor + whichAry[i-1][1];
       }
     }
     if (current.equals("right")){
       for (int i = 1; i < location.length; i++){
-          location[i][0] = xcor + zDist[i-1][1];
-          location[i][1] = ycor + zDist[i-1][0];
+          location[i][0] = xcor + whichAry[i-1][1];
+          location[i][1] = ycor + whichAry[i-1][0];
       }
     }
     if (current.equals("up")){
       for (int i = 1; i < location.length; i++){
-          location[i][0] = xcor + zDist[i-1][0] * -1;
-          location[i][1] = ycor + zDist[i-1][1] * -1;
+          location[i][0] = xcor + whichAry[i-1][0] * -1;
+          location[i][1] = ycor + whichAry[i-1][1] * -1;
       }
     }
     if (current.equals("left")){
       for (int i = 1; i < location.length; i++){
-          location[i][0] = xcor + zDist[i-1][1] * -1;
-          location[i][1] = ycor + zDist[i-1][0] * -1;
+          location[i][0] = xcor + whichAry[i-1][1] * -1;
+          location[i][1] = ycor + whichAry[i-1][0] * -1;
       }
     }
   }
