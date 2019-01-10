@@ -17,3 +17,4 @@ tetris
 1/9/19
   Tyler: changed how the shapes are created. shapes are now created using direction and relative locations. also added
          clear method
+  Jude: added more methods to the new terminal window and added a switch statement
