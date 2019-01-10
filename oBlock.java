@@ -1,37 +1,33 @@
 public class oBlock extends block{
 
-    block a,b,c,d;
+    block a;
+    int[][] cube = new int[4][2];
   /**constructor
     *@param maxHeight is the maximum hieght of the board
     *@param midWidth is half of the width of the board
-    *creates the O-shaped piece using 4 blocks placed accordingly
+    *creates a block. from there another will complete the shape
     **/
   public oBlock(int maxHeight, int midWidth){
     a = new block(midWidth,maxHeight);
-    b = new block(midWidth+1,maxHeight-1);
-    c = new block(midWidth,maxHeight-1);
-    d = new block(midWidth+1,maxHeight);
+    drawCube();
   }
   //makes all the blocks in the O-shaped piece move right
   public void moveRight(){
     a.moveRight();
-    b.moveRight();
-    c.moveRight();
-    d.moveRight();
   }
   //makes all the blocks in the O-shaped piece move left
   public void moveLeft(){
     a.moveLeft();
-    b.moveLeft();
-    c.moveLeft();
-    d.moveLeft();
   }
   //makes all the blocks in the O-shaped piece move down
   public void descend(){
     a.moveDown();
-    b.moveDown();
-    c.moveDown();
-    d.moveDown();
+  }
+  public void drawCube(){
+
+  }
+  public int[][] printCube(){
+    return cube;
   }
   //since a cube retains its shape after rotation, the next 2 methods will do nothing
   public void rotateRight(){
