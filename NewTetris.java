@@ -78,8 +78,9 @@ public class NewTetris {
       //Filling the board
       for(int ro = 0; r < blocks.length; ro++){
         for(int co = 0; c < blocks[r].length; co++){
-          Integer u = new Integer(blocks[c][r]);
-          screen.putChar(co,ro, u.toString(), Terminal.Color.WHITE, Terminal.Color.BLACK);
+          String g = "1";
+          if (blocks[c][r] == 0) g = "0";
+          screen.putString(co,ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
         }
       }
 
@@ -98,7 +99,7 @@ public class NewTetris {
         case Escape:
         screen.putString(5, 10, "You have exited the game, your score is: " + score, Terminal.Color.WHITE, Terminal.Color.BLACK);
         screen.refresh();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         running = false;
         break;
 
