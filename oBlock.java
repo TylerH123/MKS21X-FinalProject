@@ -15,14 +15,23 @@ public class oBlock extends block{
   //makes all the blocks in the O-shaped piece move right
   public void moveRight(){
     a.moveRight();
+    b.moveRight();
+    c.moveRight();
+    d.moveRight();
   }
   //makes all the blocks in the O-shaped piece move left
   public void moveLeft(){
     a.moveLeft();
+    b.moveLeft();
+    c.moveLeft();
+    d.moveLeft();
   }
   //makes all the blocks in the O-shaped piece move down
   public void descend(){
     a.moveDown();
+    b.moveDown();
+    c.moveDown();
+    d.moveDown();
   }
   //since a cube retains its shape after rotation, the next 2 methods will do nothing
   public void rotateRight(){
