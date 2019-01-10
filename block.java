@@ -1,8 +1,3 @@
-import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.Terminal.SGR;
-import com.googlecode.lanterna.TerminalFacade;
-import com.googlecode.lanterna.terminal.TerminalSize;
-
 public class block{
 
   private int xcor, ycor;
@@ -40,6 +35,6 @@ public class block{
   }
   //subtract from the xcor to move left
   public void moveLeft(){
-    xcoor--;
+    xcor--;
   }
 }

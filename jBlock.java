@@ -1,4 +1,4 @@
-public class jBlock extends Block{
+public class jBlock extends block{
 
   block a,b,c,d;
   /**constructor
