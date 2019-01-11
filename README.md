@@ -3,19 +3,25 @@
 ## How to Use
 
 **To compile:**   
-``` javac -cp lanterna.jar:. NewTetris.java
+```
+javac -cp lanterna.jar:. NewTetris.java
 ```
 **To run:**
-``` java -cp lanterna.jar:. NewTetris
+```
+java -cp lanterna.jar:. NewTetris
 ```
 **To use:**
-``` ←,→ keys to move the piece left and right
 ```
-```z to rotate left
+←,→ keys to move the piece left and right
 ```
-```x to rotate right
 ```
-```↓ key to speed up the rate at which the piece drops
+z to rotate left
+```
+```
+x to rotate right
+```
+```
+↓ key to speed up the rate at which the piece drops
 ```
 
 ## Developmental Log
