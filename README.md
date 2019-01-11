@@ -1,5 +1,23 @@
 # Tetris  
 
+## How to Use
+
+**To compile:**   
+``` javac -cp lanterna.jar:. NewTetris.java
+```
+**To run:**
+``` java -cp lanterna.jar:. NewTetris
+```
+**To use:**
+``` ←,→ keys to move the piece left and right
+```
+```z to rotate left
+```
+```x to rotate right
+```
+```↓ key to speed up the rate at which the piece drops
+```
+
 ## Developmental Log
 
 ### Tyler
@@ -10,7 +28,7 @@
 - 1/8/19 : finished adding all the piece classes, still need to work on the rotation algorithm
 - 1/9/19 : changed how the shapes are created. shapes are now created using direction and relative locations. also added
          clear method
-- 1/10/19 : worked on a border check method to make sure pieces don't go off the board. Also, deleted all the piece classes because I made a new way to create the pieces. 
+- 1/10/19 : worked on a border check method to make sure pieces don't go off the board. Also, deleted all the piece classes because I made a new way to create the pieces.
 
 ### Jude
 - 1/4/19 : worked on block methods
