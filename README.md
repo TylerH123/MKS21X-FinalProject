@@ -28,8 +28,8 @@ x to rotate right
 
 ### Tyler
 - 1/3/19 : created repo, block class, fourBlock class, piece class, and tetris class
-- 1/4/19 : worked on block class and fourBlock class. Added the methods of block and fourBlock
-- 1/5/19 : tried to do block toString, couldn't get it to work
+- 1/4/19 : worked on block class and fourBlock class. Added the methods of block and fourBlock. Made fourBlock abstract because the different tetris pieces were going to be extend the fourBlock class. 
+- 1/5/19 : tried to do block toString, couldn't get it to work because tried to print out a terminal. 
 - 1/7/19 : finished cube class, started on line class, got stuck on rotation methods, deleted piece class because it was useless. Also, deleted toString for block because toString should only be in tetris class.
 - 1/8/19 : finished adding all the piece classes, still need to work on the rotation algorithm
 - 1/9/19 : changed how the shapes are created. shapes are now created using direction and relative locations. also added
