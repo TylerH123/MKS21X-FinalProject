@@ -55,13 +55,8 @@ public class NewTetris {
     }
   }
 
-<<<<<<< HEAD
 
-  //Generating Block Function, and putting it in the arraylist
-=======
- String blockTypes = "ozlistj"
   //Generating Block Function
->>>>>>> ed880c9151104dd3dfc08b67518b640afa733b69
 public static boolean generateBlock(ArrayList<block> Pieces){
   String[] blockTypes = new String[]{"o", "z", "l", "i", "s"};
   Random rand = new Random();
@@ -124,7 +119,7 @@ public static boolean generateBlock(ArrayList<block> Pieces){
 
       //Filling the board
 
-      
+
 
       screen.setCursorPosition(c, r);
       Key key = screen.readInput();
