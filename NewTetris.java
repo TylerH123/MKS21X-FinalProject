@@ -58,9 +58,9 @@ public class NewTetris {
 
   //Generating Block Function
 public static boolean generateBlock(ArrayList<block> Pieces){
-  String[] blockTypes = new String[]{"o", "z", "l", "i", "s"};
+  String[] blockTypes = new String[]{"o", "z", "i", "s"};
   Random rand = new Random();
-  String seed = new String(blockTypes[rand.nextInt(5)]);
+  String seed = new String(blockTypes[rand.nextInt(4)]);
   block B = new block(rand.nextInt(10), 20 + rand.nextInt(4), seed, 10, 24);
 
   Pieces.add(B);
