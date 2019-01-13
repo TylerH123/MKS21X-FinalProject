@@ -91,10 +91,10 @@ public class NewTetris {
          System.out.println(blocks[ro][co]);
           String g = "1";
           if (blocks[ro][co] == 0) g = "0";
-          System.out.println(g);
           screen.putString(co,ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
-          screen.refresh();
+        }
        }
+       screen.refresh();
 
       //Filling the board
 
@@ -139,5 +139,5 @@ public class NewTetris {
     System.exit(0);
 
   }
-}
+
 }
