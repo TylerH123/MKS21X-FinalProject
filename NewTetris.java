@@ -77,23 +77,24 @@ public class NewTetris {
     int r = 0;
     int c = 0;
     NewTetris.clear(blocks);
-    System.out.println(blocks.length);
-     for(int ro = 0; ro < blocks.length; ro++){
-      for(int co = 0; co < blocks[ro].length; co++){
-       System.out.println("Test" + (ro * 24 + co));
-       System.out.println(blocks[ro][co]);
-        String g = "1";
-        if (blocks[ro][co] == 0) g = "0";
-        System.out.println(g);
-        screen.putString(co,ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
-        screen.refresh();
-     }
-     }
 
 
-    screen.refresh();
-    /*while(running){
 
+
+
+    while(running){
+
+      System.out.println(blocks.length);
+       for(int ro = 0; ro < blocks.length; ro++){
+        for(int co = 0; co < blocks[ro].length; co++){
+         System.out.println("Test" + (ro * 24 + co));
+         System.out.println(blocks[ro][co]);
+          String g = "1";
+          if (blocks[ro][co] == 0) g = "0";
+          System.out.println(g);
+          screen.putString(co,ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
+          screen.refresh();
+       }
 
       //Filling the board
 
@@ -105,7 +106,6 @@ public class NewTetris {
 
       while(key == null){
         key = screen.readInput();
-
       }
 
 
@@ -134,9 +134,10 @@ public class NewTetris {
 
 
       }
-    }*/
+    }
     Thread.sleep(3000);
     System.exit(0);
 
   }
+}
 }
