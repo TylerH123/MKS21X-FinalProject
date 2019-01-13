@@ -55,6 +55,12 @@ public class NewTetris {
     }
   }
 
+ String blockTypes = "ozlis"
+  //Generating Block Function
+public static boolean generateBlock(ArrayList<block> Pieces){
+  String
+  return true;
+}
 
 
 
@@ -91,7 +97,12 @@ public class NewTetris {
          System.out.println(blocks[ro][co]);
           String g = "1";
           if (blocks[ro][co] == 0) g = "0";
-          screen.putString(co,ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
+          if(g == "0"){
+          screen.putString(co * 2,ro * 2 + 5, g, Terminal.Color.WHITE, Terminal.Color.BLACK;
+          screen.putString(co * 2 + 1, ro * 2 + 5, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
+          screen.putString(co * 2,ro * 2 + 6, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
+          screen.putString(co * 2 + 1,ro * 2 + 6, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
+        }
         }
        }
        screen.refresh();
@@ -111,7 +122,7 @@ public class NewTetris {
 
       switch(key.getKind()){
         case Escape:
-        screen.putString(5, 10, "You have exited the game, your score is: " + score, Terminal.Color.WHITE, Terminal.Color.BLACK);
+        screen.putString(5, 30, "You have exited the game, your score is: " + score, Terminal.Color.WHITE, Terminal.Color.BLACK);
         screen.refresh();
         Thread.sleep(1000);
         running = false;
@@ -135,7 +146,7 @@ public class NewTetris {
 
       }
     }
-    Thread.sleep(3000);
+    Thread.sleep(1000);
     System.exit(0);
 
   }
