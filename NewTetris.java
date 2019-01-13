@@ -69,10 +69,20 @@ public static boolean generateBlock(ArrayList<block> Pieces){
 }
 
 //Move down all the pieces - ONLY worry about actual pieces and not empty space
-public static void Gravity(int[][] blocks){
-  for(int ro = 0; ro < blocks.length; ro++){
-   for(int co = 0; co < blocks[ro].length; co++){
-
+public static void gravity(int[][] blocks){
+  for(int co = 0; co < blocks[0].length; co++){
+    //go column by column from left to right, from down to up. Only move down blocks by swapping them with empty
+    //spaces. Also, since Y coords are backwards we have to go down from 23
+    //BUT, since you can't move down from the bottom we start at 22
+   for(int ro = 22; ro > 0; ro--){
+     //first check if coordinate has a block and coordinate below is free
+     if(blocks[ro][co] > 0 && blocks[ro][co + 1] == 0){
+       //Make a new storage variable
+      int  holder = blocks[ro][co];
+       //now swapping the block and empty space below
+       blocks[ro][co + 1] = holder;
+       blocks[ro][co] = 0;
+     }
    }
  }
 }
