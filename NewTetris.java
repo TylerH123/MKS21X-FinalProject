@@ -55,10 +55,14 @@ public class NewTetris {
     }
   }
 
- String blockTypes = "ozlis"
-  //Generating Block Function
+
+  //Generating Block Function, and putting it in the arraylist
 public static boolean generateBlock(ArrayList<block> Pieces){
-  String
+  String[] blockTypes = new String[]{"o", "z", "l", "i", "s"};
+  Random rand = new Random();
+  String seed = new String(blockTypes[rand.nextInt(5)]);
+  block B = new block(rand.nextInt(10), 20 + rand.nextInt(4), seed, 10, 24);
+  Pieces.add(B);
   return true;
 }
 
@@ -93,23 +97,29 @@ public static boolean generateBlock(ArrayList<block> Pieces){
       System.out.println(blocks.length);
        for(int ro = 0; ro < blocks.length; ro++){
         for(int co = 0; co < blocks[ro].length; co++){
-         System.out.println("Test" + (ro * 24 + co));
+         //System.out.println("Test" + (ro * 24 + co));
          System.out.println(blocks[ro][co]);
           String g = "1";
           if (blocks[ro][co] == 0) g = "0";
           if(g == "0"){
-          screen.putString(co * 2,ro * 2 + 5, g, Terminal.Color.WHITE, Terminal.Color.BLACK;
+          screen.putString(co * 2,ro * 2 + 5, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
           screen.putString(co * 2 + 1, ro * 2 + 5, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
           screen.putString(co * 2,ro * 2 + 6, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
           screen.putString(co * 2 + 1,ro * 2 + 6, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
         }
+         if(g == "1"){
+           screen.putString(co * 2,ro * 2 + 5, g, Terminal.Color.WHITE, Terminal.Color.RED);
+           screen.putString(co * 2 + 1, ro * 2 + 5, " ", Terminal.Color.WHITE, Terminal.Color.RED);
+           screen.putString(co * 2,ro * 2 + 6, " ", Terminal.Color.WHITE, Terminal.Color.RED);
+           screen.putString(co * 2 + 1,ro * 2 + 6, " ", Terminal.Color.WHITE, Terminal.Color.RED);
+         }
         }
        }
        screen.refresh();
 
       //Filling the board
 
-      screen.refresh();
+      
 
       screen.setCursorPosition(c, r);
       Key key = screen.readInput();
