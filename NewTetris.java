@@ -82,10 +82,11 @@ public class NewTetris {
       for(int co = 0; co < blocks[ro].length; co++){
        System.out.println("Test" + (ro * 24 + co));
        System.out.println(blocks[ro][co]);
-        //String g = "1";
-        //if (blocks[co][ro] == 0) g = "0";
-        //screen.putString(co,ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
-        //screen.refresh();
+        String g = "1";
+        if (blocks[ro][co] == 0) g = "0";
+        System.out.println(g);
+        screen.putString(co,ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
+        screen.refresh();
      }
      }
 
