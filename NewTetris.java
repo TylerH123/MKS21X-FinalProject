@@ -62,10 +62,20 @@ public static boolean generateBlock(ArrayList<block> Pieces){
   Random rand = new Random();
   String seed = new String(blockTypes[rand.nextInt(5)]);
   block B = new block(rand.nextInt(10), 20 + rand.nextInt(4), seed, 10, 24);
+
   Pieces.add(B);
+
   return true;
 }
 
+//Move down all the pieces - ONLY worry about actual pieces and not empty space
+public static void Gravity(int[][] blocks){
+  for(int ro = 0; ro < blocks.length; ro++){
+   for(int co = 0; co < blocks[ro].length; co++){
+
+   }
+ }
+}
 
 
   //This use
@@ -87,13 +97,15 @@ public static boolean generateBlock(ArrayList<block> Pieces){
     int r = 0;
     int c = 0;
     NewTetris.clear(blocks);
-
-
-
-
+    int counter = 0;
 
     while(running){
 
+
+
+
+
+      //filling the board
       System.out.println(blocks.length);
        for(int ro = 0; ro < blocks.length; ro++){
         for(int co = 0; co < blocks[ro].length; co++){
@@ -102,22 +114,22 @@ public static boolean generateBlock(ArrayList<block> Pieces){
           String g = "1";
           if (blocks[ro][co] == 0) g = "0";
           if(g == "0"){
-          screen.putString(co * 2,ro * 2 + 5, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
-          screen.putString(co * 2 + 1, ro * 2 + 5, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
-          screen.putString(co * 2,ro * 2 + 6, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
-          screen.putString(co * 2 + 1,ro * 2 + 6, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
+          screen.putString(ro * 2 + 5,co * 2, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
+          screen.putString(ro * 2 + 5,co * 2 + 1, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
+          screen.putString(ro * 2 + 6,co * 2, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
+          screen.putString(ro * 2 + 6,co * 2 + 1, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
         }
          if(g == "1"){
-           screen.putString(co * 2,ro * 2 + 5, g, Terminal.Color.WHITE, Terminal.Color.RED);
-           screen.putString(co * 2 + 1, ro * 2 + 5, " ", Terminal.Color.WHITE, Terminal.Color.RED);
-           screen.putString(co * 2,ro * 2 + 6, " ", Terminal.Color.WHITE, Terminal.Color.RED);
-           screen.putString(co * 2 + 1,ro * 2 + 6, " ", Terminal.Color.WHITE, Terminal.Color.RED);
+           screen.putString(ro * 2 + 5,co * 2, g, Terminal.Color.WHITE, Terminal.Color.RED);
+           screen.putString(ro * 2 + 5,co * 2 + 1, " ", Terminal.Color.WHITE, Terminal.Color.RED);
+           screen.putString(ro * 2 + 6,co * 2, " ", Terminal.Color.WHITE, Terminal.Color.RED);
+           screen.putString(ro * 2 + 6,co * 2 + 1, " ", Terminal.Color.WHITE, Terminal.Color.RED);
          }
         }
        }
        screen.refresh();
 
-      //Filling the board
+
 
 
 
