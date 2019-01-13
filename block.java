@@ -150,6 +150,18 @@ public class block{
         whichAry = sDist;
         coords = sDist;
       }
+      if (shape.equals("t")){
+        whichAry = tDist;
+        coords = tDist;
+      }
+      if (shape.equals("l")){
+        whichAry = lDist;
+        coords = lDist;
+      }
+      if (shape.equals("j")){
+        whichAry = jDist;
+        coords = jDist;
+      }
       location[0][0] = xcor;
       location[0][1] = ycor;
       if (current.equals("down")){
