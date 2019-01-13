@@ -48,7 +48,7 @@ public class NewTetris {
     for(int r = 0; r < blocks.length; r++){
       for(int c = 0; c < blocks[r].length; c++){
         blocks[r][c] = 0;
-        System.out.println(c);
+
 
       }
 
@@ -61,7 +61,7 @@ public class NewTetris {
   //This use
   public static void main(String[] args) throws InterruptedException{
     int[][] blocks = new int[10][24];
-    ArrayList<block> wordsToAdd = new ArrayList<block>();
+    ArrayList<block> Pieces = new ArrayList<block>();
     NewTetris.clear(blocks);
     Screen screen = TerminalFacade.createScreen();
     int score = 0;
@@ -77,17 +77,21 @@ public class NewTetris {
     int r = 0;
     int c = 0;
     NewTetris.clear(blocks);
-    for(int ro = 0; ro < blocks.length; ro++){
+    System.out.println(blocks.length);
+     for(int ro = 0; ro < blocks.length; ro++){
       for(int co = 0; co < blocks[ro].length; co++){
-        System.out.println(blocks[co][ro]);
+       System.out.println("Test" + (ro * 24 + co));
+       System.out.println(blocks[ro][co]);
         //String g = "1";
         //if (blocks[co][ro] == 0) g = "0";
         //screen.putString(co,ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
         //screen.refresh();
      }
-    }
+     }
+
+
     screen.refresh();
-    while(running){
+    /*while(running){
 
 
       //Filling the board
@@ -129,7 +133,7 @@ public class NewTetris {
 
 
       }
-    }
+    }*/
     Thread.sleep(3000);
     System.exit(0);
 
