@@ -48,7 +48,10 @@ public class NewTetris {
     for(int r = 0; r < blocks.length; r++){
       for(int c = 0; c < blocks[r].length; c++){
         blocks[r][c] = 0;
+        System.out.println(c);
+
       }
+
     }
   }
 
@@ -73,17 +76,23 @@ public class NewTetris {
     //setting initial coordinates for the setCursorVisibleint c = 0;
     int r = 0;
     int c = 0;
+    NewTetris.clear(blocks);
+    for(int ro = 0; ro < blocks.length; ro++){
+      for(int co = 0; co < blocks[ro].length; co++){
+        System.out.println(blocks[co][ro]);
+        //String g = "1";
+        //if (blocks[co][ro] == 0) g = "0";
+        //screen.putString(co,ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
+        //screen.refresh();
+     }
+    }
+    screen.refresh();
     while(running){
-    NewTetris.clearRows(blocks);
-      //Filling the board
-      for(int ro = 0; r < blocks.length; ro++){
-        for(int co = 0; c < blocks[r].length; co++){
-          String g = "1";
-          if (blocks[c][r] == 0) g = "0";
-          screen.putString(co,ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
-        }
-      }
 
+
+      //Filling the board
+
+      screen.refresh();
 
       screen.setCursorPosition(c, r);
       Key key = screen.readInput();
