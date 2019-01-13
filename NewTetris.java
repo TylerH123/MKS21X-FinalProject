@@ -55,7 +55,7 @@ public class NewTetris {
     }
   }
 
- String blockTypes = "ozlis"
+ String blockTypes = "ozlistj"
   //Generating Block Function
 public static boolean generateBlock(ArrayList<block> Pieces){
   String
