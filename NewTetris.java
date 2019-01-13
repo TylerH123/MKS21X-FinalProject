@@ -78,7 +78,7 @@ public static void gravity(int[][] blocks){
      //first check if coordinate has a block and coordinate below is free
      if(blocks[ro][co] > 0 && blocks[ro][co + 1] == 0){
        //Make a new storage variable
-      int  holder = blocks[ro][co];
+      int holder = blocks[ro][co];
        //now swapping the block and empty space below
        blocks[ro][co + 1] = holder;
        blocks[ro][co] = 0;

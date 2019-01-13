@@ -9,6 +9,8 @@ public class block{
   private int[][] lDist = new int[][]{{0,1},{1,1},{2,1}};
   private int[][] jDist = new int[][]{{0,1},{-1,1},{-2,1}};
   private int[][] tDist = new int[][]{{0,1},{1,1},{-1,1}};
+
+  public int[][] coords;
   //rightIdx is the index in direction thatright variable uses
   private int rightIdx = 1;
   //leftIdx is the index of direction that left variable uses
@@ -138,12 +140,15 @@ public class block{
       int[][] whichAry = new int[4][2];
       if (shape.equals("z")){
         whichAry = zDist;
+        coords = zDist;
       }
       if (shape.equals("i")){
         whichAry = iDist;
+        coords = iDist;
       }
       if (shape.equals("s")){
         whichAry = sDist;
+        coords = sDist;
       }
       location[0][0] = xcor;
       location[0][1] = ycor;
@@ -183,6 +188,7 @@ public class block{
     location[2][1] = ycor+1;
     location[3][0] = xcor+1;
     location[3][1] = ycor+1;
+    coords = new int[][]{{0,0}, {1,0}, {1,-1}, {0,-1}};
   }
   //checks to see if the location of the blocks is not out of the border
   public boolean isValid(){
