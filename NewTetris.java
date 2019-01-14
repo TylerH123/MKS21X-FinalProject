@@ -19,7 +19,7 @@ public class NewTetris {
   public static boolean GenerateFourBlock(ArrayList<block> Pieces){
 
     return true;
-    //uptade when arrayList of fourblocks in implemented
+    //update when arrayList of fourblocks in implemented
   }
   //This used in the arrayList of ints, if the coordinate has a block on the coordinate
   // - since the color is a thing and not just 0, then it uses returns true
@@ -58,10 +58,10 @@ public class NewTetris {
 
   //Generating Block Function
 public static boolean generateBlock(ArrayList<block> Pieces){
-  String[] blockTypes = new String[]{"o", "z", "i", "s"};
+  String[] blockTypes = new String[]{"o", "z", "i", "s", "t", "l", "j"};
   Random rand = new Random();
-  String seed = new String(blockTypes[rand.nextInt(4)]);
-  block B = new block(rand.nextInt(10), 20 + rand.nextInt(4), seed, 10, 24);
+  String type = blockTypes[rand.nextInt()%7];
+  block B = new block(0, 20, type, 10, 24);
 
   Pieces.add(B);
 
