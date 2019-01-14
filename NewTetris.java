@@ -121,6 +121,7 @@ private static boolean contains(int[][] coords, int x, int y){
 
 public static void gravity(int[][] blocks, ArrayList<block> Pieces){
   //to fix potential errors lets only have one block floating on at a time
+  if(Pieces.size() > 0){
   for(int i = Pieces.size() - 1; i < Pieces.size(); i++){
     boolean willFall = true;
 
@@ -140,13 +141,14 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
         [ c[k][1] + b.getY() - 1  ] != 0) willFall = false;//the y coordinate of the block 1 less than our piece \
         //also rember that blocks has backwards coords
       }
-
     }
+
 
     //now move down if willfall says so
     if(willFall) (Pieces.get(i)).moveDown();
 
   }
+}
 }
 
 
@@ -176,6 +178,7 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
 
 
     while(running){
+      counter++;
       //using this as temporary timer
       if(counter % 20 == 0){
         NewTetris.generateBlock(Pieces, blocks);
@@ -210,20 +213,18 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
         }
        }
        screen.refresh();
-
 //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
     NewTetris.gravity(blocks, Pieces);
 
-
+    System.out.println(counter);
 
       screen.setCursorPosition(c, r);
       Key key = screen.readInput();
 
 
-      while(key == null){
+     if(key == null){
         key = screen.readInput();
-      }
-
+      } else {
 
       switch(key.getKind()){
         case Escape:
@@ -251,13 +252,12 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
 
         break;
 
-
-
         default:
         break;
 
 
       }
+
 
       if(key.getCharacter() == 'z'){
         block b = Pieces.get(counter - 1);
@@ -268,7 +268,7 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
         block b = Pieces.get(counter - 1);
         b.turnRight();
       }
-
+}
 
 
     }
