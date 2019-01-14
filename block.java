@@ -15,9 +15,7 @@ public class block{
   private int rightIdx = 1;
   //leftIdx is the index of direction that left variable uses
   private int leftIdx = 3;
-  //maxX is the maximum width of the board
-  //maxY is the maximum height of the board
-  private int xcor, ycor, maxX, maxY;
+  private int xcor, ycor;
   //left shows the direction if turnLeft happens
   //right shows the direction if turnRight happens
   //current is the current direction
@@ -32,7 +30,7 @@ public class block{
     *@param type is the type of piece it will become
     *@param maxWidth,maxHeight are the maximum dimensions of the board
     **/
-  public block(int x, int y, String type, int maxWidth, int maxHeight){
+  public block(int x, int y, String type){
     xcor = x;
     ycor = y;
     current = "down";
@@ -40,8 +38,6 @@ public class block{
     right = direction[rightIdx];
     piece = type;
     createBlock(piece);
-    maxX = maxWidth;
-    maxY = maxHeight;
   }
   //clears the piece by replacing all locations with -1
   public void clear(){
@@ -73,15 +69,11 @@ public class block{
   }
   //add to the xcor to move right
   public void moveRight(){
-    if (xcor < maxX){
-      xcor++;
-    }
+    xcor++;
   }
   //subtract from the xcor to move left
   public void moveLeft(){
-    if (xcor > 0){
-      xcor--;
-    }
+    xcor--;
   }
   //returns the current direction
   public String currentDirec(){
@@ -94,7 +86,6 @@ public class block{
   //param maxWidth is the maximum width of the board
   //param maxHeight is the maximum height of the board
   public void turnRight(){
-    if (isValid()){
       current = right;
       if (rightIdx == 3){
         rightIdx = 0;
@@ -105,14 +96,12 @@ public class block{
       right = direction[rightIdx];
       clear();
       createBlock(piece);
-    }
   }
   //changes the current block location to the location of the left string
   //left string gets replaced by the previous direction in the array
   //loops to the end if at the beginning
   //after rotation, clear the piece and then redraw using new location
   public void rotateLeft(){
-    if (isValid()){
       current = left;
       if (leftIdx == 0){
         leftIdx = 3;
@@ -123,7 +112,6 @@ public class block{
       left = direction[leftIdx];
       clear();
       createBlock(piece);
-    }
   }
 
   /******************************************************************************
@@ -203,12 +191,12 @@ public class block{
     coords = new int[][]{{0,0}, {1,0}, {1,-1}, {0,-1}};
   }
   //checks to see if the location of the blocks is not out of the border
-  public boolean isValid(){
+  /**public boolean isValid(){
     for (int i = 0; i < location.length; i++){
         if (location[i][0] > maxX || location[i][0] < 0 || location[i][1] > maxY || location[i][1] < 0){
           return false;
         }
       }
     return true;
-  }
+  }**/
 }

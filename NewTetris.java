@@ -82,10 +82,10 @@ public static void gravity(int[][] blocks){
        //now swapping the block and empty space below
        blocks[ro][co + 1] = holder;
        blocks[ro][co] = 0;
+      }
      }
-   }
- }
-}
+    }
+  }
 
 
   //This use
