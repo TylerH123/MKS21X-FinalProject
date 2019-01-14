@@ -87,8 +87,10 @@ public static boolean generateBlock(ArrayList<block> Pieces){
 }
 
 //Move down all the pieces - ONLY worry about actual pieces and not empty space
-<<<<<<< HEAD
+
 public static void gravity(int[][] blocks){
+
+
   for(int co = 0; co < blocks[0].length; co++){
     //go column by column from left to right, from down to up. Only move down blocks by swapping them with empty
     //spaces. Also, since Y coords are backwards we have to go down from 23
@@ -105,11 +107,17 @@ public static void gravity(int[][] blocks){
      }
     }
   }
-=======
+
 public static void gravity(int[][] blocks, ArrayList<block> Pieces){
   for(int i = 0; i < Pieces.size(); i++){
     block b = Pieces.get(i);
-    int[4][2] c;
+    int[4][2] c = b.coords;
+    //first find the lowest blocks in each column of the piece
+    //if there is nothing below them then we can move the block down
+    int[][] lowestBlocks;
+    for(int i = 0; i < 4; i ++){
+      
+    }
 
     ().moveDown();
   }
