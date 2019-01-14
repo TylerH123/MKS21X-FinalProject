@@ -172,6 +172,16 @@ public class NewTetris {
        screen.refresh();
        //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
        //NewTetris.gravity(blocks, Pieces);
+       if (counter % 10000 == 0){
+         block B = Pieces.get(Pieces.size() - 1);
+         for(int i = 0; i < 4; i++){
+           blocks[B.location[i][0]][B.location[i][1]] = 0;
+         }
+         B.moveDown();
+         for(int i = 0; i < 4; i++){
+           blocks[B.location[i][0]][B.location[i][1]] = 1;
+         }
+       }
        counter = counter % 10000;
 
        screen.setCursorPosition(c, r);
