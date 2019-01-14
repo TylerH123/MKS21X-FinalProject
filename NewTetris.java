@@ -61,7 +61,7 @@ public static boolean generateBlock(ArrayList<block> Pieces){
   String[] blockTypes = new String[]{"o", "z", "i", "s", "t", "l", "j"};
   Random rand = new Random();
   String type = blockTypes[rand.nextInt()%7];
-  block B = new block(0, 20, type, 10, 24);
+  block B = new block(5, 0, type);
 
   Pieces.add(B);
 

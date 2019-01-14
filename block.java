@@ -20,10 +20,14 @@ public class block{
   //right shows the direction if turnRight happens
   //current is the current direction
   //piece stores the shape of the piece for later uses
-  private String left,right, current, piece;
+  private String left, right, current, piece;
   private String[] direction = new String[]{"down", "right", "up", "left"};
   //location is a 2d array which contain the coordinates of each block
   public int[][] location = new int[4][2];
+  //locationRight is a 2d array which contains the coordinates of each block if it were to rotate right
+  public int[][] locationRight = new int[4][2];
+  //locationLeft is a 2d array which contains the coordinates of each block if it were to rotate right
+  public int[][] locationLeft = new int[4][2];
 
   /**constructor
     *@param x,y are the x-coordinates and y-coordinates of the block
@@ -150,32 +154,7 @@ public class block{
         whichAry = jDist;
         coords = jDist;
       }
-      location[0][0] = xcor;
-      location[0][1] = ycor;
-      if (current.equals("down")){
-        for (int i = 1; i < location.length; i++){
-          location[i][0] = xcor + whichAry[i-1][0];
-          location[i][1] = ycor + whichAry[i-1][1];
-        }
-      }
-      if (current.equals("right")){
-        for (int i = 1; i < location.length; i++){
-          location[i][0] = xcor + whichAry[i-1][1];
-          location[i][1] = ycor + whichAry[i-1][0];
-        }
-      }
-      if (current.equals("up")){
-        for (int i = 1; i < location.length; i++){
-          location[i][0] = xcor + whichAry[i-1][0] * -1;
-          location[i][1] = ycor + whichAry[i-1][1] * -1;
-        }
-      }
-      if (current.equals("left")){
-        for (int i = 1; i < location.length; i++){
-          location[i][0] = xcor + whichAry[i-1][1] * -1;
-          location[i][1] = ycor + whichAry[i-1][0] * -1;
-        }
-      }
+      fillLocation(whichAry);
     }
   }
   //since cube does not change shape no matter how you rotate it, the location is not as dependent on direction
@@ -199,4 +178,59 @@ public class block{
       }
     return true;
   }**/
+  //loops through the different direction strings to pass into fillInLocation
+  //whichArray is the the array of the piece that is being created
+  public void fillLocation(int[][] whichArray){
+    String[] direct = new String[]{left, right, current};
+    String[] stringDirect = new String[]{"left", "right", "current"};
+    for (int i = 0; i < 3; i++){
+      fillInLocation(direct[i], whichArray, stringDirect[i]);
+    }
+  }
+  //fills in location arrays
+  //dir is the direction in which the block is facing
+  //whichAry is the array of the piece that is being created
+  //whichLoc is the location array that is being filled
+  public void fillInLocation(String dir, int[][] whichAry, String whichLoc){
+    location[0][0] = xcor;
+    location[0][1] = ycor;
+    locationLeft[0][0] = xcor;
+    locationLeft[0][1] = ycor;
+    locationRight[0][0] = xcor;
+    locationRight[0][1] = ycor;
+    int[][] locArray = new int[4][2];
+    if (whichLoc.equals("left")){
+      locArray = locationLeft;
+    }
+    if (whichLoc.equals("right")){
+      locArray = locationRight;
+    }
+    if (whichLoc.equals("current")){
+      locArray = location;
+    }
+    if (dir.equals("down")){
+      for (int i = 1; i < location.length; i++){
+        locArray[i][0] = xcor + whichAry[i-1][0];
+        locArray[i][1] = ycor + whichAry[i-1][1];
+      }
+    }
+    if (dir.equals("right")){
+      for (int i = 1; i < location.length; i++){
+        locArray[i][0] = xcor + whichAry[i-1][1];
+        locArray[i][1] = ycor + whichAry[i-1][0];
+      }
+    }
+    if (dir.equals("up")){
+      for (int i = 1; i < location.length; i++){
+        locArray[i][0] = xcor + whichAry[i-1][0] * -1;
+        locArray[i][1] = ycor + whichAry[i-1][1] * -1;
+      }
+    }
+    if (dir.equals("left")){
+      for (int i = 1; i < location.length; i++){
+        locArray[i][0] = xcor + whichAry[i-1][1] * -1;
+        locArray[i][1] = ycor + whichAry[i-1][0] * -1;
+      }
+    }
+  }
 }
