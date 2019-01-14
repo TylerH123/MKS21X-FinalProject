@@ -75,13 +75,15 @@ public class NewTetris {
 public static void generateBlock(ArrayList<block> Pieces, int[][] blocks){
   String[] blockTypes = new String[]{"o", "z", "i", "s", "t", "l", "j"};
   Random rand = new Random();
-  String type = blockTypes[rand.nextInt(7)];
+  int w = rand.nextInt(7);
+  String type = blockTypes[w];
   block B = new block(5, 5, type);
   for(int i = 0; i < 4; i++){
-    for(int j = 0; j < 2; j++){
-    blocks[B.coords[i][j] + 5][B.coords[i][j] + 5] = 1;
+
+    blocks[B.coords[i][0] + 5][B.coords[i][1] + 3] = 1;
+
     //in the future we can make differnt colors for diffrent blocks
-  }
+
 }
 
   Pieces.add(B);
@@ -174,6 +176,7 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
     int r = 0;
     int c = 0;
     NewTetris.clear(blocks);
+    NewTetris.generateBlock(Pieces, blocks);
 
 
 
@@ -181,7 +184,7 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
       counter++;
       //using this as temporary timer
       if(counter % 20 == 0){
-        NewTetris.generateBlock(Pieces, blocks);
+        //NewTetris.generateBlock(Pieces, blocks);
       }
 
 
@@ -191,7 +194,7 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
 
 
       //filling the board
-      System.out.println(blocks.length);
+
        for(int ro = 0; ro < blocks.length; ro++){
         for(int co = 0; co < blocks[ro].length; co++){
          //System.out.println("Test" + (ro * 24 + co));
@@ -216,7 +219,7 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
 //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
     NewTetris.gravity(blocks, Pieces);
 
-    System.out.println(counter);
+    counter = counter % 10000;
 
       screen.setCursorPosition(c, r);
       Key key = screen.readInput();
