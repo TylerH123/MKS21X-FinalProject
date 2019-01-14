@@ -118,7 +118,7 @@ public class NewTetris {
     }
   }
 
-//keep in mind, the pieces array list contains all the blocks that ever formed, but the user only influences the last block
+  //keep in mind, the pieces array list contains all the blocks that ever formed, but the user only influences the last block
 
   //This use
   public static void main(String[] args) throws InterruptedException{
