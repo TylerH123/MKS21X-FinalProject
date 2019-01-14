@@ -94,7 +94,7 @@ public class NewTetris {
     } return false;
   }
 
-  
+
 
   //keep in mind, the pieces array list contains all the blocks that ever formed, but the user only influences the last block
 
@@ -225,10 +225,11 @@ public class NewTetris {
              }
              B.moveRight();
              try{
-             for(int i = 0; i < 4; i++){
-               blocks[B.location[i][0]][B.location[i][1]] = 1;
+               for(int i = 0; i < 4; i++){
+                 blocks[B.location[i][0]][B.location[i][1]] = 1;
+               }
              }
-             } catch (ArrayIndexOutOfBoundsException e){
+             catch(ArrayIndexOutOfBoundsException e){
                B.moveLeft();
                for(int i = 0; i < 4; i++){
                  blocks[B.location[i][0]][B.location[i][1]] = 1;

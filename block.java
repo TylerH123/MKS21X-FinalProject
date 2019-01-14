@@ -46,7 +46,6 @@ public class block{
     ycor++;
     createBlock(piece);
   }
-
   public void moveUp(){
     ycor--;
     createBlock(piece);
