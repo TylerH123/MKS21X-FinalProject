@@ -72,21 +72,21 @@ public class NewTetris {
   }
 
   //Generating Block Function
-public static boolean generateBlock(ArrayList<block> Pieces, int[][] blocks){
+public static void generateBlock(ArrayList<block> Pieces, int[][] blocks){
   String[] blockTypes = new String[]{"o", "z", "i", "s", "t", "l", "j"};
   Random rand = new Random();
   String type = blockTypes[rand.nextInt()%7];
-  block B = new block(5, 0, type);
+  block B = new block(5, 5, type);
   for(int i = 0; i < 4; i++){
     for(int j = 0; j < 2; j++){
-    blocks[B.coords[i][j] + 5][B.coords[i][j]] = 1;
+    blocks[B.coords[i][j] + 5][B.coords[i][j] + 5] = 1;
     //in the future we can make differnt colors for diffrent blocks
   }
 }
 
   Pieces.add(B);
 
-  return true;
+
 }
 
 //Move down all the pieces - ONLY worry about actual pieces and not empty space
@@ -175,7 +175,10 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
 
 
     while(running){
-      //NewTetris.gravity(blocks, Pieces);
+      //using this as temporary timer
+      if(counter % 20 == 0){
+        NewTetris.generateBlock(Pieces, blocks);
+      }
 
 
       //if(Pieces.size() != 0) block B = Pieces[counter - 1];
@@ -208,6 +211,7 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
        screen.refresh();
 
 //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
+    NewTetris.gravity(blocks, Pieces);
 
 
 
