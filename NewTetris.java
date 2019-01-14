@@ -125,6 +125,7 @@ public class NewTetris {
     int[][] blocks = new int[24][10];
     ArrayList<block> Pieces = new ArrayList<block>();
     int counter = 0;
+    boolean canMove = true;
     NewTetris.clear(blocks);
     Screen screen = TerminalFacade.createScreen();
     int score = 0;
@@ -172,14 +173,21 @@ public class NewTetris {
        screen.refresh();
        //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
        //NewTetris.gravity(blocks, Pieces);
-       if (counter % 10000 == 0){
+       if (counter % 5000 == 0){
          block B = Pieces.get(Pieces.size() - 1);
-         for(int i = 0; i < 4; i++){
-           blocks[B.location[i][0]][B.location[i][1]] = 0;
+         if (canMove){
+           for(int i = 0; i < 4; i++){
+             blocks[B.location[i][0]][B.location[i][1]] = 0;
+           }
+           B.moveDown();
+           for(int i = 0; i < 4; i++){
+             blocks[B.location[i][0]][B.location[i][1]] = 1;
+           }
          }
-         B.moveDown();
-         for(int i = 0; i < 4; i++){
-           blocks[B.location[i][0]][B.location[i][1]] = 1;
+         for (int j = 0; j < B.location.length; j++){
+           if (B.location[j][0] > 22){
+             canMove = false;
+           }
          }
        }
        counter = counter % 10000;
@@ -247,7 +255,7 @@ public class NewTetris {
            break;
            case ArrowDown:
 
-           break; 
+           break;
 
            default:
            break;
