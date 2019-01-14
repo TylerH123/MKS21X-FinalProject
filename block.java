@@ -204,26 +204,26 @@ public class block{
     }
     if (dir.equals("down")){
       for (int i = 0; i < location.length; i++){
-        locArray[i][0] = xcor + whichAry[i-1][0];
-        locArray[i][1] = ycor + whichAry[i-1][1];
+        locArray[i][0] = xcor + whichAry[i][0];
+        locArray[i][1] = ycor + whichAry[i][1];
       }
     }
     if (dir.equals("right")){
       for (int i = 0; i < location.length; i++){
-        locArray[i][0] = xcor + whichAry[i-1][1];
-        locArray[i][1] = ycor + whichAry[i-1][0];
+        locArray[i][0] = xcor + whichAry[i][1];
+        locArray[i][1] = ycor + whichAry[i][0];
       }
     }
     if (dir.equals("up")){
       for (int i = 0; i < location.length; i++){
-        locArray[i][0] = xcor + whichAry[i-1][0] * -1;
-        locArray[i][1] = ycor + whichAry[i-1][1] * -1;
+        locArray[i][0] = xcor + whichAry[i][0] * -1;
+        locArray[i][1] = ycor + whichAry[i][1] * -1;
       }
     }
     if (dir.equals("left")){
       for (int i = 0; i < location.length; i++){
-        locArray[i][0] = xcor + whichAry[i-1][1] * -1;
-        locArray[i][1] = ycor + whichAry[i-1][0] * -1;
+        locArray[i][0] = xcor + whichAry[i][1] * -1;
+        locArray[i][1] = ycor + whichAry[i][0] * -1;
       }
     }
   }
