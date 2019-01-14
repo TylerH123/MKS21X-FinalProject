@@ -55,7 +55,7 @@ public class NewTetris {
     }
   }
   //checks through the arrays to make sure each coordinate is inside the board
-  public boolean canRotate(String rotate){
+  public boolean canRotate(String rotate, ArrayList<block> Pieces){
     if (rotate.equals("left")){
       int[][] loc = Pieces.get(0).locationLeft;
     }
@@ -63,7 +63,8 @@ public class NewTetris {
       int[][] loc = Pieces.get(0).locationRight;
     }
     block currentBlock = Pieces.get(0);
-    for (int i = 0; i < loc; i++){
+    int[][] loc = new int[4][2];
+    for (int i = 0; i < loc.length; i++){
       if (loc[i][0] > 10 || loc[i][0] < 0){
         return false;
       }
@@ -108,8 +109,8 @@ public static void gravity(int[][] blocks){
   }
 
 //helper function for gravity
-private static boolean containsCoords(int[4][2] coords, int x, int y){
-  for(int i = 0; i < 4, i++){
+private static boolean contains(int[][] coords, int x, int y){
+  for(int i = 0; i < 4; i++){
     for(int j = 0; j < 2; j++){
       if(x == i && j == y) return true;
     }
@@ -117,40 +118,50 @@ private static boolean containsCoords(int[4][2] coords, int x, int y){
 }
 
 public static void gravity(int[][] blocks, ArrayList<block> Pieces){
-  for(int i = 0; i < Pieces.size(); i++){
+  //to fix potential errors lets only have one block floating on at a time
+  for(int i = Pieces.size() - 2; i < Pieces.size(); i++){
     boolean willFall = true;
     block b = Pieces.get(i);
-    int[4][2] c = b.coords;
+    int[][] c = b.coords;
 
 
     //first find the lowest blocks in each column of the piece
     //if there is nothing below them then we can move the block down
 
-    for(int i = 0; i < 4; i ++){
-      if (!(NewTetris.contains(c, c[i][0], c[i][1] - 1)){
+    for(int k = 0; k < 4; k ++){
+      if (!(NewTetris.contains(c, c[k][0], c[k][1] - 1))) {
         //All the blocks here are lowest block, now we want to see if they can moveDown
         //if even one of them can't we will set willFall equal to false
 
-        if()
+        if(blocks[ (c[k][0]) + b.getX()  ]//the x coordinate of the block on the board
+        [ c[k][1] + b.getY() - 1  ] != 0) willFall = false;//the y coordinate of the block 1 less than our piece \
+        //also rember that blocks has backwards coords
       }
 
     }
 
+    //now move down if willfall says so
+    if(willFall) (Pieces.get(i)).moveDown();
 
   }
-
+}
 
 
 //keep in mind, the pieces array list contains all the blocks that ever formed, but the user only influences the last block
 //in the list
 
 
-  public static void placeBlock(block b){
+/*  public static void placeBlock(block b){
     int[][] coords = b.location;
     for (int i = 0; i < coords.length; i++){
+<<<<<<< HEAD
+        screen.putString(coords[i][0], coords[i][1], "1", Terminal.Color.BLUE, Terminal.Color.BLACK);
+=======
       screen.putString(coords[i][0], coords[i][1], "1", Terminal.Color.Blue, Terminal.Color.Black);
+>>>>>>> 1f4b9fe9603f692bf54d57117eb54d680c4a93a8
     }
   }
+  */
 
   //This use
   public static void main(String[] args) throws InterruptedException{
@@ -208,7 +219,7 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
        }
        screen.refresh();
 
-
+//PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
 
 
 
