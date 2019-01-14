@@ -161,6 +161,13 @@ public class NewTetris {
           }
         }
 
+        int[][] prevState = new int[blocks.length][blocks[1].length];
+        for(int ro = 0; ro < blocks.length; ro++){
+         for(int co = 0; co < blocks[ro].length; co++){
+           prevState[ro][co] = blocks[ro][co];
+         }
+       }
+
          block B = Pieces.get(Pieces.size() - 1);
          if (canMove){
            for(int i = 0; i < 4; i++){
@@ -188,9 +195,7 @@ public class NewTetris {
         }
         if(redSquaresNew < redSquaresOld){
           B.moveUp();
-          for(int i = 0; i < 4; i++){
-            blocks[B.location[i][0]][B.location[i][1]] = 1;
-          }
+          blocks = prevState;
 
         canMove = false;
         NewTetris.generateBlock(Pieces, blocks);
