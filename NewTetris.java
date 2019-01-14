@@ -209,8 +209,11 @@ public class NewTetris {
           }
         }
         if(redSquaresNew < redSquaresOld){
-        B.moveUp();
-        B.moveUp();
+          B.moveUp();
+          for(int i = 0; i < 4; i++){
+            blocks[B.location[i][0]][B.location[i][1]] = 1;
+          }
+
         canMove = false;
         NewTetris.generateBlock(Pieces, blocks);
         canMove = true;
