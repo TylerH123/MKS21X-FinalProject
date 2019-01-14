@@ -202,13 +202,13 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
           String g = "1";
           if (blocks[ro][co] == 0) g = "0";
           if(g == "0"){
-          screen.putString(ro * 2 + 5,co , g, Terminal.Color.WHITE, Terminal.Color.BLACK);
+          screen.putString(ro * 2 + 5,co , " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
           screen.putString(ro * 2 + 5,co  + 1, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
           screen.putString(ro * 2 + 6,co , " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
           screen.putString(ro * 2 + 6,co  + 1, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
         }
          if(g == "1"){
-           screen.putString(ro * 2 + 5,co, g, Terminal.Color.WHITE, Terminal.Color.RED);
+           screen.putString(ro * 2 + 5,co, " ", Terminal.Color.WHITE, Terminal.Color.RED);
            screen.putString(ro * 2 + 5,co  + 1, " ", Terminal.Color.WHITE, Terminal.Color.RED);
            screen.putString(ro * 2 + 6,co , " ", Terminal.Color.WHITE, Terminal.Color.RED);
            screen.putString(ro * 2 + 6,co  + 1, " ", Terminal.Color.WHITE, Terminal.Color.RED);
