@@ -108,18 +108,36 @@ public static void gravity(int[][] blocks){
     }
   }
 
+//helper function for gravity
+private static boolean containsCoords(int[4][2] coords, int x, int y){
+  for(int i = 0; i < 4, i++){
+    for(int j = 0; j < 2; j++){
+      if(x == i && j == y) return true;
+    }
+  } return false;
+}
+
 public static void gravity(int[][] blocks, ArrayList<block> Pieces){
   for(int i = 0; i < Pieces.size(); i++){
+    boolean willFall = true;
     block b = Pieces.get(i);
     int[4][2] c = b.coords;
+
+    
     //first find the lowest blocks in each column of the piece
     //if there is nothing below them then we can move the block down
-    int[][] lowestBlocks;
+
     for(int i = 0; i < 4; i ++){
-      
+      if (!(NewTetris.contains(c, c[i][0], c[i][1] - 1)){
+        //All the blocks here are lowest block, now we want to see if they can moveDown
+        //if even one of them can't we will set willFall equal to false
+
+        if()
+      }
+
     }
 
-    ().moveDown();
+
   }
 
 
@@ -128,9 +146,6 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
 //in the list
 
 
-public static
-
->>>>>>> 9e528c60c0234a416b72413d08d8352532cc9b53
 
 
   //This use
