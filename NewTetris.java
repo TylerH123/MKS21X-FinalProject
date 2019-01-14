@@ -154,7 +154,11 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
 /*  public static void placeBlock(block b){
     int[][] coords = b.location;
     for (int i = 0; i < coords.length; i++){
+<<<<<<< HEAD
         screen.putString(coords[i][0], coords[i][1], "1", Terminal.Color.BLUE, Terminal.Color.BLACK);
+=======
+      screen.putString(coords[i][0], coords[i][1], "1", Terminal.Color.Blue, Terminal.Color.Black);
+>>>>>>> 1f4b9fe9603f692bf54d57117eb54d680c4a93a8
     }
   }
   */
