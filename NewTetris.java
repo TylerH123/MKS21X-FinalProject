@@ -184,12 +184,26 @@ public class NewTetris {
              blocks[B.location[i][0]][B.location[i][1]] = 1;
            }
          }
+         //check if too low
          for (int j = 0; j < B.location.length; j++){
            if (B.location[j][0] > 22){
              canMove = false;
+             NewTetris.generateBlock(Pieces, blocks);
+             canMove = true;
            }
          }
+         //check if block below
+         for(int k = 0; k < 4; k ++){
+           //find the lowest blocks in the group for each row and see if they have a block below them
+           if (!(NewTetris.contains(B.location, B.location[k][0], B.location[k][1] - 1))) {
+             if(blocks[B.location[k][1] - 1][B.location[k][0]] != 0){
+               canMove = false;
+               NewTetris.generateBlock(Pieces, blocks);
+               canMove = true;
+             }
        }
+     }
+   }
 
        counter = counter % 10000;
 
