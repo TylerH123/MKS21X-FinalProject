@@ -75,7 +75,7 @@ public class NewTetris {
 public static void generateBlock(ArrayList<block> Pieces, int[][] blocks){
   String[] blockTypes = new String[]{"o", "z", "i", "s", "t", "l", "j"};
   Random rand = new Random();
-  String type = blockTypes[rand.nextInt()%7];
+  String type = blockTypes[rand.nextInt()%4+3];
   block B = new block(5, 5, type);
   for(int i = 0; i < 4; i++){
     for(int j = 0; j < 2; j++){
