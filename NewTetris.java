@@ -254,6 +254,27 @@ public class NewTetris {
 
       //same as ArrowRight
            break;
+
+           case 'z':
+           if(counter > -1){
+             block B = Pieces.get(Pieces.size() - 1);
+             for(int i = 0; i < 4; i++){
+               blocks[B.location[i][0]][B.location[i][1]] = 0;
+             }
+             B.moveRight();
+             try{
+             for(int i = 0; i < 4; i++){
+               blocks[B.location[i][0]][B.location[i][1]] = 1;
+             }
+             } catch (ArrayIndexOutOfBoundsException e){
+               B.moveLeft();
+               for(int i = 0; i < 4; i++){
+                 blocks[B.location[i][0]][B.location[i][1]] = 1;
+               }
+             }
+           }
+           break;
+
            case ArrowDown:
 
            break;
