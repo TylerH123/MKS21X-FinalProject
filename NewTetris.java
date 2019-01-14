@@ -54,9 +54,25 @@ public class NewTetris {
 
     }
   }
-public void borderCheck(){
-  if ()
-}
+  //checks through the arrays to make sure each coordinate is inside the board
+  public boolean canRotate(String rotate){
+    if (rotate.equals("left")){
+      int[][] loc = Pieces.get(0).locationLeft;
+    }
+    if (rotate.equals("right")){
+      int[][] loc = Pieces.get(0).locationRight;
+    }
+    block currentBlock = Pieces.get(0);
+    for (int i = 0; i < loc; i++){
+      if (loc[i][0] > 10 || loc[i][0] < 0){
+        return false;
+      }
+      if (loc[i][1] < 0 || loc[i][1] > 24){
+        return false;
+      }
+    }
+    return true;
+  }
 
   //Generating Block Function
 public static boolean generateBlock(ArrayList<block> Pieces){

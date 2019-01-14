@@ -3,12 +3,12 @@ public class block{
   //dist variables are 2d arrays containing the locations of the other 3 blocks relative to one block
   //each of these varaibles are for different pieces
   //first value is the change in x-cor, second value is the change in y-cor
-  private int[][] zDist = new int[][]{{-1,0},{1,0},{1,1}};
-  private int[][] iDist = new int[][]{{0,1},{0,2},{0,3},{0,4}};
-  private int[][] sDist = new int[][]{{1,0},{1,0},{-1,1}};
-  private int[][] lDist = new int[][]{{0,1},{1,1},{2,1}};
-  private int[][] jDist = new int[][]{{0,1},{-1,1},{-2,1}};
-  private int[][] tDist = new int[][]{{0,1},{1,1},{-1,1}};
+  private int[][] zDist = new int[][]{{0,0},{-1,0},{1,0},{1,1}};
+  private int[][] iDist = new int[][]{{0,0},{0,1},{0,2},{0,3}};
+  private int[][] sDist = new int[][]{{0,0},{1,0},{1,0},{-1,1}};
+  private int[][] lDist = new int[][]{{0,0},{0,1},{1,1},{2,1}};
+  private int[][] jDist = new int[][]{{0,0},{0,1},{-1,1},{-2,1}};
+  private int[][] tDist = new int[][]{{0,0},{0,1},{1,1},{-1,1}};
 
   public int[][] coords;
   //rightIdx is the index in direction thatright variable uses
@@ -192,12 +192,6 @@ public class block{
   //whichAry is the array of the piece that is being created
   //whichLoc is the location array that is being filled
   public void fillInLocation(String dir, int[][] whichAry, String whichLoc){
-    location[0][0] = xcor;
-    location[0][1] = ycor;
-    locationLeft[0][0] = xcor;
-    locationLeft[0][1] = ycor;
-    locationRight[0][0] = xcor;
-    locationRight[0][1] = ycor;
     int[][] locArray = new int[4][2];
     if (whichLoc.equals("left")){
       locArray = locationLeft;
@@ -209,25 +203,25 @@ public class block{
       locArray = location;
     }
     if (dir.equals("down")){
-      for (int i = 1; i < location.length; i++){
+      for (int i = 0; i < location.length; i++){
         locArray[i][0] = xcor + whichAry[i-1][0];
         locArray[i][1] = ycor + whichAry[i-1][1];
       }
     }
     if (dir.equals("right")){
-      for (int i = 1; i < location.length; i++){
+      for (int i = 0; i < location.length; i++){
         locArray[i][0] = xcor + whichAry[i-1][1];
         locArray[i][1] = ycor + whichAry[i-1][0];
       }
     }
     if (dir.equals("up")){
-      for (int i = 1; i < location.length; i++){
+      for (int i = 0; i < location.length; i++){
         locArray[i][0] = xcor + whichAry[i-1][0] * -1;
         locArray[i][1] = ycor + whichAry[i-1][1] * -1;
       }
     }
     if (dir.equals("left")){
-      for (int i = 1; i < location.length; i++){
+      for (int i = 0; i < location.length; i++){
         locArray[i][0] = xcor + whichAry[i-1][1] * -1;
         locArray[i][1] = ycor + whichAry[i-1][0] * -1;
       }
