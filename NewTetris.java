@@ -16,11 +16,7 @@ import com.googlecode.lanterna.screen.Screen;
 
 public class NewTetris {
 
-  public static boolean GenerateFourBlock(ArrayList<block> Pieces){
 
-    return true;
-    //update when arrayList of fourblocks in implemented
-  }
   //This used in the arrayList of ints, if the coordinate has a block on the coordinate
   // - since the color is a thing and not just 0, then it uses returns true
   public static boolean hasBlock(int[][] blocks, int col, int row){
@@ -76,11 +72,17 @@ public class NewTetris {
   }
 
   //Generating Block Function
-public static boolean generateBlock(ArrayList<block> Pieces){
+public static boolean generateBlock(ArrayList<block> Pieces, int[][] blocks){
   String[] blockTypes = new String[]{"o", "z", "i", "s", "t", "l", "j"};
   Random rand = new Random();
   String type = blockTypes[rand.nextInt()%7];
   block B = new block(5, 0, type);
+  for(int i = 0; i < 4; i++){
+    for(int j = 0; j < 2; j++){
+    blocks[B.coords[i][j] + 5][B.coords[i][j]] = 1;
+    //in the future we can make differnt colors for diffrent blocks
+  }
+}
 
   Pieces.add(B);
 
@@ -148,20 +150,6 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
 
 
 //keep in mind, the pieces array list contains all the blocks that ever formed, but the user only influences the last block
-//in the list
-
-
-/*  public static void placeBlock(block b){
-    int[][] coords = b.location;
-    for (int i = 0; i < coords.length; i++){
-<<<<<<< HEAD
-        screen.putString(coords[i][0], coords[i][1], "1", Terminal.Color.BLUE, Terminal.Color.BLACK);
-=======
-      screen.putString(coords[i][0], coords[i][1], "1", Terminal.Color.Blue, Terminal.Color.Black);
->>>>>>> 1f4b9fe9603f692bf54d57117eb54d680c4a93a8
-    }
-  }
-  */
 
   //This use
   public static void main(String[] args) throws InterruptedException{
