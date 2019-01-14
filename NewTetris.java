@@ -230,7 +230,7 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
         case Escape:
         screen.putString(5, 30, "You have exited the game, your score is: " + score, Terminal.Color.WHITE, Terminal.Color.BLACK);
         screen.refresh();
-        Thread.sleep(1000);
+        Thread.sleep(1);
         running = false;
         break;
 
