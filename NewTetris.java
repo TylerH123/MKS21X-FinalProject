@@ -220,26 +220,26 @@ public class NewTetris {
            }
 
       //same as ArrowRight
-          break;
-          case ArrowDown:
+           break;
+           case ArrowDown:
 
-          break;
+           break;
 
-          default:
-          break;
-        }
-        if(key.getCharacter() == 'z'){
-          block b = Pieces.get(counter - 1);
-          b.rotateLeft();
-        }
+           default:
+           break;
+           }
+           if(key.getCharacter() == 'z'){
+             block b = Pieces.get(counter - 1);
+             b.rotateLeft();
+           }
 
-        if(key.getCharacter() == 'z'){
-          block b = Pieces.get(counter - 1);
-          b.turnRight();
-        }
-      }
-    }
-    Thread.sleep(1000);
-    System.exit(0);
-  }
-}
+           if(key.getCharacter() == 'z'){
+             block b = Pieces.get(counter - 1);
+             b.turnRight();
+           }
+         }
+       }
+       Thread.sleep(1000);
+       System.exit(0);
+     }
+   }
