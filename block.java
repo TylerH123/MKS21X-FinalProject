@@ -82,7 +82,7 @@ public class block{
   //after rotation, clear the piece and then redraw using new location
   //param maxWidth is the maximum width of the board
   //param maxHeight is the maximum height of the board
-  public void turnRight(){
+  public void rotateRight(){
       current = right;
       if (rightIdx == 3){
         rightIdx = 0;
@@ -103,7 +103,7 @@ public class block{
         leftIdx = 3;
       }
       else{
-        leftIdx++;
+        leftIdx--;
       }
       left = direction[leftIdx];
       createBlock(piece);

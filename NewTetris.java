@@ -77,7 +77,7 @@ public class NewTetris {
     Random rand = new Random();
     int w = rand.nextInt(7);
     String type = blockTypes[w];
-    block B = new block(0, 5, type);
+    block B = new block(5, 1, type);
     for(int i = 0; i < 4; i++){
       blocks[B.location[i][0]][B.location[i][1]] = 1;
     }
@@ -173,7 +173,7 @@ public class NewTetris {
        screen.refresh();
        //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
        //NewTetris.gravity(blocks, Pieces);
-       if (counter % 500 == 0){
+       if (counter % 1000 == 0){
          block B = Pieces.get(Pieces.size() - 1);
          if (canMove){
            for(int i = 0; i < 4; i++){
@@ -244,35 +244,15 @@ public class NewTetris {
                blocks[B.location[i][0]][B.location[i][1]] = 1;
              }
 
-           } catch(ArrayIndexOutOfBoundsException e){
+             } catch(ArrayIndexOutOfBoundsException e){
              B.moveRight();
              for(int i = 0; i < 4; i++){
                blocks[B.location[i][0]][B.location[i][1]] = 1;
              }
            }
-         }
+          }
 
       //same as ArrowRight
-           break;
-
-           case 'z':
-           if(counter > -1){
-             block B = Pieces.get(Pieces.size() - 1);
-             for(int i = 0; i < 4; i++){
-               blocks[B.location[i][0]][B.location[i][1]] = 0;
-             }
-             B.moveRight();
-             try{
-             for(int i = 0; i < 4; i++){
-               blocks[B.location[i][0]][B.location[i][1]] = 1;
-             }
-             } catch (ArrayIndexOutOfBoundsException e){
-               B.moveLeft();
-               for(int i = 0; i < 4; i++){
-                 blocks[B.location[i][0]][B.location[i][1]] = 1;
-               }
-             }
-           }
            break;
 
            case ArrowDown:
@@ -283,16 +263,33 @@ public class NewTetris {
            break;
            }
            if(key.getCharacter() == 'z'){
-             block b = Pieces.get(counter - 1);
-             b.rotateLeft();
-           }
+             if(counter > -1){
+               block B = Pieces.get(Pieces.size() - 1);
+               for(int i = 0; i < 4; i++){
+                 blocks[B.location[i][0]][B.location[i][1]] = 0;
 
-           if(key.getCharacter() == 'z'){
-             block b = Pieces.get(counter - 1);
-             b.turnRight();
+               }
+               B.rotateLeft();
+               for(int i = 0; i < 4; i++){
+                 blocks[B.location[i][0]][B.location[i][1]] = 1;
+               }
+             }
+           }
+           if(key.getCharacter() == 'x'){
+             if(counter > -1){
+               block B = Pieces.get(Pieces.size() - 1);
+               for(int i = 0; i < 4; i++){
+                 blocks[B.location[i][0]][B.location[i][1]] = 0;
+
+               }
+               B.rotateRight();
+               for(int i = 0; i < 4; i++){
+                 blocks[B.location[i][0]][B.location[i][1]] = 1;
+               }
+             }
            }
          }
-       }
+         }
        Thread.sleep(1000);
        System.exit(0);
      }
