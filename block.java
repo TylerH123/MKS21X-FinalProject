@@ -67,10 +67,12 @@ public class block{
   //add to the xcor to move right
   public void moveRight(){
     xcor++;
+    createBlock(piece);
   }
   //subtract from the xcor to move left
   public void moveLeft(){
     xcor--;
+    createBlock(piece);
   }
   //returns the current direction
   public String currentDirec(){

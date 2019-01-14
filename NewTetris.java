@@ -128,13 +128,13 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
     boolean willFall = true;
 
     block b = Pieces.get(i);
-    int[][] c = b.coords;
+    int[][] c = b.location;
 
 
     //first find the lowest blocks in each column of the piece
     //if there is nothing below them then we can move the block down
 
-    for(int k = 0; k < 4; k ++){
+    for(int k = 0; k < c.length; k ++){
       if (!(NewTetris.contains(c, c[k][0], c[k][1] - 1))) {
         //All the blocks here are lowest block, now we want to see if they can moveDown
         //if even one of them can't we will set willFall equal to false
@@ -216,13 +216,12 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
         }
        }
        screen.refresh();
-//PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
-    NewTetris.gravity(blocks, Pieces);
-    Pieces.get(0).moveDown();
-    counter = counter % 10000;
-
-      screen.setCursorPosition(c, r);
-      Key key = screen.readInput();
+       //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
+       NewTetris.gravity(blocks, Pieces);
+       counter = counter % 10000;
+       Pieces.get(0).moveDown();
+       screen.setCursorPosition(c, r);
+       Key key = screen.readInput();
 
 
      if(key == null){
