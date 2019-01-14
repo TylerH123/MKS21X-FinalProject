@@ -121,7 +121,7 @@ public static void gravity(int[][] blocks){
   public static void placeBlock(block b){
     int[][] coords = b.location;
     for (int i = 0; i < coords.length; i++){
-        screen.putString(coords[i][0], coords[i][1], "1", Terminal.Color.Blue, Terminal.Color.Black);
+      screen.putString(coords[i][0], coords[i][1], "1", Terminal.Color.Blue, Terminal.Color.Black);
     }
   }
 
