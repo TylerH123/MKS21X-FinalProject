@@ -233,7 +233,7 @@ public class NewTetris {
            break;
            case ArrowDown:
 
-           break;
+           break; 
 
            default:
            break;
