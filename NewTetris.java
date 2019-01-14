@@ -224,6 +224,20 @@ public class NewTetris {
 
            case ArrowRight:
            if(counter > -1){
+             int redSquaresOld = 0;
+             for(int ro = 0; ro < blocks.length; ro++){
+              for(int co = 0; co < blocks[ro].length; co++){
+                redSquaresOld += blocks[ro][co];
+              }
+            }
+
+            int[][] prevState = new int[blocks.length][blocks[1].length];
+            for(int ro = 0; ro < blocks.length; ro++){
+             for(int co = 0; co < blocks[ro].length; co++){
+               prevState[ro][co] = blocks[ro][co];
+             }
+           }
+
              block B = Pieces.get(Pieces.size() - 1);
              for(int i = 0; i < 4; i++){
                blocks[B.location[i][0]][B.location[i][1]] = 0;
@@ -240,6 +254,19 @@ public class NewTetris {
                  blocks[B.location[i][0]][B.location[i][1]] = 1;
                }
              }
+
+             int redSquaresNew = 0;
+             for(int ro = 0; ro < blocks.length; ro++){
+              for(int co = 0; co < blocks[ro].length; co++){
+                redSquaresNew += blocks[ro][co];
+              }
+            }
+
+            if(redSquaresOld > redSquaresNew){
+               blocks = prevState;
+               B.moveLeft();
+
+            }
             }
 
 
@@ -248,6 +275,20 @@ public class NewTetris {
            case ArrowLeft:
 
            if(counter > -1){
+             int redSquaresOld = 0;
+             for(int ro = 0; ro < blocks.length; ro++){
+              for(int co = 0; co < blocks[ro].length; co++){
+                redSquaresOld += blocks[ro][co];
+              }
+            }
+
+            int[][] prevState = new int[blocks.length][blocks[1].length];
+            for(int ro = 0; ro < blocks.length; ro++){
+             for(int co = 0; co < blocks[ro].length; co++){
+               prevState[ro][co] = blocks[ro][co];
+             }
+           }
+
              block B = Pieces.get(Pieces.size() - 1);
              for(int i = 0; i < 4; i++){
                blocks[B.location[i][0]][B.location[i][1]] = 0;
@@ -264,6 +305,19 @@ public class NewTetris {
                blocks[B.location[i][0]][B.location[i][1]] = 1;
              }
            }
+
+           int redSquaresNew = 0;
+           for(int ro = 0; ro < blocks.length; ro++){
+            for(int co = 0; co < blocks[ro].length; co++){
+              redSquaresNew += blocks[ro][co];
+            }
+          }
+
+          if(redSquaresOld > redSquaresNew){
+             blocks = prevState;
+             B.moveRight();
+
+          }
           }
 
       //same as ArrowRight
@@ -277,6 +331,8 @@ public class NewTetris {
            break;
            }
            if(key.getCharacter() == 'z'){
+             //algorithm to prevent going into another square
+
              if(counter > -1){
                block B = Pieces.get(Pieces.size() - 1);
                for(int i = 0; i < 4; i++){
