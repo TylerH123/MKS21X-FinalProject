@@ -111,7 +111,7 @@ public static void gravity(int[][] blocks){
      }
     }
   }
-  
+
 //helper function for gravity
 private static boolean contains(int[][] coords, int x, int y){
   for(int i = 0; i < 4; i++){
@@ -218,7 +218,7 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
        screen.refresh();
 //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
     NewTetris.gravity(blocks, Pieces);
-
+    Pieces.get(0).moveDown();
     counter = counter % 10000;
 
       screen.setCursorPosition(c, r);

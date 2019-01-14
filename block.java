@@ -43,17 +43,10 @@ public class block{
     piece = type;
     createBlock(piece);
   }
-  //clears the piece by replacing all locations with -1
-  public void clear(){
-    for (int i = 0; i < location.length; i++){
-      for (int j = 0; j < location[i].length; j++){
-        location[i][j] = -1;
-      }
-    }
-  }
   //Implementing the bastic methods movedown getx and gety
   public void moveDown(){
     ycor++;
+    createBlock(piece);
   }
   //return xcor
   public int getX(){
@@ -98,7 +91,6 @@ public class block{
         rightIdx++;
       }
       right = direction[rightIdx];
-      clear();
       createBlock(piece);
   }
   //changes the current block location to the location of the left string
@@ -114,7 +106,6 @@ public class block{
         leftIdx++;
       }
       left = direction[leftIdx];
-      clear();
       createBlock(piece);
   }
 
