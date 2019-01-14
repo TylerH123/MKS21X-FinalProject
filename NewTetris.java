@@ -79,10 +79,7 @@ public static void generateBlock(ArrayList<block> Pieces, int[][] blocks){
   String type = blockTypes[w];
   block B = new block(5, 5, type);
   for(int i = 0; i < 4; i++){
-
     blocks[B.coords[i][0] + 5][B.coords[i][1] + 3] = 1;
-
-    //in the future we can make differnt colors for diffrent blocks
 
 }
 
@@ -91,27 +88,7 @@ public static void generateBlock(ArrayList<block> Pieces, int[][] blocks){
 
 }
 
-//Move down all the pieces - ONLY worry about actual pieces and not empty space
-public static void gravity(int[][] blocks){
-
-
-  for(int co = 0; co < blocks[0].length; co++){
-    //go column by column from left to right, from down to up. Only move down blocks by swapping them with empty
-    //spaces. Also, since Y coords are backwards we have to go down from 23
-    //BUT, since you can't move down from the bottom we start at 22
-   for(int ro = 22; ro > 0; ro--){
-     //first check if coordinate has a block and coordinate below is free
-     if(blocks[ro][co] > 0 && blocks[ro][co + 1] == 0){
-       //Make a new storage variable
-      int holder = blocks[ro][co];
-       //now swapping the block and empty space below
-       blocks[ro][co + 1] = holder;
-       blocks[ro][co] = 0;
-      }
-     }
-    }
-  }
-
+//Move down all the pieces - ONLY worry about actual pieces and not empty spa
 //helper function for gravity
 private static boolean contains(int[][] coords, int x, int y){
   for(int i = 0; i < 4; i++){
@@ -128,13 +105,13 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
     boolean willFall = true;
 
     block b = Pieces.get(i);
-    int[][] c = b.location;
+    int[][] c = b.coords;
 
 
     //first find the lowest blocks in each column of the piece
     //if there is nothing below them then we can move the block down
 
-    for(int k = 0; k < c.length; k ++){
+    for(int k = 0; k < 4; k ++){
       if (!(NewTetris.contains(c, c[k][0], c[k][1] - 1))) {
         //All the blocks here are lowest block, now we want to see if they can moveDown
         //if even one of them can't we will set willFall equal to false
@@ -216,12 +193,13 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
         }
        }
        screen.refresh();
-       //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
-       NewTetris.gravity(blocks, Pieces);
-       counter = counter % 10000;
-       Pieces.get(0).moveDown();
-       screen.setCursorPosition(c, r);
-       Key key = screen.readInput();
+//PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
+    //NewTetris.gravity(blocks, Pieces);
+
+    counter = counter % 10000;
+
+      screen.setCursorPosition(c, r);
+      Key key = screen.readInput();
 
 
      if(key == null){
@@ -238,16 +216,31 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
 
         case ArrowRight:
         if(counter > -1){
-          block b = Pieces.get(counter - 1);
-          b.moveRight();
+          block B = Pieces.get(Pieces.size() - 1);
+          B.moveRight();
+          for(int i = 0; i < 4; i++){
+            blocks[B.coords[i][0] + 5][B.coords[i][1] + 3] = 0;
+
+        }
+          for(int i = 0; i < 4; i++){
+            blocks[B.coords[i][0] + 4][B.coords[i][1] + 3] = 1;
+        }
         }
         break;
 
         case ArrowLeft:
         if(counter > -1){
-          block b = Pieces.get(counter - 1);
-          b.moveLeft();
+          block B = Pieces.get(Pieces.size() - 1);
+          B.moveLeft();
+          for(int i = 0; i < 4; i++){
+            blocks[B.coords[i][0] + 5][B.coords[i][1] + 3] = 0;
+
         }
+          for(int i = 0; i < 4; i++){
+            blocks[B.coords[i][0] + 6][B.coords[i][1] + 3] = 1;
+        }
+        }
+
       //same as ArrowRight
         break;
         case ArrowDown:
