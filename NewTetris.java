@@ -173,7 +173,16 @@ public class NewTetris {
        screen.refresh();
        //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
        //NewTetris.gravity(blocks, Pieces);
+
+
        if (counter % 1000 == 0){
+         int redSquaresOld = 0;
+         for(int ro = 0; ro < blocks.length; ro++){
+          for(int co = 0; co < blocks[ro].length; co++){
+            redSquaresOld += blocks[ro][co];
+          }
+        }
+
          block B = Pieces.get(Pieces.size() - 1);
          if (canMove){
            for(int i = 0; i < 4; i++){
@@ -192,17 +201,21 @@ public class NewTetris {
              canMove = true;
            }
          }
-         //check if block below
-         for(int k = 0; k < 4; k ++){
-           //find the lowest blocks in the group for each row and see if they have a block below them
-           if (!(NewTetris.contains(B.location, B.location[k][0], B.location[k][1] - 1))) {
-             if(blocks[B.location[k][1] - 1][B.location[k][0]] != 0){
-               canMove = false;
-               NewTetris.generateBlock(Pieces, blocks);
-               canMove = true;
-             }
-       }
-     }
+         //check if block is covering
+         int redSquaresNew = 0;
+         for(int ro = 0; ro < blocks.length; ro++){
+          for(int co = 0; co < blocks[ro].length; co++){
+            redSquaresNew += blocks[ro][co];
+          }
+        }
+        if(redSquaresNew < redSquaresOld){
+        B.moveUp();
+        B.moveUp();
+        canMove = false;
+        NewTetris.generateBlock(Pieces, blocks);
+        canMove = true;
+      }
+
    }
 
        counter = counter % 10000;
