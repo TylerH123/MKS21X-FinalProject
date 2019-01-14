@@ -197,10 +197,18 @@ public class NewTetris {
                blocks[B.location[i][0]][B.location[i][1]] = 0;
              }
              B.moveRight();
+             try{
              for(int i = 0; i < 4; i++){
                blocks[B.location[i][0]][B.location[i][1]] = 1;
              }
-           }
+             } catch (ArrayIndexOutOfBoundsException e){
+               B.moveLeft();
+               for(int i = 0; i < 4; i++){
+                 blocks[B.location[i][0]][B.location[i][1]] = 1;
+               }
+             }
+            }
+
 
            break;
 
@@ -213,11 +221,17 @@ public class NewTetris {
 
              }
              B.moveLeft();
-             for(int i = 0; i < 4; i++){
+             try{ for(int i = 0; i < 4; i++){
                blocks[B.location[i][0]][B.location[i][1]] = 1;
              }
 
+           } catch(ArrayIndexOutOfBoundsException e){
+             B.moveRight();
+             for(int i = 0; i < 4; i++){
+               blocks[B.location[i][0]][B.location[i][1]] = 1;
+             }
            }
+         }
 
       //same as ArrowRight
            break;
