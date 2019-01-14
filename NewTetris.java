@@ -75,7 +75,7 @@ public class NewTetris {
 public static void generateBlock(ArrayList<block> Pieces, int[][] blocks){
   String[] blockTypes = new String[]{"o", "z", "i", "s", "t", "l", "j"};
   Random rand = new Random();
-  String type = blockTypes[rand.nextInt()%4+3];
+  String type = blockTypes[rand.nextInt(7)];
   block B = new block(5, 5, type);
   for(int i = 0; i < 4; i++){
     for(int j = 0; j < 2; j++){
@@ -123,6 +123,7 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
   //to fix potential errors lets only have one block floating on at a time
   for(int i = Pieces.size() - 2; i < Pieces.size(); i++){
     boolean willFall = true;
+
     block b = Pieces.get(i);
     int[][] c = b.coords;
 
