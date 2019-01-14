@@ -72,64 +72,51 @@ public class NewTetris {
   }
 
   //Generating Block Function
-public static void generateBlock(ArrayList<block> Pieces, int[][] blocks){
-  String[] blockTypes = new String[]{"o", "z", "i", "s", "t", "l", "j"};
-  Random rand = new Random();
-  int w = rand.nextInt(7);
-  String type = blockTypes[w];
-  block B = new block(5, 5, type);
-  for(int i = 0; i < 4; i++){
-    blocks[B.coords[i][0] + 5][B.coords[i][1] + 3] = 1;
-
-}
-
-  Pieces.add(B);
-
-
-}
-
-//Move down all the pieces - ONLY worry about actual pieces and not empty spa
-//helper function for gravity
-private static boolean contains(int[][] coords, int x, int y){
-  for(int i = 0; i < 4; i++){
-    for(int j = 0; j < 2; j++){
-      if(x == i && j == y) return true;
+  public static void generateBlock(ArrayList<block> Pieces, int[][] blocks){
+    String[] blockTypes = new String[]{"o", "z", "i", "s", "t", "l", "j"};
+    Random rand = new Random();
+    int w = rand.nextInt(7);
+    String type = blockTypes[w];
+    block B = new block(5, 5, type);
+    for(int i = 0; i < 4; i++){
+      blocks[B.coords[i][0] + 5][B.coords[i][1] + 3] = 1;
     }
-  } return false;
-}
+    Pieces.add(B);
+  }
 
-public static void gravity(int[][] blocks, ArrayList<block> Pieces){
-  //to fix potential errors lets only have one block floating on at a time
-  if(Pieces.size() > 0){
-  for(int i = Pieces.size() - 1; i < Pieces.size(); i++){
-    boolean willFall = true;
+  //Move down all the pieces - ONLY worry about actual pieces and not empty spa
+  //helper function for gravity
+  private static boolean contains(int[][] coords, int x, int y){
+    for(int i = 0; i < 4; i++){
+      for(int j = 0; j < 2; j++){
+        if(x == i && j == y) return true;
+      }
+    } return false;
+  }
 
-    block b = Pieces.get(i);
-    int[][] c = b.coords;
-
-
+  public static void gravity(int[][] blocks, ArrayList<block> Pieces){
+    //to fix potential errors lets only have one block floating on at a time
+    if(Pieces.size() > 0){
+      for(int i = Pieces.size() - 1; i < Pieces.size(); i++){
+        boolean willFall = true;
+        block b = Pieces.get(i);
+        int[][] c = b.coords;
     //first find the lowest blocks in each column of the piece
     //if there is nothing below them then we can move the block down
-
-    for(int k = 0; k < 4; k ++){
-      if (!(NewTetris.contains(c, c[k][0], c[k][1] - 1))) {
-        //All the blocks here are lowest block, now we want to see if they can moveDown
-        //if even one of them can't we will set willFall equal to false
-
-        if(blocks[ (c[k][0]) + b.getX()  ]//the x coordinate of the block on the board
-        [ c[k][1] + b.getY() - 1  ] != 0) willFall = false;//the y coordinate of the block 1 less than our piece \
-        //also rember that blocks has backwards coords
+        for(int k = 0; k < 4; k ++){
+          if (!(NewTetris.contains(c, c[k][0], c[k][1] - 1))) {
+            //All the blocks here are lowest block, now we want to see if they can moveDown
+            //if even one of them can't we will set willFall equal to false
+            if(blocks[ (c[k][0]) + b.getX()  ]//the x coordinate of the block on the board
+              [ c[k][1] + b.getY() - 1  ] != 0) willFall = false;//the y coordinate of the block 1 less than our piece \
+              //also rember that blocks has backwards coords
+            }
+          }
+        //now move down if willfall says so
+        if(willFall) (Pieces.get(i)).moveDown();
       }
     }
-
-
-    //now move down if willfall says so
-    if(willFall) (Pieces.get(i)).moveDown();
-
   }
-}
-}
-
 
 //keep in mind, the pieces array list contains all the blocks that ever formed, but the user only influences the last block
 
@@ -154,24 +141,14 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
     int c = 0;
     NewTetris.clear(blocks);
     NewTetris.generateBlock(Pieces, blocks);
-
-
-
     while(running){
       counter++;
       //using this as temporary timer
       if(counter % 20 == 0){
         //NewTetris.generateBlock(Pieces, blocks);
       }
-
-
       //if(Pieces.size() != 0) block B = Pieces[counter - 1];
-
-
-
-
       //filling the board
-
        for(int ro = 0; ro < blocks.length; ro++){
         for(int co = 0; co < blocks[ro].length; co++){
          //System.out.println("Test" + (ro * 24 + co));
@@ -193,89 +170,76 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
         }
        }
        screen.refresh();
-//PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
-    //NewTetris.gravity(blocks, Pieces);
+       //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
+       //NewTetris.gravity(blocks, Pieces);
+       counter = counter % 10000;
 
-    counter = counter % 10000;
+       screen.setCursorPosition(c, r);
+       Key key = screen.readInput();
 
-      screen.setCursorPosition(c, r);
-      Key key = screen.readInput();
+       int totalshift = 0;
+       //used for arrows
+       if(key == null){
+         key = screen.readInput();
+       } else {
+         switch(key.getKind()){
+           case Escape:
+           screen.putString(5, 30, "You have exited the game, your score is: " + score, Terminal.Color.WHITE, Terminal.Color.BLACK);
+           screen.refresh();
+           Thread.sleep(1);
+           running = false;
+           break;
 
-      int totalshift = 0;
-      //used for arrows
-     if(key == null){
-        key = screen.readInput();
-      } else {
+           case ArrowRight:
+           if(counter > -1){
+             block B = Pieces.get(Pieces.size() - 1);
+             for(int i = 0; i < 4; i++){
+               blocks[B.coords[i][0] + 5][B.coords[i][1] + 3] = 0;
+             }
+             B.moveRight();
+             for(int i = 0; i < 4; i++){
+               blocks[B.coords[i][0] + 5 ][B.coords[i][1] + 3] = 1;
+             }
+           }
 
-      switch(key.getKind()){
-        case Escape:
-        screen.putString(5, 30, "You have exited the game, your score is: " + score, Terminal.Color.WHITE, Terminal.Color.BLACK);
-        screen.refresh();
-        Thread.sleep(1);
-        running = false;
-        break;
+           break;
 
-        case ArrowRight:
-        if(counter > -1){
-          block B = Pieces.get(Pieces.size() - 1);
-          for(int i = 0; i < 4; i++){
-            blocks[B.coords[i][0] + 5][B.coords[i][1] + 3] = 0;
+           case ArrowLeft:
 
-        }
-          B.moveRight();
+           if(counter > -1){
+             block B = Pieces.get(Pieces.size() - 1);
+             for(int i = 0; i < 4; i++){
+               blocks[B.coords[i][0] + 5 ][B.coords[i][1] + 3] = 0;
 
-          for(int i = 0; i < 4; i++){
-            blocks[B.coords[i][0] + 5 ][B.coords[i][1] + 3] = 1;
+             }
+             B.moveLeft();
+             for(int i = 0; i < 4; i++){
+               blocks[B.coords[i][0] + 5][B.coords[i][1] + 3] = 1;
+             }
 
-        }
-        }
-
-        break;
-
-        case ArrowLeft:
-
-        if(counter > -1){
-          block B = Pieces.get(Pieces.size() - 1);
-          for(int i = 0; i < 4; i++){
-            blocks[B.coords[i][0] + 5 ][B.coords[i][1] + 3] = 0;
-
-        }
-          B.moveLeft();
-          for(int i = 0; i < 4; i++){
-            blocks[B.coords[i][0] + 5][B.coords[i][1] + 3] = 1;
-        }
-
-        }
+           }
 
       //same as ArrowRight
-        break;
-        case ArrowDown:
+          break;
+          case ArrowDown:
 
-        break;
+          break;
 
-        default:
-        break;
+          default:
+          break;
+        }
+        if(key.getCharacter() == 'z'){
+          block b = Pieces.get(counter - 1);
+          b.rotateLeft();
+        }
 
-
+        if(key.getCharacter() == 'z'){
+          block b = Pieces.get(counter - 1);
+          b.turnRight();
+        }
       }
-
-
-      if(key.getCharacter() == 'z'){
-        block b = Pieces.get(counter - 1);
-        b.rotateLeft();
-      }
-
-      if(key.getCharacter() == 'z'){
-        block b = Pieces.get(counter - 1);
-        b.turnRight();
-      }
-}
-
-
     }
     Thread.sleep(1000);
     System.exit(0);
-
   }
-
 }
