@@ -201,7 +201,8 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
       screen.setCursorPosition(c, r);
       Key key = screen.readInput();
 
-
+      int totalshift = 0;
+      //used for arrows
      if(key == null){
         key = screen.readInput();
       } else {
@@ -217,28 +218,33 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
         case ArrowRight:
         if(counter > -1){
           block B = Pieces.get(Pieces.size() - 1);
-          B.moveRight();
           for(int i = 0; i < 4; i++){
             blocks[B.coords[i][0] + 5][B.coords[i][1] + 3] = 0;
 
         }
+          B.moveRight();
+
           for(int i = 0; i < 4; i++){
-            blocks[B.coords[i][0] + 4][B.coords[i][1] + 3] = 1;
+            blocks[B.coords[i][0] + 5 ][B.coords[i][1] + 3] = 1;
+
         }
         }
+
         break;
 
         case ArrowLeft:
+
         if(counter > -1){
           block B = Pieces.get(Pieces.size() - 1);
-          B.moveLeft();
           for(int i = 0; i < 4; i++){
-            blocks[B.coords[i][0] + 5][B.coords[i][1] + 3] = 0;
+            blocks[B.coords[i][0] + 5 ][B.coords[i][1] + 3] = 0;
 
         }
+          B.moveLeft();
           for(int i = 0; i < 4; i++){
-            blocks[B.coords[i][0] + 6][B.coords[i][1] + 3] = 1;
+            blocks[B.coords[i][0] + 5][B.coords[i][1] + 3] = 1;
         }
+
         }
 
       //same as ArrowRight
