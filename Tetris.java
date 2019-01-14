@@ -12,95 +12,11 @@ import com.googlecode.lanterna.input.InputDecoder;
 import com.googlecode.lanterna.input.InputProvider;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
-
-
-
+import com.googlecode.lanterna.screen.Screen;
 
 public class Tetris{
-  private int height, width;
-  private int[][] pieces;
-  private ArrayList blocks;
-  //This can be a 1D version of a 2D array of all the blocks. The coordinates is x = index% width y = index/width
-  private int score;
-  private boolean running = true;
-  private TerminalSize size;
-  private Terminal terminal;
-  //Blocks is an array of all the coordinates in the tetris board, each index in the 2d array representaing
-  //a coordinate. False means there is no block on the piece while
-  public Tetris(){
-    height = 24;
-    width = 10;
-    pieces = new int[height][width];
-    //at the default the board has no blocks
-    for(int i = 0; i < height; i++){
-      for(int j = 0; j < width; j ++){
-        pieces[i][j] = 0;
-      }
-    }
-  }
-
-  public static void putString(int r, int c,Terminal t, String s){
-    t.moveCursor(r,c);
-    for(int i = 0; i < s.length();i++){
-      t.putCharacter(s.charAt(i));
-    }
-  }
-
-    //Note that these coordinates are (row column), which are (y, x), not (x, y)
-
-
-public void printBoard(){
-  terminal.moveCursor(size.getColumns()-5,-10);
-  terminal.applyBackgroundColor(Terminal.Color.RED);
-  terminal.applyForegroundColor(Terminal.Color.YELLOW);
-  terminal.applySGR(Terminal.SGR.ENTER_BOLD);
-  terminal.putCharacter(' ');
-  terminal.putCharacter(' ');
-  terminal.putCharacter('X');
-  terminal.putCharacter(' ');
-  terminal.moveCursor(size.getColumns()-5,-10);
-  terminal.putCharacter(' ');
-  terminal.putCharacter(' ');
-  terminal.putCharacter(' ');
-  terminal.putCharacter(' ');
-  terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
-  terminal.applyForegroundColor(Terminal.Color.DEFAULT);
-
-
-  }
-
-
-
-  public static void main(String args[]){
-    Tetris ans = new Tetris();
-    terminal = TerminalFacade.createTextTerminal();
-    terminal.enterPrivateMode();
-    size = terminal.getTerminalSize();
-    terminal.setCursorVisible(false);
-
-      boolean running = true;
-
-      long tStart = System.currentTimeMillis();
-      long lastSecond = 0;
-
-    while(running){
-
-      ans.printBoard();
-      for(int i = 0; i < 24; i++){
-        for(int j = 0; j < 10; j ++){
-      terminal.applyBackgroundColor(Terminal.Color.BLACK);
-      Key key = terminal.readInput();
-      if (key != null)
-      {
-
-        if (key.getKind() == Key.Kind.Escape) {
-
-          terminal.exitPrivateMode();
-          running = false;
-        }
-      }
-    }
-  }
-  }
-  }
+  private block pieceOrigin;
+	private int currentPiece;
+	private int rotation;
+	private ArrayList<Integer> nextPieces = new ArrayList<Integer>();
 }
