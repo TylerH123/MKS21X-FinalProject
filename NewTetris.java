@@ -94,29 +94,7 @@ public class NewTetris {
     } return false;
   }
 
-  public static void gravity(int[][] blocks, ArrayList<block> Pieces){
-    //to fix potential errors lets only have one block floating on at a time
-    if(Pieces.size() > 0){
-      for(int i = Pieces.size() - 1; i < Pieces.size(); i++){
-        boolean willFall = true;
-        block b = Pieces.get(i);
-        int[][] c = b.location;
-    //first find the lowest blocks in each column of the piece
-    //if there is nothing below them then we can move the block down
-        for(int k = 0; k < 4; k ++){
-          if (!(NewTetris.contains(c, c[k][0], c[k][1] - 1))) {
-            //All the blocks here are lowest block, now we want to see if they can moveDown
-            //if even one of them can't we will set willFall equal to false
-            if(blocks[ (c[k][0]) + b.getX()  ]//the x coordinate of the block on the board
-              [ c[k][1] + b.getY() - 1  ] != 0) willFall = false;//the y coordinate of the block 1 less than our piece \
-              //also rember that blocks has backwards coords
-            }
-          }
-        //now move down if willfall says so
-        if(willFall) (Pieces.get(i)).moveDown();
-      }
-    }
-  }
+  
 
   //keep in mind, the pieces array list contains all the blocks that ever formed, but the user only influences the last block
 
@@ -158,15 +136,15 @@ public class NewTetris {
           if (blocks[ro][co] == 0) g = "0";
           if(g == "0"){
             screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
-            screen.putString(co * 2 + 5, ro + 1, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
-            screen.putString(co * 2 + 6, ro, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
-            screen.putString(co * 2 + 6, ro + 1, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
+            screen.putString(co * 2 + 5, ro + 1, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
+            screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
+            screen.putString(co * 2 + 6, ro + 1, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
           }
           if(g == "1"){
             screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.RED);
-            screen.putString(co * 2 + 5, ro + 1, " ", Terminal.Color.WHITE, Terminal.Color.RED);
-            screen.putString(co * 2 + 6, ro, " ", Terminal.Color.WHITE, Terminal.Color.RED);
-            screen.putString(co * 2 + 6,ro + 1, " ", Terminal.Color.WHITE, Terminal.Color.RED);
+            screen.putString(co * 2 + 5, ro + 1, g, Terminal.Color.WHITE, Terminal.Color.RED);
+            screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.RED);
+            screen.putString(co * 2 + 6,ro + 1, g, Terminal.Color.WHITE, Terminal.Color.RED);
           }
         }
       }
@@ -175,7 +153,7 @@ public class NewTetris {
        //NewTetris.gravity(blocks, Pieces);
 
 
-       if (counter % 1000 == 0){
+       if (counter % 2000 == 0){
          int redSquaresOld = 0;
          for(int ro = 0; ro < blocks.length; ro++){
           for(int co = 0; co < blocks[ro].length; co++){
@@ -299,10 +277,14 @@ public class NewTetris {
                  blocks[B.location[i][0]][B.location[i][1]] = 0;
 
                }
+               try{
                B.rotateLeft();
                for(int i = 0; i < 4; i++){
                  blocks[B.location[i][0]][B.location[i][1]] = 1;
                }
+             } catch (Exception e){
+               B.rotateRight();
+             }
              }
            }
            if(key.getCharacter() == 'x'){
@@ -312,11 +294,15 @@ public class NewTetris {
                  blocks[B.location[i][0]][B.location[i][1]] = 0;
 
                }
+               try{
                B.rotateRight();
                for(int i = 0; i < 4; i++){
                  blocks[B.location[i][0]][B.location[i][1]] = 1;
                }
+             } catch(Exception e){
+               B.rotateLeft();
              }
+           }
            }
          }
          }
