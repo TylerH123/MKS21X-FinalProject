@@ -144,24 +144,15 @@ public class block{
   }
   //since cube does not change shape no matter how you rotate it, the location is not as dependent on direction
   public void createOBlock(){
-    location[0][0] = xcor;
-    location[0][1] = ycor;
-    location[1][0] = xcor+1;
-    location[1][1] = ycor;
-    location[2][0] = xcor;
-    location[2][1] = ycor+1;
-    location[3][0] = xcor+1;
-    location[3][1] = ycor+1;
+    location[0][1] = xcor;
+    location[0][0] = ycor;
+    location[1][1] = xcor+1;
+    location[1][0] = ycor;
+    location[2][1] = xcor;
+    location[2][0] = ycor+1;
+    location[3][1] = xcor+1;
+    location[3][0] = ycor+1;
   }
-  //checks to see if the location of the blocks is not out of the border
-  /**public boolean isValid(){
-    for (int i = 0; i < location.length; i++){
-        if (location[i][0] > maxX || location[i][0] < 0 || location[i][1] > maxY || location[i][1] < 0){
-          return false;
-        }
-      }
-    return true;
-  }**/
   //loops through the different direction strings to pass into fillInLocation
   //whichArray is the the array of the piece that is being created
   public void fillLocation(int[][] whichArray){
