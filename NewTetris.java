@@ -87,6 +87,7 @@ public static boolean generateBlock(ArrayList<block> Pieces){
 }
 
 //Move down all the pieces - ONLY worry about actual pieces and not empty space
+<<<<<<< HEAD
 public static void gravity(int[][] blocks){
   for(int co = 0; co < blocks[0].length; co++){
     //go column by column from left to right, from down to up. Only move down blocks by swapping them with empty
@@ -104,12 +105,31 @@ public static void gravity(int[][] blocks){
      }
     }
   }
+=======
+public static void gravity(int[][] blocks, ArrayList<block> Pieces){
+  for(int i = 0; i < Pieces.size(); i++){
+    block b = Pieces.get(i);
+    int[4][2] c;
+
+    ().moveDown();
+  }
+
+
+
+//keep in mind, the pieces array list contains all the blocks that ever formed, but the user only influences the last block
+//in the list
+
+
+public static
+
+>>>>>>> 9e528c60c0234a416b72413d08d8352532cc9b53
 
 
   //This use
   public static void main(String[] args) throws InterruptedException{
     int[][] blocks = new int[10][24];
     ArrayList<block> Pieces = new ArrayList<block>();
+    int counter = 0;
     NewTetris.clear(blocks);
     Screen screen = TerminalFacade.createScreen();
     int score = 0;
@@ -125,10 +145,15 @@ public static void gravity(int[][] blocks){
     int r = 0;
     int c = 0;
     NewTetris.clear(blocks);
-    int counter = 0;
+
+
+
 
     while(running){
+      //NewTetris.gravity(blocks, Pieces);
 
+
+      //if(Pieces.size() != 0) block B = Pieces[counter - 1];
 
 
 
@@ -138,7 +163,7 @@ public static void gravity(int[][] blocks){
        for(int ro = 0; ro < blocks.length; ro++){
         for(int co = 0; co < blocks[ro].length; co++){
          //System.out.println("Test" + (ro * 24 + co));
-         System.out.println(blocks[ro][co]);
+         //System.out.println(blocks[ro][co]);
           String g = "1";
           if (blocks[ro][co] == 0) g = "0";
           if(g == "0"){
@@ -179,22 +204,43 @@ public static void gravity(int[][] blocks){
         break;
 
         case ArrowRight:
-
-        //move cursor to block
-        //(hasBlock (getTerminalPosition.x, getTerminalPosition.y)) --> check screen documentation
-        //  blockAt(terminalpostion).rotateRight
+        if(counter > -1){
+          block b = Pieces.get(counter - 1);
+          b.moveRight();
+        }
         break;
 
         case ArrowLeft:
-
+        if(counter > -1){
+          block b = Pieces.get(counter - 1);
+          b.moveLeft();
+        }
       //same as ArrowRight
         break;
         case ArrowDown:
-        //fourBlockAt.movedDown()
+
+        break;
+
+
+
+        default:
         break;
 
 
       }
+
+      if(key.getCharacter() == 'z'){
+        block b = Pieces.get(counter - 1);
+        b.rotateLeft();
+      }
+
+      if(key.getCharacter() == 'z'){
+        block b = Pieces.get(counter - 1);
+        b.turnRight();
+      }
+
+
+
     }
     Thread.sleep(1000);
     System.exit(0);
