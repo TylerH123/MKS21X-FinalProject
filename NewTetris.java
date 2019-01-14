@@ -122,7 +122,7 @@ public class NewTetris {
 
   //This use
   public static void main(String[] args) throws InterruptedException{
-    int[][] blocks = new int[10][24];
+    int[][] blocks = new int[24][10];
     ArrayList<block> Pieces = new ArrayList<block>();
     int counter = 0;
     NewTetris.clear(blocks);
@@ -156,19 +156,19 @@ public class NewTetris {
           String g = "1";
           if (blocks[ro][co] == 0) g = "0";
           if(g == "0"){
-          screen.putString(ro * 2 + 5,co , g, Terminal.Color.WHITE, Terminal.Color.BLACK);
-          screen.putString(ro * 2 + 5,co  + 1, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
-          screen.putString(ro * 2 + 6,co , " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
-          screen.putString(ro * 2 + 6,co  + 1, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
+            screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
+            screen.putString(co * 2 + 5, ro + 1, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
+            screen.putString(co * 2 + 6, ro, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
+            screen.putString(co * 2 + 6, ro + 1, " ", Terminal.Color.WHITE, Terminal.Color.BLACK);
+          }
+          if(g == "1"){
+            screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.RED);
+            screen.putString(co * 2 + 5, ro + 1, " ", Terminal.Color.WHITE, Terminal.Color.RED);
+            screen.putString(co * 2 + 6, ro, " ", Terminal.Color.WHITE, Terminal.Color.RED);
+            screen.putString(co * 2 + 6,ro + 1, " ", Terminal.Color.WHITE, Terminal.Color.RED);
+          }
         }
-         if(g == "1"){
-           screen.putString(ro * 2 + 5,co, g, Terminal.Color.WHITE, Terminal.Color.RED);
-           screen.putString(ro * 2 + 5,co  + 1, " ", Terminal.Color.WHITE, Terminal.Color.RED);
-           screen.putString(ro * 2 + 6,co , " ", Terminal.Color.WHITE, Terminal.Color.RED);
-           screen.putString(ro * 2 + 6,co  + 1, " ", Terminal.Color.WHITE, Terminal.Color.RED);
-         }
-        }
-       }
+      }
        screen.refresh();
        //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
        //NewTetris.gravity(blocks, Pieces);
