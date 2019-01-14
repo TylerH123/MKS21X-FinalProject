@@ -87,7 +87,6 @@ public static boolean generateBlock(ArrayList<block> Pieces){
 }
 
 //Move down all the pieces - ONLY worry about actual pieces and not empty space
-<<<<<<< HEAD
 public static void gravity(int[][] blocks){
   for(int co = 0; co < blocks[0].length; co++){
     //go column by column from left to right, from down to up. Only move down blocks by swapping them with empty
@@ -105,13 +104,12 @@ public static void gravity(int[][] blocks){
      }
     }
   }
-=======
-public static void gravity(int[][] blocks, ArrayList<block> Pieces){
-  for(int i = 0; i < Pieces.size(); i++){
-    block b = Pieces.get(i);
-    int[4][2] c;
-
-    ().moveDown();
+  public static void gravity(int[][] blocks, ArrayList<block> Pieces){
+    for(int i = 0; i < Pieces.size(); i++){
+      block b = Pieces.get(i);
+      int[4][2] c;
+      ().moveDown();
+    }
   }
 
 
@@ -120,10 +118,12 @@ public static void gravity(int[][] blocks, ArrayList<block> Pieces){
 //in the list
 
 
-public static
-
->>>>>>> 9e528c60c0234a416b72413d08d8352532cc9b53
-
+  public static void placeBlock(block b){
+    int[][] coords = b.location;
+    for (int i = 0; i < coords.length; i++){
+        screen.putString(coords[i][0], coords[i][1], "1", Terminal.Color.Blue, Terminal.Color.Black);
+    }
+  }
 
   //This use
   public static void main(String[] args) throws InterruptedException{
@@ -145,7 +145,6 @@ public static
     int r = 0;
     int c = 0;
     NewTetris.clear(blocks);
-
 
 
 
