@@ -54,7 +54,9 @@ public class NewTetris {
 
     }
   }
-
+public void borderCheck(){
+  if ()
+}
 
   //Generating Block Function
 public static boolean generateBlock(ArrayList<block> Pieces){

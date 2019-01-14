@@ -53,7 +53,7 @@ public class block{
   }
   //Implementing the bastic methods movedown getx and gety
   public void moveDown(){
-    ycor--;
+    ycor++;
   }
   //return xcor
   public int getX(){
