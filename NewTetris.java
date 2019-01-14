@@ -88,6 +88,8 @@ public static boolean generateBlock(ArrayList<block> Pieces){
 
 //Move down all the pieces - ONLY worry about actual pieces and not empty space
 public static void gravity(int[][] blocks){
+
+
   for(int co = 0; co < blocks[0].length; co++){
     //go column by column from left to right, from down to up. Only move down blocks by swapping them with empty
     //spaces. Also, since Y coords are backwards we have to go down from 23
@@ -104,12 +106,37 @@ public static void gravity(int[][] blocks){
      }
     }
   }
-  public static void gravity(int[][] blocks, ArrayList<block> Pieces){
-    for(int i = 0; i < Pieces.size(); i++){
-      block b = Pieces.get(i);
-      int[4][2] c;
-      ().moveDown();
+
+//helper function for gravity
+private static boolean containsCoords(int[4][2] coords, int x, int y){
+  for(int i = 0; i < 4, i++){
+    for(int j = 0; j < 2; j++){
+      if(x == i && j == y) return true;
     }
+  } return false;
+}
+
+public static void gravity(int[][] blocks, ArrayList<block> Pieces){
+  for(int i = 0; i < Pieces.size(); i++){
+    boolean willFall = true;
+    block b = Pieces.get(i);
+    int[4][2] c = b.coords;
+
+
+    //first find the lowest blocks in each column of the piece
+    //if there is nothing below them then we can move the block down
+
+    for(int i = 0; i < 4; i ++){
+      if (!(NewTetris.contains(c, c[i][0], c[i][1] - 1)){
+        //All the blocks here are lowest block, now we want to see if they can moveDown
+        //if even one of them can't we will set willFall equal to false
+
+        if()
+      }
+
+    }
+
+
   }
 
 
