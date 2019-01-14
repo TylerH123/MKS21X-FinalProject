@@ -172,6 +172,7 @@ public class NewTetris {
        screen.refresh();
        //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
        //NewTetris.gravity(blocks, Pieces);
+       try{
        if (counter % 10000 == 0){
          block B = Pieces.get(Pieces.size() - 1);
          for(int i = 0; i < 4; i++){
@@ -182,7 +183,11 @@ public class NewTetris {
            blocks[B.location[i][0]][B.location[i][1]] = 1;
          }
        }
+
        counter = counter % 10000;
+     } catch(ArrayIndexOutOfBoundsException e) {
+       NewTetris.generateBlock(Pieces, blocks);
+     }
 
        screen.setCursorPosition(c, r);
        Key key = screen.readInput();
