@@ -116,8 +116,7 @@ public class NewTetris {
     screen.refresh();
 
     //setting initial coordinates for the setCursorVisibleint c = 0;
-    int r = 0;
-    int c = 0;
+
     NewTetris.clear(blocks);
     NewTetris.generateBlock(Pieces, blocks);
     while(running){
@@ -153,7 +152,7 @@ public class NewTetris {
        //NewTetris.gravity(blocks, Pieces);
 
 
-       if (counter % 2000 == 0){
+       if (counter % 5000 == 0){
          int redSquaresOld = 0;
          for(int ro = 0; ro < blocks.length; ro++){
           for(int co = 0; co < blocks[ro].length; co++){
@@ -203,10 +202,11 @@ public class NewTetris {
       }
 
    }
+   NewTetris.clearRows(blocks);
 
        counter = counter % 10000;
 
-       screen.setCursorPosition(c, r);
+
        Key key = screen.readInput();
 
        int totalshift = 0;
