@@ -121,7 +121,7 @@ private static boolean contains(int[][] coords, int x, int y){
 
 public static void gravity(int[][] blocks, ArrayList<block> Pieces){
   //to fix potential errors lets only have one block floating on at a time
-  for(int i = Pieces.size() - 2; i < Pieces.size(); i++){
+  for(int i = Pieces.size() - 1; i < Pieces.size(); i++){
     boolean willFall = true;
 
     block b = Pieces.get(i);
