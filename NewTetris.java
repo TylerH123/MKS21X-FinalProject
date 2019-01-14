@@ -77,9 +77,9 @@ public class NewTetris {
     Random rand = new Random();
     int w = rand.nextInt(7);
     String type = blockTypes[w];
-    block B = new block(5, 5, type);
+    block B = new block(0, 5, type);
     for(int i = 0; i < 4; i++){
-      blocks[B.coords[i][0] + 5][B.coords[i][1] + 3] = 1;
+      blocks[B.location[i][0]][B.location[i][1]] = 1;
     }
     Pieces.add(B);
   }
@@ -100,7 +100,7 @@ public class NewTetris {
       for(int i = Pieces.size() - 1; i < Pieces.size(); i++){
         boolean willFall = true;
         block b = Pieces.get(i);
-        int[][] c = b.coords;
+        int[][] c = b.location;
     //first find the lowest blocks in each column of the piece
     //if there is nothing below them then we can move the block down
         for(int k = 0; k < 4; k ++){
@@ -194,11 +194,11 @@ public class NewTetris {
            if(counter > -1){
              block B = Pieces.get(Pieces.size() - 1);
              for(int i = 0; i < 4; i++){
-               blocks[B.coords[i][0] + 5][B.coords[i][1] + 3] = 0;
+               blocks[B.location[i][0]][B.location[i][1]] = 0;
              }
              B.moveRight();
              for(int i = 0; i < 4; i++){
-               blocks[B.coords[i][0] + 5 ][B.coords[i][1] + 3] = 1;
+               blocks[B.location[i][0]][B.location[i][1]] = 1;
              }
            }
 
@@ -209,12 +209,12 @@ public class NewTetris {
            if(counter > -1){
              block B = Pieces.get(Pieces.size() - 1);
              for(int i = 0; i < 4; i++){
-               blocks[B.coords[i][0] + 5 ][B.coords[i][1] + 3] = 0;
+               blocks[B.location[i][0]][B.location[i][1]] = 0;
 
              }
              B.moveLeft();
              for(int i = 0; i < 4; i++){
-               blocks[B.coords[i][0] + 5][B.coords[i][1] + 3] = 1;
+               blocks[B.location[i][0]][B.location[i][1]] = 1;
              }
 
            }
