@@ -137,27 +137,27 @@ public class NewTetris {
           if (blocks[ro][co] == 0) g = "0";
           if(g == "0"){
             screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
-            screen.putString(co * 2 + 5, ro + 1, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
+            screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
             screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
-            screen.putString(co * 2 + 6, ro + 1, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
+            screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
           }
           if(g == "1"){
             screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.RED);
-            screen.putString(co * 2 + 5, ro + 1, g, Terminal.Color.WHITE, Terminal.Color.RED);
+            screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.RED);
             screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.RED);
-            screen.putString(co * 2 + 6,ro + 1, g, Terminal.Color.WHITE, Terminal.Color.RED);
+            screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.RED);
           }
           if(g == "2"){
             screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.GREEN);
-            screen.putString(co * 2 + 5, ro + 1, g, Terminal.Color.WHITE, Terminal.Color.GREEN);
+            screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.GREEN);
             screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.GREEN);
-            screen.putString(co * 2 + 6,ro + 1, g, Terminal.Color.WHITE, Terminal.Color.GREEN);
+            screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.GREEN);
           }
           if(g == "3"){
             screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.BLUE);
-            screen.putString(co * 2 + 5, ro + 1, g, Terminal.Color.WHITE, Terminal.Color.BLUE);
+            screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.BLUE);
             screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.BLUE);
-            screen.putString(co * 2 + 6,ro + 1, g, Terminal.Color.WHITE, Terminal.Color.BLUE);
+            screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.BLUE);
           }
         }
       }
@@ -193,7 +193,7 @@ public class NewTetris {
          }
          //check if too low
          for (int j = 0; j < B.location.length; j++){
-           if (B.location[j][0] > 22){
+           if (B.location[j][0] >= 23){
              canMove = false;
               NewTetris.clearRows(blocks, score);
              NewTetris.generateBlock(Pieces, blocks);
