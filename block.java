@@ -26,6 +26,8 @@ public class block{
   public int[][] locationRight = new int[4][2];
   //locationLeft is a 2d array which contains the coordinates of each block if it were to rotate right
   public int[][] locationLeft = new int[4][2];
+  //canMoveDown allows the block to move down
+  public boolean canMoveDown;
 
   /**constructor
     *@param x,y are the x-coordinates and y-coordinates of the block
@@ -40,11 +42,14 @@ public class block{
     right = direction[rightIdx];
     piece = type;
     createBlock(piece);
+    canMoveDown = true;
   }
   //Implementing the bastic methods movedown getx and gety
   public void moveDown(){
-    ycor++;
-    createBlock(piece);
+    if (canMoveDown){
+      ycor++;
+      createBlock(piece);
+    }
   }
   public void moveUp(){
     ycor--;
