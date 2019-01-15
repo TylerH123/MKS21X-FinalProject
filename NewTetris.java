@@ -123,15 +123,15 @@ public class NewTetris {
           if (blocks[ro][co] == 0) g = "0";
           if(g == "0"){
             screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
-            screen.putString(co * 2 + 5, ro + 1, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
+            screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
             screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
-            screen.putString(co * 2 + 6, ro + 1, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
+            screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
           }
           if(g == "1"){
             screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.RED);
-            screen.putString(co * 2 + 5, ro + 1, g, Terminal.Color.WHITE, Terminal.Color.RED);
+            screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.RED);
             screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.RED);
-            screen.putString(co * 2 + 6,ro + 1, g, Terminal.Color.WHITE, Terminal.Color.RED);
+            screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.RED);
           }
         }
       }
@@ -163,7 +163,7 @@ public class NewTetris {
         }
         //check if too low
         for (int j = 0; j < B.location.length; j++){
-          if (B.location[j][0] > 22){
+          if (B.location[j][0] >= 23){
             B.canMoveDown = false;
             NewTetris.generateBlock(Pieces, blocks);
             B.canMoveDown = true;
