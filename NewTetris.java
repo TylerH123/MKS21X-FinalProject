@@ -79,9 +79,9 @@ public class NewTetris {
     int w = rand.nextInt(7);
     String type = blockTypes[w];
     block B = new block(5, 1, type);
-    int color = rand.nextInt(2) + 1;
+    int color = rand.nextInt(3) + 1;
     for(int i = 0; i < 4; i++){
-      blocks[B.location[i][0]][B.location[i][1]] = color;
+      blocks[B.location[i][0]][B.location[i][1]] = 2;
     }
     Pieces.add(B);
   }
@@ -183,12 +183,14 @@ public class NewTetris {
 
          block B = Pieces.get(Pieces.size() - 1);
          if (canMove){
+           int color = 0;
            for(int i = 0; i < 4; i++){
+              color = blocks[B.location[0][0]][B.location[0][1]];
              blocks[B.location[i][0]][B.location[i][1]] = 0;
            }
            B.moveDown();
            for(int i = 0; i < 4; i++){
-             blocks[B.location[i][0]][B.location[i][1]] = 1;
+             blocks[B.location[i][0]][B.location[i][1]] = color;
            }
          }
          //check if too low
