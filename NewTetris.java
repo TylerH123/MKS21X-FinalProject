@@ -25,7 +25,7 @@ public class NewTetris {
   }
 
 
-  public static void clearRows(int[][] blocks){
+  public static void clearRows(int[][] blocks, int score){
     for(int r = 0; r < blocks.length; r++){
       boolean filledIn = true;
       for(int c = 0; c < blocks[r].length; c++){
@@ -36,6 +36,7 @@ public class NewTetris {
           blocks[r][c] = 0;
         }
       }
+      score += 10;
 
     }
   }
@@ -78,8 +79,9 @@ public class NewTetris {
     int w = rand.nextInt(7);
     String type = blockTypes[w];
     block B = new block(5, 1, type);
+    int color = rand.nextInt(2) + 1;
     for(int i = 0; i < 4; i++){
-      blocks[B.location[i][0]][B.location[i][1]] = 1;
+      blocks[B.location[i][0]][B.location[i][1]] = color;
     }
     Pieces.add(B);
   }
@@ -145,6 +147,18 @@ public class NewTetris {
             screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.RED);
             screen.putString(co * 2 + 6,ro + 1, g, Terminal.Color.WHITE, Terminal.Color.RED);
           }
+          if(g == "2"){
+            screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.GREEN);
+            screen.putString(co * 2 + 5, ro + 1, g, Terminal.Color.WHITE, Terminal.Color.GREEN);
+            screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.GREEN);
+            screen.putString(co * 2 + 6,ro + 1, g, Terminal.Color.WHITE, Terminal.Color.GREEN);
+          }
+          if(g == "3"){
+            screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.BLUE);
+            screen.putString(co * 2 + 5, ro + 1, g, Terminal.Color.WHITE, Terminal.Color.BLUE);
+            screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.BLUE);
+            screen.putString(co * 2 + 6,ro + 1, g, Terminal.Color.WHITE, Terminal.Color.BLUE);
+          }
         }
       }
        screen.refresh();
@@ -181,6 +195,7 @@ public class NewTetris {
          for (int j = 0; j < B.location.length; j++){
            if (B.location[j][0] > 22){
              canMove = false;
+              NewTetris.clearRows(blocks, score);
              NewTetris.generateBlock(Pieces, blocks);
              canMove = true;
            }
@@ -197,12 +212,13 @@ public class NewTetris {
           blocks = prevState;
 
         canMove = false;
+        NewTetris.clearRows(blocks, score);
         NewTetris.generateBlock(Pieces, blocks);
         canMove = true;
       }
 
    }
-   NewTetris.clearRows(blocks);
+
 
        counter = counter % 10000;
 
