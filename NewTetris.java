@@ -116,6 +116,7 @@ public class NewTetris {
     screen.putString(40, 0, "Score: " + score, Terminal.Color.WHITE, Terminal.Color.BLACK);
     //Putting the score at the top
     screen.refresh();
+    Terminal.setCursorVisible(False);
 
     //setting initial coordinates for the setCursorVisibleint c = 0;
 
