@@ -15,8 +15,5 @@ import com.googlecode.lanterna.input.KeyMappingProfile;
 import com.googlecode.lanterna.screen.Screen;
 
 public class Tetris{
-  private block pieceOrigin;
-	private int currentPiece;
-	private int rotation;
-	private ArrayList<Integer> nextPieces = new ArrayList<Integer>();
+  
 }
