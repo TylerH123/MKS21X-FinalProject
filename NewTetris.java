@@ -142,73 +142,10 @@ public class NewTetris {
           fillBoard(screen, co, ro, g);
         }
       }
-     screen.refresh();
-     //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
-     //NewTetris.gravity(blocks, Pieces);
-     if (counter % 5000 == 0){
-       int redSquaresOld = 0;
-       for(int ro = 0; ro < blocks.length; ro++){
-         for(int co = 0; co < blocks[ro].length; co++){
-           redSquaresOld += blocks[ro][co];
-         }
-       }
-       int[][] prevState = new int[blocks.length][blocks[1].length];
-       for(int ro = 0; ro < blocks.length; ro++){
-         for(int co = 0; co < blocks[ro].length; co++){
-           prevState[ro][co] = blocks[ro][co];
-         }
-       }
-       block B = Pieces.get(Pieces.size() - 1);
-       if (canMove){
-         for(int i = 0; i < 4; i++){
-           blocks[B.location[i][0]][B.location[i][1]] = 0;
-         }
-         B.moveDown();
-         for(int i = 0; i < 4; i++){
-           blocks[B.location[i][0]][B.location[i][1]] = color;
-         }
-       }
-       //check if too low
-       for (int j = 0; j < B.location.length; j++){
-         if (B.location[j][0] >= 23){
-           canMove = false;
-           NewTetris.clearRows(blocks, score);
-           color = NewTetris.generateBlock(Pieces, blocks);
-           canMove = true;
-         }
-       }
-       //check if block is covering
-       int redSquaresNew = 0;
-       for(int ro = 0; ro < blocks.length; ro++){
-         for(int co = 0; co < blocks[ro].length; co++){
-           redSquaresNew += blocks[ro][co];
-         }
-       }
-      if(redSquaresNew < redSquaresOld){
-        B.moveUp();
-        blocks = prevState;
-        canMove = false;
-        NewTetris.clearRows(blocks, score);
-        NewTetris.generateBlock(Pieces, blocks);
-        canMove = true;
-      }
-    }
-    counter = counter % 10000;
-    Key key = screen.readInput();
-    int totalshift = 0;
-    //used for arrows
-    if(key == null){
-      key = screen.readInput();
-    } else {
-      switch(key.getKind()){
-      case Escape:
-        screen.putString(5, 30, "You have exited the game, your score is: " + score, Terminal.Color.WHITE, Terminal.Color.BLACK);
-        screen.refresh();
-        Thread.sleep(1);
-        running = false;
-        break;
-      case ArrowRight:
-        if(counter > -1){
+      screen.refresh();
+      //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
+      //NewTetris.gravity(blocks, Pieces);
+      if (counter % 5000 == 0){
         int redSquaresOld = 0;
         for(int ro = 0; ro < blocks.length; ro++){
           for(int co = 0; co < blocks[ro].length; co++){
@@ -216,122 +153,185 @@ public class NewTetris {
           }
         }
         int[][] prevState = new int[blocks.length][blocks[1].length];
-          for(int ro = 0; ro < blocks.length; ro++){
-             for(int co = 0; co < blocks[ro].length; co++){
-               prevState[ro][co] = blocks[ro][co];
-             }
-           }
-           block B = Pieces.get(Pieces.size() - 1);
-           for(int i = 0; i < 4; i++){
-             blocks[B.location[i][0]][B.location[i][1]] = 0;
-           }
-           B.moveRight();
-           try{
-             for(int i = 0; i < 4; i++){
-               blocks[B.location[i][0]][B.location[i][1]] = color;
-             }
-           }
-           catch(ArrayIndexOutOfBoundsException e){
-             B.moveLeft();
-             for(int i = 0; i < 4; i++){
-               blocks[B.location[i][0]][B.location[i][1]] = color;
-             }
-           }
-           int redSquaresNew = 0;
-           for(int ro = 0; ro < blocks.length; ro++){
-             for(int co = 0; co < blocks[ro].length; co++){
-               redSquaresNew += blocks[ro][co];
-             }
-           }
-           if(redSquaresOld > redSquaresNew){
-             blocks = prevState;
-             B.moveLeft();
-           }
-         }
-         break;
-         case ArrowLeft:
-          if(counter > -1){
-            int redSquaresOld = 0;
-            for(int ro = 0; ro < blocks.length; ro++){
-              for(int co = 0; co < blocks[ro].length; co++){
-                redSquaresOld += blocks[ro][co];
-              }
-            }
-            int[][] prevState = new int[blocks.length][blocks[1].length];
-            for(int ro = 0; ro < blocks.length; ro++){
-              for(int co = 0; co < blocks[ro].length; co++){
-                prevState[ro][co] = blocks[ro][co];
-              }
-            }
-            block B = Pieces.get(Pieces.size() - 1);
-            for(int i = 0; i < 4; i++){
-              blocks[B.location[i][0]][B.location[i][1]] = 0;
-            }
-            B.moveLeft();
-            try{
-              for(int i = 0; i < 4; i++){
-                blocks[B.location[i][0]][B.location[i][1]] = color;
-              }
-            } catch(ArrayIndexOutOfBoundsException e){
-              B.moveRight();
-              for(int i = 0; i < 4; i++){
-                blocks[B.location[i][0]][B.location[i][1]] = color;
-              }
-            }
-            int redSquaresNew = 0;
-            for(int ro = 0; ro < blocks.length; ro++){
-              for(int co = 0; co < blocks[ro].length; co++){
-                redSquaresNew += blocks[ro][co];
-              }
-            }
-            if(redSquaresOld > redSquaresNew){
-              blocks = prevState;
-              B.moveRight();
-            }
+        for(int ro = 0; ro < blocks.length; ro++){
+          for(int co = 0; co < blocks[ro].length; co++){
+            prevState[ro][co] = blocks[ro][co];
           }
-          //same as ArrowRight
-          break;
-          case ArrowDown:
-          break;
-          default:
-          break;
         }
-        if(key.getCharacter() == 'z'){
-        //algorithm to prevent going into another square
-          if(counter > -1){
-            block B = Pieces.get(Pieces.size() - 1);
+        block B = Pieces.get(Pieces.size() - 1);
+        if (canMove){
+          for(int i = 0; i < 4; i++){
+            blocks[B.location[i][0]][B.location[i][1]] = 0;
+          }
+          B.moveDown();
+          for(int i = 0; i < 4; i++){
+            blocks[B.location[i][0]][B.location[i][1]] = color;
+          }
+        }
+        //check if too low
+        for (int j = 0; j < B.location.length; j++){
+          if (B.location[j][0] >= 23){
+            canMove = false;
+            NewTetris.clearRows(blocks, score);
+            color = NewTetris.generateBlock(Pieces, blocks);
+            canMove = true;
+          }
+        }
+        //check if block is covering
+        int redSquaresNew = 0;
+        for(int ro = 0; ro < blocks.length; ro++){
+          for(int co = 0; co < blocks[ro].length; co++){
+            redSquaresNew += blocks[ro][co];
+          }
+        }
+        if(redSquaresNew < redSquaresOld){
+          B.moveUp();
+          blocks = prevState;
+          canMove = false;
+          NewTetris.clearRows(blocks, score);
+          NewTetris.generateBlock(Pieces, blocks);
+          canMove = true;
+        }
+      }
+      counter = counter % 10000;
+      Key key = screen.readInput();
+      int totalshift = 0;
+      //used for arrows
+      if(key == null){
+        key = screen.readInput();
+      } else {
+        switch(key.getKind()){
+          case Escape:
+            screen.putString(5, 30, "You have exited the game, your score is: " + score, Terminal.Color.WHITE, Terminal.Color.BLACK);
+            screen.refresh();
+            Thread.sleep(1);
+            running = false;
+          break;
+          case ArrowRight:
+            if(counter > -1){
+              int redSquaresOld = 0;
+              for(int ro = 0; ro < blocks.length; ro++){
+                for(int co = 0; co < blocks[ro].length; co++){
+                  redSquaresOld += blocks[ro][co];
+                }
+              }
+              int[][] prevState = new int[blocks.length][blocks[1].length];
+              for(int ro = 0; ro < blocks.length; ro++){
+                for(int co = 0; co < blocks[ro].length; co++){
+                  prevState[ro][co] = blocks[ro][co];
+                }
+              }
+              block B = Pieces.get(Pieces.size() - 1);
               for(int i = 0; i < 4; i++){
                 blocks[B.location[i][0]][B.location[i][1]] = 0;
               }
+              B.moveRight();
               try{
-                B.rotateLeft();
                 for(int i = 0; i < 4; i++){
                   blocks[B.location[i][0]][B.location[i][1]] = color;
                 }
-              } catch (Exception e){
-                B.rotateRight();
+              }
+              catch(ArrayIndexOutOfBoundsException e){
+                B.moveLeft();
+                for(int i = 0; i < 4; i++){
+                  blocks[B.location[i][0]][B.location[i][1]] = color;
+                }
+              }
+              int redSquaresNew = 0;
+              for(int ro = 0; ro < blocks.length; ro++){
+                for(int co = 0; co < blocks[ro].length; co++){
+                  redSquaresNew += blocks[ro][co];
+                }
+              }
+              if(redSquaresOld > redSquaresNew){
+                blocks = prevState;
+                B.moveLeft();
               }
             }
+            break;
+            case ArrowLeft:
+              if(counter > -1){
+                int redSquaresOld = 0;
+                for(int ro = 0; ro < blocks.length; ro++){
+                  for(int co = 0; co < blocks[ro].length; co++){
+                    redSquaresOld += blocks[ro][co];
+                  }
+                }
+                int[][] prevState = new int[blocks.length][blocks[1].length];
+                for(int ro = 0; ro < blocks.length; ro++){
+                  for(int co = 0; co < blocks[ro].length; co++){
+                    prevState[ro][co] = blocks[ro][co];
+                  }
+                }
+                block B = Pieces.get(Pieces.size() - 1);
+                for(int i = 0; i < 4; i++){
+                  blocks[B.location[i][0]][B.location[i][1]] = 0;
+                }
+                B.moveLeft();
+                try{
+                  for(int i = 0; i < 4; i++){
+                    blocks[B.location[i][0]][B.location[i][1]] = color;
+                  }
+                } catch(ArrayIndexOutOfBoundsException e){
+                  B.moveRight();
+                  for(int i = 0; i < 4; i++){
+                    blocks[B.location[i][0]][B.location[i][1]] = color;
+                  }
+                }
+                int redSquaresNew = 0;
+                for(int ro = 0; ro < blocks.length; ro++){
+                  for(int co = 0; co < blocks[ro].length; co++){
+                    redSquaresNew += blocks[ro][co];
+                }
+              }
+              if(redSquaresOld > redSquaresNew){
+                blocks = prevState;
+                B.moveRight();
+              }
+            }
+            //same as ArrowRight
+            break;
+            case ArrowDown:
+            break;
+            default:
+            break;
           }
-          if(key.getCharacter() == 'x'){
+          if(key.getCharacter() == 'z'){
+            //algorithm to prevent going into another square
             if(counter > -1){
               block B = Pieces.get(Pieces.size() - 1);
                 for(int i = 0; i < 4; i++){
                   blocks[B.location[i][0]][B.location[i][1]] = 0;
                 }
                 try{
-                  B.rotateRight();
+                  B.rotateLeft();
                   for(int i = 0; i < 4; i++){
                     blocks[B.location[i][0]][B.location[i][1]] = color;
                   }
-                } catch(Exception e){
-                  B.rotateLeft();
+                } catch (Exception e){
+                  B.rotateRight();
+                }
+              }
+            }
+            if(key.getCharacter() == 'x'){
+              if(counter > -1){
+                block B = Pieces.get(Pieces.size() - 1);
+                  for(int i = 0; i < 4; i++){
+                    blocks[B.location[i][0]][B.location[i][1]] = 0;
+                  }
+                  try{
+                    B.rotateRight();
+                    for(int i = 0; i < 4; i++){
+                      blocks[B.location[i][0]][B.location[i][1]] = color;
+                    }
+                  } catch(Exception e){
+                    B.rotateLeft();
+                  }
                 }
               }
             }
           }
+          Thread.sleep(1000);
+          System.exit(0);
         }
-        Thread.sleep(1000);
-        System.exit(0);
       }
-    }
