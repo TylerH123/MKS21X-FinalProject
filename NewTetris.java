@@ -168,8 +168,6 @@ public class NewTetris {
         }
       }
       screen.refresh();
-      //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
-      //NewTetris.gravity(blocks, Pieces);
       if (counter % 5000 == 0){
         canMove = canMoveDown(current);
         if (canMove){
