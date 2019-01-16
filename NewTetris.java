@@ -67,7 +67,7 @@ public class NewTetris {
   }
 
   //Generating Block Function
-  public static void generateBlock(ArrayList<block> Pieces, int[][] blocks){
+  public static int generateBlock(ArrayList<block> Pieces, int[][] blocks){
     String[] blockTypes = new String[]{"o", "z", "i", "s", "t", "l", "j"};
     Random rand = new Random();
     int w = rand.nextInt(7);
@@ -78,6 +78,7 @@ public class NewTetris {
       blocks[B.location[i][0]][B.location[i][1]] = color;
     }
     Pieces.add(B);
+    return color;
   }
 
   //Move down all the pieces - ONLY worry about actual pieces and not empty spa
@@ -88,6 +89,23 @@ public class NewTetris {
         if(x == i && j == y) return true;
       }
     } return false;
+  }
+
+  //fill in board Function
+  public static void fillBoard(Screen x, int co, int ro, String g){
+    Terminal.Color color = Terminal.Color.BLACK;
+    if (g.equals("0")) color = Terminal.Color.BLACK;
+    if (g.equals("1")) color = Terminal.Color.YELLOW;
+    if (g.equals("2")) color = Terminal.Color.RED;
+    if (g.equals("3")) color = Terminal.Color.CYAN;
+    if (g.equals("4")) color = Terminal.Color.GREEN;
+    if (g.equals("5")) color = Terminal.Color.MAGENTA;
+    if (g.equals("6")) color = Terminal.Color.BLUE;
+    if (g.equals("7")) color = Terminal.Color.WHITE;
+    x.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, color);
+    x.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, color);
+    x.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, color);
+    x.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, color);
   }
 
   //keep in mind, the pieces array list contains all the blocks that ever formed, but the user only influences the last block
@@ -102,7 +120,6 @@ public class NewTetris {
     int score = 0;
     boolean running = true;
     //initiate new screen for terminal
-    int color =
     screen.startScreen();
     screen.putString(40, 0, "Score: " + score, Terminal.Color.WHITE, Terminal.Color.BLACK);
     //Putting the score at the top
@@ -110,7 +127,7 @@ public class NewTetris {
     //screen.setCursorVisible(false);
     //setting initial coordinates for the setCursorVisibleint c = 0;
     NewTetris.clear(blocks);
-    NewTetris.generateBlock(Pieces, blocks);
+    int color = NewTetris.generateBlock(Pieces, blocks);
     while(running){
       counter++;
       //using this as temporary timer
@@ -121,60 +138,10 @@ public class NewTetris {
       //filling the board
       for(int ro = 0; ro < blocks.length; ro++){
         for(int co = 0; co < blocks[ro].length; co++){
-         //System.out.println("Test" + (ro * 24 + co));
-         //System.out.println(blocks[ro][co]);
-         String g = Integer.toString(blocks[ro][co]);
-         if (blocks[ro][co] == 0) g = "0";
-         if(g == "0"){
-           screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
-           screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
-           screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
-           screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.BLACK);
-         }
-         if(g == "1"){
-           screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.YELLOW);
-           screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.YELLOW);
-           screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.YELLOW);
-           screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.YELLOW);
-         }
-         if(g == "2"){
-           screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.RED);
-           screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.RED);
-           screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.RED);
-           screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.RED);
-         }
-         if(g == "3"){
-           screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.CYAN);
-           screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.CYAN);
-           screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.CYAN);
-           screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.CYAN);
-         }
-         if(g == "4"){
-           screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.GREEN);
-           screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.GREEN);
-           screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.GREEN);
-           screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.GREEN);
-         }
-         if(g == "5"){
-           screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.MAGENTA);
-           screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.MAGENTA);
-           screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.MAGENTA);
-           screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.MAGENTA);
-         }
-         if(g == "6"){
-           screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.BLUE);
-           screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.BLUE);
-           screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.BLUE);
-           screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.BLUE);
-         }
-         if(g == "7"){
-           screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.WHITE);
-           screen.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, Terminal.Color.WHITE);
-           screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.WHITE);
-           screen.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, Terminal.Color.WHITE);
-         }
-       }
-     }
+          String g = Integer.toString(blocks[ro][co]);
+          fillBoard(screen, co, ro, g);
+        }
+      }
      screen.refresh();
      //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
      //NewTetris.gravity(blocks, Pieces);
@@ -198,7 +165,7 @@ public class NewTetris {
          }
          B.moveDown();
          for(int i = 0; i < 4; i++){
-           blocks[B.location[i][0]][B.location[i][1]] = 1;
+           blocks[B.location[i][0]][B.location[i][1]] = color;
          }
        }
        //check if too low
@@ -206,7 +173,7 @@ public class NewTetris {
          if (B.location[j][0] >= 23){
            canMove = false;
            NewTetris.clearRows(blocks, score);
-           NewTetris.generateBlock(Pieces, blocks);
+           color = NewTetris.generateBlock(Pieces, blocks);
            canMove = true;
          }
        }
@@ -261,13 +228,13 @@ public class NewTetris {
            B.moveRight();
            try{
              for(int i = 0; i < 4; i++){
-               blocks[B.location[i][0]][B.location[i][1]] = 1;
+               blocks[B.location[i][0]][B.location[i][1]] = color;
              }
            }
            catch(ArrayIndexOutOfBoundsException e){
              B.moveLeft();
              for(int i = 0; i < 4; i++){
-               blocks[B.location[i][0]][B.location[i][1]] = 1;
+               blocks[B.location[i][0]][B.location[i][1]] = color;
              }
            }
            int redSquaresNew = 0;
@@ -303,12 +270,12 @@ public class NewTetris {
             B.moveLeft();
             try{
               for(int i = 0; i < 4; i++){
-                blocks[B.location[i][0]][B.location[i][1]] = 1;
+                blocks[B.location[i][0]][B.location[i][1]] = color;
               }
             } catch(ArrayIndexOutOfBoundsException e){
               B.moveRight();
               for(int i = 0; i < 4; i++){
-                blocks[B.location[i][0]][B.location[i][1]] = 1;
+                blocks[B.location[i][0]][B.location[i][1]] = color;
               }
             }
             int redSquaresNew = 0;
@@ -339,7 +306,7 @@ public class NewTetris {
               try{
                 B.rotateLeft();
                 for(int i = 0; i < 4; i++){
-                  blocks[B.location[i][0]][B.location[i][1]] = 1;
+                  blocks[B.location[i][0]][B.location[i][1]] = color;
                 }
               } catch (Exception e){
                 B.rotateRight();
@@ -355,7 +322,7 @@ public class NewTetris {
                 try{
                   B.rotateRight();
                   for(int i = 0; i < 4; i++){
-                    blocks[B.location[i][0]][B.location[i][1]] = 1;
+                    blocks[B.location[i][0]][B.location[i][1]] = color;
                   }
                 } catch(Exception e){
                   B.rotateLeft();
