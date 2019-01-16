@@ -168,10 +168,6 @@ public class NewTetris {
     int color = NewTetris.generateBlock(Pieces, blocks);
     while(running){
       counter++;
-      //using this as temporary timer
-      if(counter % 20 == 0){
-        //NewTetris.generateBlock(Pieces, blocks);
-      }
       //if(Pieces.size() != 0) block B = Pieces[counter - 1];
       //filling the board
       for(int ro = 0; ro < blocks.length; ro++){
@@ -183,7 +179,7 @@ public class NewTetris {
       screen.refresh();
       //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
       //NewTetris.gravity(blocks, Pieces);
-      if (counter % 5000 == 0){
+      if (counter % 2000 == 0){
         overlapCheck(blocks);
         block B = Pieces.get(Pieces.size() - 1);
         if (canMove){
@@ -246,15 +242,8 @@ public class NewTetris {
                   blocks[B.location[i][0]][B.location[i][1]] = 0;
                 }
                 B.moveLeft();
-                try{
-                  for(int i = 0; i < 4; i++){
-                    blocks[B.location[i][0]][B.location[i][1]] = color;
-                  }
-                } catch(ArrayIndexOutOfBoundsException e){
-                  B.moveRight();
-                  for(int i = 0; i < 4; i++){
-                    blocks[B.location[i][0]][B.location[i][1]] = color;
-                  }
+                for(int i = 0; i < 4; i++){
+                  blocks[B.location[i][0]][B.location[i][1]] = color;
                 }
               }
             //same as ArrowRight
