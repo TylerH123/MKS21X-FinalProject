@@ -108,6 +108,42 @@ public class NewTetris {
     x.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, color);
   }
 
+  //really bad algorithm to make sure blocks dont overlap
+  public static void overlapCheck(int[][] blocks){
+    int redSquaresOld = 0;
+    for(int ro = 0; ro < blocks.length; ro++){
+      for(int co = 0; co < blocks[ro].length; co++){
+        redSquaresOld += blocks[ro][co];
+      }
+    }
+    int[][] prevState = new int[blocks.length][blocks[1].length];
+    for(int ro = 0; ro < blocks.length; ro++){
+      for(int co = 0; co < blocks[ro].length; co++){
+        prevState[ro][co] = blocks[ro][co];
+      }
+    }
+  }
+
+  //method to check if a block can move right
+  public static boolean checkRight(block b){
+    for (int i = 0; i < b.location.length; i++){
+      if (b.location[i][1] >= 9){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  //method to check if a block cana move left
+  public static boolean checkLeft(block b){
+    for (int i = 0; i < b.location.length; i++){
+      if (b.location[i][1] <= 1){
+        return false;
+      }
+    }
+    return true;
+  }
+
   //keep in mind, the pieces array list contains all the blocks that ever formed, but the user only influences the last block
   //This use
   public static void main(String[] args) throws InterruptedException{
@@ -115,6 +151,8 @@ public class NewTetris {
     ArrayList<block> Pieces = new ArrayList<block>();
     int counter = 0;
     boolean canMove = true;
+    boolean canMoveRight = true;
+    boolean canMoveLeft = true;
     NewTetris.clear(blocks);
     Screen screen = TerminalFacade.createScreen();
     int score = 0;
@@ -146,18 +184,7 @@ public class NewTetris {
       //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
       //NewTetris.gravity(blocks, Pieces);
       if (counter % 5000 == 0){
-        int redSquaresOld = 0;
-        for(int ro = 0; ro < blocks.length; ro++){
-          for(int co = 0; co < blocks[ro].length; co++){
-            redSquaresOld += blocks[ro][co];
-          }
-        }
-        int[][] prevState = new int[blocks.length][blocks[1].length];
-        for(int ro = 0; ro < blocks.length; ro++){
-          for(int co = 0; co < blocks[ro].length; co++){
-            prevState[ro][co] = blocks[ro][co];
-          }
-        }
+        overlapCheck(blocks);
         block B = Pieces.get(Pieces.size() - 1);
         if (canMove){
           for(int i = 0; i < 4; i++){
@@ -175,22 +202,9 @@ public class NewTetris {
             NewTetris.clearRows(blocks, score);
             color = NewTetris.generateBlock(Pieces, blocks);
             canMove = true;
+            canMoveLeft = true;
+            canMoveRight = true;
           }
-        }
-        //check if block is covering
-        int redSquaresNew = 0;
-        for(int ro = 0; ro < blocks.length; ro++){
-          for(int co = 0; co < blocks[ro].length; co++){
-            redSquaresNew += blocks[ro][co];
-          }
-        }
-        if(redSquaresNew < redSquaresOld){
-          B.moveUp();
-          blocks = prevState;
-          canMove = false;
-          NewTetris.clearRows(blocks, score);
-          NewTetris.generateBlock(Pieces, blocks);
-          canMove = true;
         }
       }
       counter = counter % 10000;
@@ -209,61 +223,25 @@ public class NewTetris {
           break;
           case ArrowRight:
             if(counter > -1){
-              int redSquaresOld = 0;
-              for(int ro = 0; ro < blocks.length; ro++){
-                for(int co = 0; co < blocks[ro].length; co++){
-                  redSquaresOld += blocks[ro][co];
-                }
-              }
-              int[][] prevState = new int[blocks.length][blocks[1].length];
-              for(int ro = 0; ro < blocks.length; ro++){
-                for(int co = 0; co < blocks[ro].length; co++){
-                  prevState[ro][co] = blocks[ro][co];
-                }
-              }
               block B = Pieces.get(Pieces.size() - 1);
+              canMoveRight = checkRight(B);
+              if (canMoveRight){
+              overlapCheck(blocks);
               for(int i = 0; i < 4; i++){
                 blocks[B.location[i][0]][B.location[i][1]] = 0;
               }
               B.moveRight();
-              try{
                 for(int i = 0; i < 4; i++){
                   blocks[B.location[i][0]][B.location[i][1]] = color;
                 }
-              }
-              catch(ArrayIndexOutOfBoundsException e){
-                B.moveLeft();
-                for(int i = 0; i < 4; i++){
-                  blocks[B.location[i][0]][B.location[i][1]] = color;
-                }
-              }
-              int redSquaresNew = 0;
-              for(int ro = 0; ro < blocks.length; ro++){
-                for(int co = 0; co < blocks[ro].length; co++){
-                  redSquaresNew += blocks[ro][co];
-                }
-              }
-              if(redSquaresOld > redSquaresNew){
-                blocks = prevState;
-                B.moveLeft();
               }
             }
             break;
             case ArrowLeft:
               if(counter > -1){
-                int redSquaresOld = 0;
-                for(int ro = 0; ro < blocks.length; ro++){
-                  for(int co = 0; co < blocks[ro].length; co++){
-                    redSquaresOld += blocks[ro][co];
-                  }
-                }
-                int[][] prevState = new int[blocks.length][blocks[1].length];
-                for(int ro = 0; ro < blocks.length; ro++){
-                  for(int co = 0; co < blocks[ro].length; co++){
-                    prevState[ro][co] = blocks[ro][co];
-                  }
-                }
                 block B = Pieces.get(Pieces.size() - 1);
+                canMoveLeft = checkLeft(B);
+                overlapCheck(blocks);
                 for(int i = 0; i < 4; i++){
                   blocks[B.location[i][0]][B.location[i][1]] = 0;
                 }
@@ -278,17 +256,7 @@ public class NewTetris {
                     blocks[B.location[i][0]][B.location[i][1]] = color;
                   }
                 }
-                int redSquaresNew = 0;
-                for(int ro = 0; ro < blocks.length; ro++){
-                  for(int co = 0; co < blocks[ro].length; co++){
-                    redSquaresNew += blocks[ro][co];
-                }
               }
-              if(redSquaresOld > redSquaresNew){
-                blocks = prevState;
-                B.moveRight();
-              }
-            }
             //same as ArrowRight
             break;
             case ArrowDown:
