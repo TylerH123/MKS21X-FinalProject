@@ -45,21 +45,17 @@ public class NewTetris {
     }
   }
 
-  //checks through the arrays to make sure each coordinate is inside the board
-  public boolean canRotate(String rotate, ArrayList<block> Pieces){
-    if (rotate.equals("left")){
-      int[][] loc = Pieces.get(0).locationLeft;
+  //checks through the left arrays to make sure each coordinate is inside the board
+  public static boolean canRotate(block b, String dir){
+    int[][] ary = new int[4][2];
+    if (dir.equals("left")){
+      ary = b.locationLeft;
     }
-    if (rotate.equals("right")){
-      int[][] loc = Pieces.get(0).locationRight;
+    if (dir.equals("right")){
+      ary = b.locationRight;
     }
-    block currentBlock = Pieces.get(0);
-    int[][] loc = new int[4][2];
-    for (int i = 0; i < loc.length; i++){
-      if (loc[i][0] > 10 || loc[i][0] < 0){
-        return false;
-      }
-      if (loc[i][1] < 0 || loc[i][1] > 24){
+    for (int i = 0; i < ary.length; i++){
+      if (ary[i][0] < 0 || ary[i][0] > 24 || ary[i][1] < 0 || ary[i][1] > 10){
         return false;
       }
     }
@@ -111,7 +107,16 @@ public class NewTetris {
   //method to check if a block can move right
   public static boolean checkRight(block b){
     for (int i = 0; i < b.location.length; i++){
-      if (b.location[i][1] >= 9){
+      if (b.location[i][1] + 1 > 9){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static boolean canMoveDown(block b){
+    for (int i = 0; i < b.location.length; i++){
+      if (b.location[i][0] + 1 > 23){
         return false;
       }
     }
@@ -121,7 +126,7 @@ public class NewTetris {
   //method to check if a block cana move left
   public static boolean checkLeft(block b){
     for (int i = 0; i < b.location.length; i++){
-      if (b.location[i][1] <= 0){
+      if (b.location[i][1] - 1 < 0){
         return false;
       }
     }
@@ -137,7 +142,8 @@ public class NewTetris {
     boolean canMove = true;
     boolean canMoveRight = true;
     boolean canMoveLeft = true;
-    NewTetris.clear(blocks);
+    boolean canRotateRight = true;
+    boolean canRotateLeft = true;
     Screen screen = TerminalFacade.createScreen();
     int score = 0;
     boolean running = true;
@@ -164,7 +170,8 @@ public class NewTetris {
       screen.refresh();
       //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
       //NewTetris.gravity(blocks, Pieces);
-      if (counter % 2000 == 0){
+      if (counter % 5000 == 0){
+        canMove = canMoveDown(current);
         if (canMove){
           for(int i = 0; i < 4; i++){
             blocks[current.location[i][0]][current.location[i][1]] = 0;
@@ -174,16 +181,14 @@ public class NewTetris {
             blocks[current.location[i][0]][current.location[i][1]] = color;
           }
         }
-        //check if too low
-        for (int j = 0; j < current.location.length; j++){
-          if (current.location[j][0] >= 23){
-            canMove = false;
-            NewTetris.clearRows(blocks, score);
-            color = NewTetris.generateBlock(Pieces, blocks);
-            canMove = true;
-            canMoveLeft = true;
-            canMoveRight = true;
-          }
+        else{
+          NewTetris.clearRows(blocks, score);
+          color = NewTetris.generateBlock(Pieces, blocks);
+          canMove = true;
+          canMoveLeft = true;
+          canMoveRight = true;
+          canRotateLeft = true;
+          canRotateRight = true;
         }
       }
       Key key = screen.readInput();
@@ -200,33 +205,28 @@ public class NewTetris {
             running = false;
           break;
           case ArrowRight:
-            if(counter > -1){
-              canMoveRight = checkRight(current);
-              if (canMoveRight){
+            canMoveRight = checkRight(current);
+            if (canMoveRight){
               for(int i = 0; i < 4; i++){
                 blocks[current.location[i][0]][current.location[i][1]] = 0;
               }
               current.moveRight();
-                for(int i = 0; i < 4; i++){
-                  blocks[current.location[i][0]][current.location[i][1]] = color;
-                }
+              for(int i = 0; i < 4; i++){
+                blocks[current.location[i][0]][current.location[i][1]] = color;
               }
             }
             break;
             case ArrowLeft:
-              if(counter > -1){
-                canMoveLeft = checkLeft(current);
-                if (canMoveLeft){
-                  for(int i = 0; i < 4; i++){
-                    blocks[current.location[i][0]][current.location[i][1]] = 0;
-                  }
-                  current.moveLeft();
-                  for(int i = 0; i < 4; i++){
-                    blocks[current.location[i][0]][current.location[i][1]] = color;
-                  }
+              canMoveLeft = checkLeft(current);
+              if (canMoveLeft){
+                for(int i = 0; i < 4; i++){
+                  blocks[current.location[i][0]][current.location[i][1]] = 0;
+                }
+                current.moveLeft();
+                for(int i = 0; i < 4; i++){
+                  blocks[current.location[i][0]][current.location[i][1]] = color;
                 }
               }
-            //same as ArrowRight
             break;
             case ArrowDown:
             break;
@@ -234,39 +234,32 @@ public class NewTetris {
             break;
           }
           if(key.getCharacter() == 'z'){
-            //algorithm to prevent going into another square
-            if(counter > -1){
+            canRotateLeft = canRotate(current, "left");
+            if(canRotateLeft){
               for(int i = 0; i < 4; i++){
                 blocks[current.location[i][0]][current.location[i][1]] = 0;
               }
-              try{
-                current.rotateLeft();
-                  for(int i = 0; i < 4; i++){
-                    blocks[current.location[i][0]][current.location[i][1]] = color;
-                  }
-                } catch (Exception e){
-                  current.rotateRight();
-                }
-              }
-            }
-            if(key.getCharacter() == 'x'){
-              if(counter > -1){
-                for(int i = 0; i < 4; i++){
-                    blocks[current.location[i][0]][current.location[i][1]] = 0;
-                  }
-                  try{
-                    current.rotateRight();
-                    for(int i = 0; i < 4; i++){
-                      blocks[current.location[i][0]][current.location[i][1]] = color;
-                    }
-                  } catch(Exception e){
-                    current.rotateLeft();
-                  }
-                }
+              current.rotateLeft();
+              for(int i = 0; i < 4; i++){
+                blocks[current.location[i][0]][current.location[i][1]] = color;
               }
             }
           }
-          Thread.sleep(1000);
-          System.exit(0);
+          if(key.getCharacter() == 'x'){
+            canRotateRight = canRotate(current, "right");
+            if(canRotateRight){
+              for(int i = 0; i < 4; i++){
+                blocks[current.location[i][0]][current.location[i][1]] = 0;
+              }
+              current.rotateRight();
+              for(int i = 0; i < 4; i++){
+                blocks[current.location[i][0]][current.location[i][1]] = color;
+              }
+            }
+          }
         }
       }
+      Thread.sleep(1000);
+      System.exit(0);
+    }
+  }
