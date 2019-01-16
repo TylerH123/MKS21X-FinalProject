@@ -108,22 +108,6 @@ public class NewTetris {
     x.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, color);
   }
 
-  //really bad algorithm to make sure blocks dont overlap
-  public static void overlapCheck(int[][] blocks){
-    int redSquaresOld = 0;
-    for(int ro = 0; ro < blocks.length; ro++){
-      for(int co = 0; co < blocks[ro].length; co++){
-        redSquaresOld += blocks[ro][co];
-      }
-    }
-    int[][] prevState = new int[blocks.length][blocks[1].length];
-    for(int ro = 0; ro < blocks.length; ro++){
-      for(int co = 0; co < blocks[ro].length; co++){
-        prevState[ro][co] = blocks[ro][co];
-      }
-    }
-  }
-
   //method to check if a block can move right
   public static boolean checkRight(block b){
     for (int i = 0; i < b.location.length; i++){
@@ -137,7 +121,7 @@ public class NewTetris {
   //method to check if a block cana move left
   public static boolean checkLeft(block b){
     for (int i = 0; i < b.location.length; i++){
-      if (b.location[i][1] <= 1){
+      if (b.location[i][1] <= 0){
         return false;
       }
     }
@@ -167,6 +151,7 @@ public class NewTetris {
     NewTetris.clear(blocks);
     int color = NewTetris.generateBlock(Pieces, blocks);
     while(running){
+      block current = Pieces.get(Pieces.size() - 1);
       counter++;
       //if(Pieces.size() != 0) block B = Pieces[counter - 1];
       //filling the board
@@ -180,20 +165,18 @@ public class NewTetris {
       //PUT GRAVITY HERE - CUZ IT MUST go after we fill in blocks
       //NewTetris.gravity(blocks, Pieces);
       if (counter % 2000 == 0){
-        overlapCheck(blocks);
-        block B = Pieces.get(Pieces.size() - 1);
         if (canMove){
           for(int i = 0; i < 4; i++){
-            blocks[B.location[i][0]][B.location[i][1]] = 0;
+            blocks[current.location[i][0]][current.location[i][1]] = 0;
           }
-          B.moveDown();
+          current.moveDown();
           for(int i = 0; i < 4; i++){
-            blocks[B.location[i][0]][B.location[i][1]] = color;
+            blocks[current.location[i][0]][current.location[i][1]] = color;
           }
         }
         //check if too low
-        for (int j = 0; j < B.location.length; j++){
-          if (B.location[j][0] >= 23){
+        for (int j = 0; j < current.location.length; j++){
+          if (current.location[j][0] >= 23){
             canMove = false;
             NewTetris.clearRows(blocks, score);
             color = NewTetris.generateBlock(Pieces, blocks);
@@ -203,7 +186,6 @@ public class NewTetris {
           }
         }
       }
-      counter = counter % 10000;
       Key key = screen.readInput();
       int totalshift = 0;
       //used for arrows
@@ -219,31 +201,29 @@ public class NewTetris {
           break;
           case ArrowRight:
             if(counter > -1){
-              block B = Pieces.get(Pieces.size() - 1);
-              canMoveRight = checkRight(B);
+              canMoveRight = checkRight(current);
               if (canMoveRight){
-              overlapCheck(blocks);
               for(int i = 0; i < 4; i++){
-                blocks[B.location[i][0]][B.location[i][1]] = 0;
+                blocks[current.location[i][0]][current.location[i][1]] = 0;
               }
-              B.moveRight();
+              current.moveRight();
                 for(int i = 0; i < 4; i++){
-                  blocks[B.location[i][0]][B.location[i][1]] = color;
+                  blocks[current.location[i][0]][current.location[i][1]] = color;
                 }
               }
             }
             break;
             case ArrowLeft:
               if(counter > -1){
-                block B = Pieces.get(Pieces.size() - 1);
-                canMoveLeft = checkLeft(B);
-                overlapCheck(blocks);
-                for(int i = 0; i < 4; i++){
-                  blocks[B.location[i][0]][B.location[i][1]] = 0;
-                }
-                B.moveLeft();
-                for(int i = 0; i < 4; i++){
-                  blocks[B.location[i][0]][B.location[i][1]] = color;
+                canMoveLeft = checkLeft(current);
+                if (canMoveLeft){
+                  for(int i = 0; i < 4; i++){
+                    blocks[current.location[i][0]][current.location[i][1]] = 0;
+                  }
+                  current.moveLeft();
+                  for(int i = 0; i < 4; i++){
+                    blocks[current.location[i][0]][current.location[i][1]] = color;
+                  }
                 }
               }
             //same as ArrowRight
@@ -256,33 +236,31 @@ public class NewTetris {
           if(key.getCharacter() == 'z'){
             //algorithm to prevent going into another square
             if(counter > -1){
-              block B = Pieces.get(Pieces.size() - 1);
-                for(int i = 0; i < 4; i++){
-                  blocks[B.location[i][0]][B.location[i][1]] = 0;
-                }
-                try{
-                  B.rotateLeft();
+              for(int i = 0; i < 4; i++){
+                blocks[current.location[i][0]][current.location[i][1]] = 0;
+              }
+              try{
+                current.rotateLeft();
                   for(int i = 0; i < 4; i++){
-                    blocks[B.location[i][0]][B.location[i][1]] = color;
+                    blocks[current.location[i][0]][current.location[i][1]] = color;
                   }
                 } catch (Exception e){
-                  B.rotateRight();
+                  current.rotateRight();
                 }
               }
             }
             if(key.getCharacter() == 'x'){
               if(counter > -1){
-                block B = Pieces.get(Pieces.size() - 1);
-                  for(int i = 0; i < 4; i++){
-                    blocks[B.location[i][0]][B.location[i][1]] = 0;
+                for(int i = 0; i < 4; i++){
+                    blocks[current.location[i][0]][current.location[i][1]] = 0;
                   }
                   try{
-                    B.rotateRight();
+                    current.rotateRight();
                     for(int i = 0; i < 4; i++){
-                      blocks[B.location[i][0]][B.location[i][1]] = color;
+                      blocks[current.location[i][0]][current.location[i][1]] = color;
                     }
                   } catch(Exception e){
-                    B.rotateLeft();
+                    current.rotateLeft();
                   }
                 }
               }
