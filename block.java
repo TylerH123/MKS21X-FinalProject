@@ -143,7 +143,9 @@ public class block{
       if (shape.equals("j")){
         whichAry = jDist;
       }
-      fillLocation(whichAry);
+      fillInLocation(left, whichAry, "left");
+      fillInLocation(right, whichAry, "right");
+      fillInLocation(current, whichAry, "current");
     }
   }
   //since cube does not change shape no matter how you rotate it, the location is not as dependent on direction
@@ -156,15 +158,6 @@ public class block{
     location[2][0] = ycor+1;
     location[3][1] = xcor+1;
     location[3][0] = ycor+1;
-  }
-  //loops through the different direction strings to pass into fillInLocation
-  //whichArray is the the array of the piece that is being created
-  public void fillLocation(int[][] whichArray){
-    String[] direct = new String[]{left, right, current};
-    String[] stringDirect = new String[]{"left", "right", "current"};
-    for (int i = 0; i < 3; i++){
-      fillInLocation(direct[i], whichArray, stringDirect[i]);
-    }
   }
   //fills in location arrays
   //dir is the direction in which the block is facing
