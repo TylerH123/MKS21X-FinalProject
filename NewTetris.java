@@ -87,21 +87,33 @@ public class NewTetris {
     } return false;
   }
 
+  //creates a border around the board
+  public static void createBorder(Screen x){
+    for (int i = 0; i < 25; i++){
+      x.putString(4, i, " ", Terminal.Color.GREEN, Terminal.Color.GREEN);
+      x.putString(25, i, " ", Terminal.Color.GREEN, Terminal.Color.GREEN);
+      x.putString(3, i, " ", Terminal.Color.GREEN, Terminal.Color.GREEN);
+      x.putString(26, i, " ", Terminal.Color.GREEN, Terminal.Color.GREEN);
+    }
+    for (int j = 3; j < 27; j++){
+      x.putString(j, 0, " ", Terminal.Color.GREEN, Terminal.Color.GREEN);
+      x.putString(j, 25, " ", Terminal.Color.GREEN, Terminal.Color.GREEN);
+    }
+  }
+
   //fill in board Function
   public static void fillBoard(Screen x, int co, int ro, String g){
-    Terminal.Color color = Terminal.Color.BLACK;
+    Terminal.Color color = Terminal.Color.YELLOW;
     if (g.equals("0")) color = Terminal.Color.BLACK;
     if (g.equals("1")) color = Terminal.Color.YELLOW;
     if (g.equals("2")) color = Terminal.Color.RED;
     if (g.equals("3")) color = Terminal.Color.CYAN;
-    if (g.equals("4")) color = Terminal.Color.GREEN;
+    if (g.equals("4")) color = Terminal.Color.RED;
     if (g.equals("5")) color = Terminal.Color.MAGENTA;
     if (g.equals("6")) color = Terminal.Color.BLUE;
     if (g.equals("7")) color = Terminal.Color.WHITE;
-    x.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, color);
-    x.putString(co * 2 + 5, ro, g, Terminal.Color.WHITE, color);
-    x.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, color);
-    x.putString(co * 2 + 6, ro, g, Terminal.Color.WHITE, color);
+    x.putString(co * 2 + 5, ro, " ", Terminal.Color.WHITE, color);
+    x.putString(co * 2 + 6, ro, " ", Terminal.Color.WHITE, color);
   }
 
   //method to check if a block can move right
@@ -149,7 +161,7 @@ public class NewTetris {
     boolean running = true;
     //initiate new screen for terminal
     screen.startScreen();
-    screen.putString(40, 0, "Score: " + score, Terminal.Color.WHITE, Terminal.Color.BLACK);
+    screen.putString(40, 0, "Score: " + score, Terminal.Color.WHITE, Terminal.Color.DEFAULT);
     //Putting the score at the top
     screen.refresh();
     //screen.setCursorVisible(false);
@@ -159,7 +171,6 @@ public class NewTetris {
     while(running){
       block current = Pieces.get(Pieces.size() - 1);
       counter++;
-      //if(Pieces.size() != 0) block B = Pieces[counter - 1];
       //filling the board
       for(int ro = 0; ro < blocks.length; ro++){
         for(int co = 0; co < blocks[ro].length; co++){
@@ -167,6 +178,7 @@ public class NewTetris {
           fillBoard(screen, co, ro, g);
         }
       }
+      createBorder(screen);
       screen.refresh();
       if (counter % 5000 == 0){
         canMove = canMoveDown(current);
@@ -197,7 +209,7 @@ public class NewTetris {
       } else {
         switch(key.getKind()){
           case Escape:
-            screen.putString(5, 30, "You have exited the game, your score is: " + score, Terminal.Color.WHITE, Terminal.Color.BLACK);
+            screen.putString(5, 30, "You have exited the game, your score is: " + score, Terminal.Color.WHITE, Terminal.Color.YELLOW);
             screen.refresh();
             Thread.sleep(1);
             running = false;
