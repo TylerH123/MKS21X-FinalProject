@@ -77,6 +77,23 @@ public class NewTetris {
     return color;
   }
 
+  public static boolean contains(int num, int[][] stuff){
+    for(int i = 0; i < stuff.length; i++){
+      for(int j = 0; j < stuff[0].length; j++){
+        if(stuff[i][j] == num) return true;
+      }
+    } return false;
+  }
+
+  public static boolean canFall(ArrayList<block> Pieces, int[][]blocks){
+    block b = Pieces.get(Pieces.size() - 1);
+    for(int i = 0; i < 4; i++){
+      for(int j = 0; j < 2; j++){
+        if(blocks.location[i][j])
+      }
+    }
+  }
+
   //Move down all the pieces - ONLY worry about actual pieces and not empty spa
   //helper function for gravity
   private static boolean contains(int[][] coords, int x, int y){

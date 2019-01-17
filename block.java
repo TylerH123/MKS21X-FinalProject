@@ -9,6 +9,8 @@ public class block{
   private int[][] lDist = new int[][]{{0,0},{1,0},{1,1},{1,2}};
   private int[][] jDist = new int[][]{{0,0},{1,0},{1,-1},{1,-2}};
   private int[][] tDist = new int[][]{{0,0},{1,0},{1,1},{1,-1}};
+
+
   //rightIdx is the index in direction thatright variable uses
   private int rightIdx = 1;
   //leftIdx is the index of direction that left variable uses
