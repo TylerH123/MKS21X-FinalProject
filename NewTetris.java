@@ -89,7 +89,9 @@ public class NewTetris {
 
         if(!NewTetris.contains(b.location[i][0]+1, b.location[i][1], b.location)){
           //^roots out all the blocks that are above another block in the 4block
+        if(b.location[i][0]+1 < 24){
           if(blocks[b.location[i][0]+1][b.location[i][1]] > 0) return false;
+        }
         }
 
     } return true;
@@ -129,10 +131,19 @@ public class NewTetris {
   }
 
   //method to check if a block can move right
-  public static boolean checkRight(block b){
+  public static boolean checkRight(ArrayList<block> Pieces, int[][] blocks){
+    block b = Pieces.get(Pieces.size() - 1);
     for (int i = 0; i < b.location.length; i++){
       if (b.location[i][1] + 1 > 9){
         return false;
+      } else{
+        if(b.location[i][1] + 1 > 9){
+          //checking if there's a block to the left using the same algorithm as moveDown
+          if(!NewTetris.contains(b.location[i][0], b.location[i][1] + 1, b.location)){
+            if(blocks[b.location[i][0]][b.location[i][1] + 1] > 0) return false;
+          }
+
+        }
       }
     }
     return true;
@@ -152,10 +163,18 @@ public class NewTetris {
   }
 
   //method to check if a block cana move left
-  public static boolean checkLeft(block b){
+  public static boolean checkLeft(ArrayList<block>Pieces, int[][]blocks){
+    block b = Pieces.get(Pieces.size() - 1);
     for (int i = 0; i < b.location.length; i++){
       if (b.location[i][1] - 1 < 0){
         return false;
+      } else{
+        if(b.location[i][1] + 1 < 0){
+          //checking if there's a block to the left using the same algorithm as moveDown
+          if(!NewTetris.contains(b.location[i][0], b.location[i][1] - 1, b.location)){
+            if(blocks[b.location[i][0]][b.location[i][1] - 1] > 1) return false;
+          }
+        }
       }
     }
     return true;
@@ -231,7 +250,7 @@ public class NewTetris {
             running = false;
           break;
           case ArrowRight:
-            canMoveRight = checkRight(current);
+            canMoveRight = checkRight(Pieces, blocks);
             if (canMoveRight){
               for(int i = 0; i < 4; i++){
                 blocks[current.location[i][0]][current.location[i][1]] = 0;
@@ -243,7 +262,7 @@ public class NewTetris {
             }
             break;
             case ArrowLeft:
-              canMoveLeft = checkLeft(current);
+              canMoveLeft = checkLeft(Pieces, blocks);
               if (canMoveLeft){
                 for(int i = 0; i < 4; i++){
                   blocks[current.location[i][0]][current.location[i][1]] = 0;
