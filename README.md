@@ -35,6 +35,7 @@ x to rotate right
 - 1/13/19: added a rotational border check. to do this I added 2 new arrays in to block which contained the locations if it were to rotate. also worked on debugging NewTetris. added ways for blocks to fall and move left and right. added a way to rotate blocks.
 - 1/14/19: fixed indentation. got rid of the bug that created an extra line at the bottom of the board.
 - 1/15/19: added different colors to each of the pieces. made code more modular. got rid of move left and right bugs. added check for rotation.
+- 1/16/19: added a border around the board. also fixed rotation check.
 
 ### Jude
 - 1/4/19 : worked on block methods
