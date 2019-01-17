@@ -144,11 +144,12 @@ public class NewTetris {
     return true;
   }
 
-  public static boolean canMoveDown(block b){
+  public static boolean canMoveDown(block b, ArrayList<block> Pieces, int[][]blocks){
     for (int i = 0; i < b.location.length; i++){
       if (b.location[i][0] + 1 > 23){
         return false;
       }
+      if(!NewTetris.canFall(Pieces, blocks)) return false;
     }
     return true;
   }
@@ -199,7 +200,7 @@ public class NewTetris {
       createBorder(screen);
       screen.refresh();
       if (counter % 5000 == 0){
-        canMove = canMoveDown(current);
+        canMove = canMoveDown(current, Pieces, blocks);
         if (canMove){
           for(int i = 0; i < 4; i++){
             blocks[current.location[i][0]][current.location[i][1]] = 0;
