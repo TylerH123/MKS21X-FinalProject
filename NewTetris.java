@@ -69,7 +69,7 @@ public class NewTetris {
     int w = rand.nextInt(7);
     String type = blockTypes[w];
     int color = w + 1;
-    block B = new block(5, 1, type);
+    block B = new block(5, 2, type);
     for(int i = 0; i < 4; i++){
       blocks[B.location[i][0]][B.location[i][1]] = color;
     }
@@ -175,7 +175,7 @@ public class NewTetris {
       for(int ro = 0; ro < blocks.length; ro++){
         for(int co = 0; co < blocks[ro].length; co++){
           String g = Integer.toString(blocks[ro][co]);
-          fillBoard(screen, co, ro, g);
+          fillBoard(screen, co, ro+1, g);
         }
       }
       createBorder(screen);
