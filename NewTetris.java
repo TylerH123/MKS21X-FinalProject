@@ -87,9 +87,9 @@ public class NewTetris {
     block b = Pieces.get(Pieces.size() - 1);
     for(int i = 0; i < 4; i++){
 
-        if(!NewTetris.contains(b.location[i][0], b.location[i][1] + 1, b.location)){
+        if(!NewTetris.contains(b.location[i][0]+1, b.location[i][1], b.location)){
           //^roots out all the blocks that are above another block in the 4block
-          if(blocks[b.location[i][0]][b.location[i][1] + 1] > 0) return false;
+          if(blocks[b.location[i][0]+1][b.location[i][1]] > 0) return false;
         }
 
     } return true;
@@ -142,8 +142,10 @@ public class NewTetris {
     for (int i = 0; i < b.location.length; i++){
       if (b.location[i][0] + 1 > 23){
         return false;
+      } else if (b.location[i][0] < 23){
+        if(!NewTetris.blockBelow(Pieces, blocks)) return false;
       }
-      if(!NewTetris.blockBelow(Pieces, blocks)) return false;
+
       //checks if theres a block below
     }
     return true;
