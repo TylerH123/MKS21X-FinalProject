@@ -55,7 +55,7 @@ public class NewTetris {
       ary = b.locationRight;
     }
     for (int i = 0; i < ary.length; i++){
-      if (ary[i][0] < 0 || ary[i][0] > 24 || ary[i][1] < 0 || ary[i][1] > 10){
+      if (ary[i][0] < 0 || ary[i][0] > 23 || ary[i][1] < 0 || ary[i][1] > 9){
         return false;
       }
     }
