@@ -77,11 +77,9 @@ public class NewTetris {
     return color;
   }
 
-  public static boolean contains(int num, int[][] stuff){
+  public static boolean contains(int num1,int num2, int[][] stuff){
     for(int i = 0; i < stuff.length; i++){
-      for(int j = 0; j < stuff[0].length; j++){
-        if(stuff[i][j] == num) return true;
-      }
+        if(stuff[i][1] == num2 && stuff[i][0] == num1) return true;
     } return false;
   }
 
@@ -89,9 +87,12 @@ public class NewTetris {
     block b = Pieces.get(Pieces.size() - 1);
     for(int i = 0; i < 4; i++){
       for(int j = 0; j < 2; j++){
-        if(blocks.location[i][j])
+        if(!NewTetris.contains(b.location[i][0], b.location[i][1] - 1, b.location)){
+          //^roots out all the blocks that are above another block in the 4block
+          if(blocks[b.location[i][0]][b.location[i][1] - 1] > 0) return false;
+        }
       }
-    }
+    } return true;
   }
 
   //Move down all the pieces - ONLY worry about actual pieces and not empty spa
