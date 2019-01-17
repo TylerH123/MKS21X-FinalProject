@@ -275,6 +275,25 @@ public class NewTetris {
               }
             break;
             case ArrowDown:
+            canMove = canMoveDown(current, Pieces, blocks);
+            if (canMove){
+              for(int i = 0; i < 4; i++){
+                blocks[current.location[i][0]][current.location[i][1]] = 0;
+              }
+              current.moveDown();
+              for(int i = 0; i < 4; i++){
+                blocks[current.location[i][0]][current.location[i][1]] = color;
+              }
+            }
+            else{
+              NewTetris.clearRows(blocks, score);
+              color = NewTetris.generateBlock(Pieces, blocks);
+              canMove = true;
+              canMoveLeft = true;
+              canMoveRight = true;
+              canRotateLeft = true;
+              canRotateRight = true;
+            }
             break;
             default:
             break;
