@@ -196,14 +196,15 @@ public class NewTetris {
     boolean running = true;
     //initiate new screen for terminal
     screen.startScreen();
-    screen.putString(40, 0, "Score: " + score, Terminal.Color.WHITE, Terminal.Color.DEFAULT);
-    //Putting the score at the top
-    screen.refresh();
+
     //screen.setCursorVisible(false);
     //setting initial coordinates for the setCursorVisibleint c = 0;
     NewTetris.clear(blocks);
     int color = NewTetris.generateBlock(Pieces, blocks);
     while(running){
+      screen.putString(40, 20, "Score: " + score, Terminal.Color.WHITE, Terminal.Color.DEFAULT);
+      //Putting the score at the top
+      screen.refresh();
       block current = Pieces.get(Pieces.size() - 1);
       counter++;
       //filling the board
