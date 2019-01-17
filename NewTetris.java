@@ -83,7 +83,7 @@ public class NewTetris {
     } return false;
   }
 
-  public static boolean canFall(ArrayList<block> Pieces, int[][]blocks){
+  public static boolean blockBelow(ArrayList<block> Pieces, int[][]blocks){
     block b = Pieces.get(Pieces.size() - 1);
     for(int i = 0; i < 4; i++){
 
@@ -143,7 +143,8 @@ public class NewTetris {
       if (b.location[i][0] + 1 > 23){
         return false;
       }
-      if(!NewTetris.canFall(Pieces, blocks)) return false;
+      if(!NewTetris.blockBelow(Pieces, blocks)) return false;
+      //checks if theres a block below
     }
     return true;
   }
