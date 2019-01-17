@@ -87,23 +87,17 @@ public class NewTetris {
     block b = Pieces.get(Pieces.size() - 1);
     for(int i = 0; i < 4; i++){
 
-        if(!NewTetris.contains(b.location[i][0], b.location[i][1] - 1, b.location)){
+        if(!NewTetris.contains(b.location[i][0], b.location[i][1] + 1, b.location)){
           //^roots out all the blocks that are above another block in the 4block
-          if(blocks[b.location[i][0]][b.location[i][1] - 1] > 0) return false;
+          if(blocks[b.location[i][0]][b.location[i][1] + 1] > 0) return false;
         }
-      
+
     } return true;
   }
 
   //Move down all the pieces - ONLY worry about actual pieces and not empty spa
   //helper function for gravity
-  private static boolean contains(int[][] coords, int x, int y){
-    for(int i = 0; i < 4; i++){
-      for(int j = 0; j < 2; j++){
-        if(x == i && j == y) return true;
-      }
-    } return false;
-  }
+
 
   //creates a border around the board
   public static void createBorder(Screen x){
