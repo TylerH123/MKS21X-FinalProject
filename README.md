@@ -4,11 +4,11 @@
 
 **To compile:**   
 ```
-javac -cp lanterna.jar:. NewTetris.java
+bash compile.sh
 ```
 **To run:**
 ```
-java -cp lanterna.jar:. NewTetris
+bash run.sh
 ```
 **To use:**
 ```
