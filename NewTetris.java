@@ -23,6 +23,7 @@ public class NewTetris {
   }
 
   public static void clearRows(int[][] blocks, int score){
+    int startY = 0;
     for(int r = 0; r < blocks.length; r++){
       boolean filledIn = true;
       for(int c = 0; c < blocks[r].length; c++){
@@ -31,9 +32,18 @@ public class NewTetris {
       if (filledIn){
         for(int c = 0; c < blocks[r].length; c++){
           blocks[r][c] = 0;
+          startY = r;
+          System.out.println(startY);
         }
       }
       score += 10;
+    }
+    //slides the thin up to the top
+    while(startY > 0){
+      for(int x = 0; x < 10; x++){
+      blocks[startY][x] = blocks[startY - 1][x];
+      startY--;
+    }
     }
   }
 
