@@ -33,7 +33,6 @@ public class Tetris {
         for(int c = 0; c < blocks[r].length; c++){
           blocks[r][c] = 0;
           startY = r;
-          System.out.println(startY);
         }
       }
       score += 10;
@@ -147,7 +146,7 @@ public class Tetris {
       if (b.location[i][1] + 1 > 9){
         return false;
       } else{
-        if(b.location[i][1] + 1 > 9){
+        if(b.location[i][1] + 1 < 10){
           //checking if there's a block to the left using the same algorithm as moveDown
           if(!Tetris.contains(b.location[i][0], b.location[i][1] + 1, b.location)){
             if(blocks[b.location[i][0]][b.location[i][1] + 1] > 0) return false;
@@ -179,7 +178,7 @@ public class Tetris {
       if (b.location[i][1] - 1 < 0){
         return false;
       } else{
-        if(b.location[i][1] + 1 < 0){
+        if(b.location[i][1] - 1 >= 0){
           //checking if there's a block to the left using the same algorithm as moveDown
           if(!Tetris.contains(b.location[i][0], b.location[i][1] - 1, b.location)){
             if(blocks[b.location[i][0]][b.location[i][1] - 1] > 1) return false;
