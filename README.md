@@ -20,6 +20,9 @@ z to rotate left
 ```
 x to rotate right
 ```
+```
+↓ key to speed up the rate at which the pieces fall
+```
 
 ## Developmental Log
 
