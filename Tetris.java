@@ -39,10 +39,10 @@ public class Tetris {
       score += 10;
     }
     //slides the thin up to the top
-    while(startY > 0){
+    for(int i = 0; startY > 0; startY--){
       for(int x = 0; x < 10; x++){
       blocks[startY][x] = blocks[startY - 1][x];
-      startY--;
+
     }
     }
   }
