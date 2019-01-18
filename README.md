@@ -4,11 +4,11 @@
 
 **To compile:**   
 ```
-javac -cp lanterna.jar:. NewTetris.java
+bash compile.sh
 ```
 **To run:**
 ```
-java -cp lanterna.jar:. NewTetris
+bash run.sh
 ```
 **To use:**
 ```
@@ -19,6 +19,9 @@ z to rotate left
 ```
 ```
 x to rotate right
+```
+```
+↓ key to speed up the rate at which the pieces fall
 ```
 
 ## Developmental Log
