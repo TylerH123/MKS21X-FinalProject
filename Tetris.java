@@ -32,7 +32,7 @@ public class Tetris {
       if (filledIn){
         for(int c = 0; c < blocks[r].length; c++){
           blocks[r][c] = 0;
-          startY = c;
+          startY = r;
           System.out.println(startY);
         }
       }
@@ -41,7 +41,7 @@ public class Tetris {
     //slides the thin up to the top
     while(startY > 0){
       for(int x = 0; x < 10; x++){
-      blocks[x][startY] = blocks[x][startY - 1];
+      blocks[startY][x] = blocks[startY - 1][x];
       startY--;
     }
     }
