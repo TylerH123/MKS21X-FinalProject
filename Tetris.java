@@ -15,30 +15,26 @@ import com.googlecode.lanterna.input.KeyMappingProfile;
 import com.googlecode.lanterna.screen.Screen;
 
 public class Tetris {
-  //This used in the arrayList of ints, if the coordinate has a block on the coordinate
-  // - since the color is a thing and not just 0, then it uses returns true
-  public static boolean hasBlock(int[][] blocks, int col, int row){
-    if(blocks[row][col] > 0) return true;
-    return false;
-  }
 
   public static boolean gameOver(ArrayList<block> Leon){
     if(Leon.size() > 3){
-    for(int i = 1; i < Leon.size() - 1; i++){
-      block leeeon = Leon.get(i);
-      for(int j = 0; j < 10; j++){
-      if (Tetris.contains(3,j, leeeon.location)) return true;
+      for(int i = 1; i < Leon.size() - 1; i++){
+        block leeeon = Leon.get(i);
+        for(int j = 0; j < 10; j++){
+          if (Tetris.contains(3,j, leeeon.location)) return true;
+        }
+      }
     }
-    }
-  } return false;
+    return false;
   }
 
+  //if a full row is filled, then it gets cleared and all the blocks fall down
   public static void clearRows(int[][] blocks, int score){
     for(int r = 0; r < blocks.length; r++){
       boolean filledIn = true;
       for(int c = 0; c < blocks[r].length; c++){
         //checks if the row the entire row is filled
-        if(!hasBlock(blocks, c, r)) filledIn = false;
+        if(blocks[r][c] == 0) filledIn = false;
       }
       //if the row is filled in, clear it, then move all the blocks above that row down by 1
       if (filledIn){
@@ -56,6 +52,7 @@ public class Tetris {
     }
   }
 
+  //wipes the entire board
   public static void clear(int[][] blocks){
     for(int r = 0; r < blocks.length; r++){
       for(int c = 0; c < blocks[r].length; c++){
@@ -64,7 +61,7 @@ public class Tetris {
     }
   }
 
-  //checks through the left arrays to make sure each coordinate is inside the board
+  //checks through the left and right location arrays to make sure each coordinate is inside the board
   public static boolean canRotate(block b, String dir){
     int[][] ary = new int[4][2];
     if (dir.equals("left")){
@@ -83,10 +80,13 @@ public class Tetris {
 
   //Generating Block Function
   public static int generateBlock(ArrayList<block> Pieces, int[][] blocks){
-    String[] blockTypes = new String[]{"o", "z", "i", "s", "t", "l", "j"};
+    //string containing all the different piece types
+    String[] blockTypes = new String[]{"o", "z", "i", "j", "t", "l", "s"};
     Random rand = new Random();
+    //rand is used to determine what type of piece gets created
     int w = rand.nextInt(7);
     String type = blockTypes[w];
+    //color is based on the type of piece, each piece has its own color
     int color = w + 1;
     block B = new block(5, 2, type);
     for(int i = 0; i < 4; i++){
@@ -96,38 +96,39 @@ public class Tetris {
     return color;
   }
 
+  //helper function to find if a space is occupied
   public static boolean contains(int num1,int num2, int[][] stuff){
     for(int i = 0; i < stuff.length; i++){
-        if(stuff[i][1] == num2 && stuff[i][0] == num1) return true;
-    } return false;
+      if(stuff[i][1] == num2 && stuff[i][0] == num1) return true;
+    }
+    return false;
   }
 
+  //checks if the spaces underneath current block is occupied or not
   public static boolean blockBelow(ArrayList<block> Pieces, int[][]blocks){
     block b = Pieces.get(Pieces.size() - 1);
     for(int i = 0; i < 4; i++){
-
-        if(!Tetris.contains(b.location[i][0]+1, b.location[i][1], b.location)){
-          //^roots out all the blocks that are above another block in the 4block
+      //make sure spaces underneath is not occupied
+      if(!Tetris.contains(b.location[i][0]+1, b.location[i][1], b.location)){
+        //make sure block is above the board limits
         if(b.location[i][0]+1 < 24){
           if(blocks[b.location[i][0]+1][b.location[i][1]] > 0) return false;
         }
-        }
-
-    } return true;
+      }
+    }
+    return true;
   }
-
-  //Move down all the pieces - ONLY worry about actual pieces and not empty spa
-  //helper function for gravity
-
 
   //creates a border around the board
   public static void createBorder(Screen x){
+    //creates the vertical parts of the border
     for (int i = 0; i < 25; i++){
       x.putString(4, i, " ", Terminal.Color.GREEN, Terminal.Color.GREEN);
       x.putString(25, i, " ", Terminal.Color.GREEN, Terminal.Color.GREEN);
       x.putString(3, i, " ", Terminal.Color.GREEN, Terminal.Color.GREEN);
       x.putString(26, i, " ", Terminal.Color.GREEN, Terminal.Color.GREEN);
     }
+    //creates the horizontal parts of the border
     for (int j = 3; j < 27; j++){
       x.putString(j, 0, " ", Terminal.Color.GREEN, Terminal.Color.GREEN);
       x.putString(j, 25, " ", Terminal.Color.GREEN, Terminal.Color.GREEN);
@@ -135,16 +136,20 @@ public class Tetris {
   }
 
   //fill in board Function
-  public static void fillBoard(Screen x, int co, int ro, String g){
-    Terminal.Color color = Terminal.Color.YELLOW;
-    if (g.equals("0")) color = Terminal.Color.BLACK;
-    if (g.equals("1")) color = Terminal.Color.YELLOW;
-    if (g.equals("2")) color = Terminal.Color.RED;
-    if (g.equals("3")) color = Terminal.Color.CYAN;
-    if (g.equals("4")) color = Terminal.Color.RED;
-    if (g.equals("5")) color = Terminal.Color.MAGENTA;
-    if (g.equals("6")) color = Terminal.Color.BLUE;
-    if (g.equals("7")) color = Terminal.Color.WHITE;
+  public static void fillBoard(Screen x, int co, int ro, int colour){
+    //array list with all the colors to color pieces
+    ArrayList<Terminal.Color> colors = new ArrayList();
+    colors.add(Terminal.Color.BLACK);
+    colors.add(Terminal.Color.YELLOW);
+    colors.add(Terminal.Color.RED);
+    colors.add(Terminal.Color.CYAN);
+    colors.add(Terminal.Color.WHITE);
+    colors.add(Terminal.Color.MAGENTA);
+    colors.add(Terminal.Color.BLUE);
+    colors.add(Terminal.Color.RED);
+    //the piece determines which color is used
+    Terminal.Color color = colors.get(colour);
+    //creates the board
     x.putString(co * 2 + 5, ro, " ", Terminal.Color.WHITE, color);
     x.putString(co * 2 + 6, ro, " ", Terminal.Color.WHITE, color);
   }
@@ -153,6 +158,7 @@ public class Tetris {
   public static boolean checkRight(ArrayList<block> Pieces, int[][] blocks){
     block b = Pieces.get(Pieces.size() - 1);
     for (int i = 0; i < b.location.length; i++){
+      //checking if the coordinates of the space to the right is outside the boundary of the board
       if (b.location[i][1] + 1 > 9){
         return false;
       } else{
@@ -161,30 +167,31 @@ public class Tetris {
           if(!Tetris.contains(b.location[i][0], b.location[i][1] + 1, b.location)){
             if(blocks[b.location[i][0]][b.location[i][1] + 1] > 0) return false;
           }
-
         }
       }
     }
     return true;
   }
 
+  //method to check if a block can move down
   public static boolean canMoveDown(block b, ArrayList<block> Pieces, int[][]blocks){
     for (int i = 0; i < b.location.length; i++){
+      //checking if the space under the block is outside of the board
       if (b.location[i][0] + 1 > 23){
         return false;
       } else if (b.location[i][0] < 23){
+        //checks if there is a block underneath
         if(!Tetris.blockBelow(Pieces, blocks)) return false;
       }
-
-      //checks if theres a block below
     }
     return true;
   }
 
-  //method to check if a block cana move left
+  //method to check if a block can move left
   public static boolean checkLeft(ArrayList<block>Pieces, int[][]blocks){
     block b = Pieces.get(Pieces.size() - 1);
     for (int i = 0; i < b.location.length; i++){
+      //checking if the space to the left of the block is outside of the board
       if (b.location[i][1] - 1 < 0){
         return false;
       } else{
@@ -199,12 +206,14 @@ public class Tetris {
     return true;
   }
 
-  //keep in mind, the pieces array list contains all the blocks that ever formed, but the user only influences the last block
-  //This use
   public static void main(String[] args) throws InterruptedException{
+    //dimensions of the board
     int[][] blocks = new int[24][10];
+    //array list containing all the pieces generated
     ArrayList<block> Pieces = new ArrayList<block>();
+    //counter used to make blocks auto drop
     int counter = 0;
+    //setting movement in all directions possible
     boolean canMove = true;
     boolean canMoveRight = true;
     boolean canMoveLeft = true;
@@ -215,26 +224,25 @@ public class Tetris {
     boolean running = true;
     //initiate new screen for terminal
     screen.startScreen();
-
-    //screen.setCursorVisible(false);
-    //setting initial coordinates for the setCursorVisibleint c = 0;
-    Tetris.clear(blocks);
+    //create the first piece
     int color = Tetris.generateBlock(Pieces, blocks);
+    //setting the current block to the most recent piece created
+    //this block will be the player controlled piece
+    block current = Pieces.get(Pieces.size() - 1);
+    //starting the game
     while(running){
       screen.putString(40, 20, "Score: " + score, Terminal.Color.WHITE, Terminal.Color.DEFAULT);
-      //Putting the score at the top
-      screen.refresh();
-      block current = Pieces.get(Pieces.size() - 1);
+      //Putting the score at the bottom middle
       counter++;
       //filling the board
       for(int ro = 0; ro < blocks.length; ro++){
         for(int co = 0; co < blocks[ro].length; co++){
-          String g = Integer.toString(blocks[ro][co]);
-          fillBoard(screen, co, ro+1, g);
+          fillBoard(screen, co, ro+1, blocks[ro][co]);
         }
       }
+      //adding the border
       createBorder(screen);
-      screen.refresh();
+      //auto falling code for the current piece
       if (counter % 5000 == 0){
         canMove = canMoveDown(current, Pieces, blocks);
         if (canMove){
@@ -247,107 +255,117 @@ public class Tetris {
           }
         }
         else{
+          //if piece can no longer move down, new piece will be created
+          //current piece will be set to the new piece created
+          //all movement will be allowed again
           Tetris.clearRows(blocks, score);
           color = Tetris.generateBlock(Pieces, blocks);
+          current = Pieces.get(Pieces.size() - 1);
           canMove = true;
           canMoveLeft = true;
           canMoveRight = true;
           canRotateLeft = true;
           canRotateRight = true;
-          System.out.println(score);
         }
       }
 
       //
       if (gameOver(Pieces)) running = false;
       Key key = screen.readInput();
-      int totalshift = 0;
       //used for arrows
       if(key == null){
         key = screen.readInput();
       } else {
         switch(key.getKind()){
+          //stops the game and exits the game
           case Escape:
-            screen.putString(5, 30, "You have exited the game, your score is: " + score, Terminal.Color.WHITE, Terminal.Color.YELLOW);
-            screen.refresh();
-            Thread.sleep(1);
-            running = false;
+          screen.putString(5, 30, "You have exited the game, your score is: " + score, Terminal.Color.WHITE, Terminal.Color.YELLOW);
+          screen.refresh();
+          Thread.sleep(1);
+          running = false;
           break;
           case ArrowRight:
-            canMoveRight = checkRight(Pieces, blocks);
-            if (canMoveRight){
-              for(int i = 0; i < 4; i++){
-                blocks[current.location[i][0]][current.location[i][1]] = 0;
-              }
-              current.moveRight();
-              for(int i = 0; i < 4; i++){
-                blocks[current.location[i][0]][current.location[i][1]] = color;
-              }
+          //move right by clearing its current position, adding 1 to its xcor, then updating location
+          canMoveRight = checkRight(Pieces, blocks);
+          if (canMoveRight){
+            for(int i = 0; i < 4; i++){
+              blocks[current.location[i][0]][current.location[i][1]] = 0;
             }
-            break;
-            case ArrowLeft:
-              canMoveLeft = checkLeft(Pieces, blocks);
-              if (canMoveLeft){
-                for(int i = 0; i < 4; i++){
-                  blocks[current.location[i][0]][current.location[i][1]] = 0;
-                }
-                current.moveLeft();
-                for(int i = 0; i < 4; i++){
-                  blocks[current.location[i][0]][current.location[i][1]] = color;
-                }
-              }
-            break;
-            case ArrowDown:
-            canMove = canMoveDown(current, Pieces, blocks);
-            if (canMove){
-              for(int i = 0; i < 4; i++){
-                blocks[current.location[i][0]][current.location[i][1]] = 0;
-              }
-              current.moveDown();
-              for(int i = 0; i < 4; i++){
-                blocks[current.location[i][0]][current.location[i][1]] = color;
-              }
-            }
-            else{
-              Tetris.clearRows(blocks, score);
-              color = Tetris.generateBlock(Pieces, blocks);
-              canMove = true;
-              canMoveLeft = true;
-              canMoveRight = true;
-              canRotateLeft = true;
-              canRotateRight = true;
-            }
-            break;
-            default:
-            break;
-          }
-          if(key.getCharacter() == 'z'){
-            canRotateLeft = canRotate(current, "left");
-            if(canRotateLeft){
-              for(int i = 0; i < 4; i++){
-                blocks[current.location[i][0]][current.location[i][1]] = 0;
-              }
-              current.rotateLeft();
-              for(int i = 0; i < 4; i++){
-                blocks[current.location[i][0]][current.location[i][1]] = color;
-              }
+            current.moveRight();
+            for(int i = 0; i < 4; i++){
+              blocks[current.location[i][0]][current.location[i][1]] = color;
             }
           }
-          if(key.getCharacter() == 'x'){
-            canRotateRight = canRotate(current, "right");
-            if(canRotateRight){
-              for(int i = 0; i < 4; i++){
-                blocks[current.location[i][0]][current.location[i][1]] = 0;
-              }
-              current.rotateRight();
-              for(int i = 0; i < 4; i++){
-                blocks[current.location[i][0]][current.location[i][1]] = color;
-              }
+          break;
+          case ArrowLeft:
+          //move left by clearing its current position, subtracting 1 to its xcor, then updating location
+          canMoveLeft = checkLeft(Pieces, blocks);
+          if (canMoveLeft){
+            for(int i = 0; i < 4; i++){
+              blocks[current.location[i][0]][current.location[i][1]] = 0;
+            }
+            current.moveLeft();
+            for(int i = 0; i < 4; i++){
+              blocks[current.location[i][0]][current.location[i][1]] = color;
+            }
+          }
+          break;
+          case ArrowDown:
+          //manual move down by clearing its current position, subtracting 1 to its ycor, then updating location
+          //this is very similar to the auto fall code
+          canMove = canMoveDown(current, Pieces, blocks);
+          if (canMove){
+            for(int i = 0; i < 4; i++){
+              blocks[current.location[i][0]][current.location[i][1]] = 0;
+            }
+            current.moveDown();
+            for(int i = 0; i < 4; i++){
+              blocks[current.location[i][0]][current.location[i][1]] = color;
+            }
+          }
+          else{
+            Tetris.clearRows(blocks, score);
+            color = Tetris.generateBlock(Pieces, blocks);
+            canMove = true;
+            canMoveLeft = true;
+            canMoveRight = true;
+            canRotateLeft = true;
+            canRotateRight = true;
+          }
+          break;
+          default:
+          break;
+        }
+        if(key.getCharacter() == 'z'){
+          //rotate right by clearing its current position, changing the direction the block is facing, then updating location
+          canRotateLeft = canRotate(current, "left");
+          if(canRotateLeft){
+            for(int i = 0; i < 4; i++){
+              blocks[current.location[i][0]][current.location[i][1]] = 0;
+            }
+            current.rotateLeft();
+            for(int i = 0; i < 4; i++){
+              blocks[current.location[i][0]][current.location[i][1]] = color;
+            }
+          }
+        }
+        if(key.getCharacter() == 'x'){
+          //rotate left by clearing its current position, changing the direction the block is facing, then updating location
+          canRotateRight = canRotate(current, "right");
+          if(canRotateRight){
+            for(int i = 0; i < 4; i++){
+              blocks[current.location[i][0]][current.location[i][1]] = 0;
+            }
+            current.rotateRight();
+            for(int i = 0; i < 4; i++){
+              blocks[current.location[i][0]][current.location[i][1]] = color;
             }
           }
         }
       }
-      Thread.sleep(1000);
-      System.exit(0);
+      screen.refresh();
     }
+    Thread.sleep(1000);
+    System.exit(0);
   }
+}
