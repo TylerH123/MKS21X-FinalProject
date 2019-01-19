@@ -22,6 +22,17 @@ public class Tetris {
     return false;
   }
 
+  public static boolean gameOver(ArrayList<block> Leon){
+    if(Leon.size() > 3){
+    for(int i = 1; i < Leon.size() - 1; i++){
+      block leeeon = Leon.get(i);
+      for(int j = 0; j < 10; j++){
+      if (Tetris.contains(3,j, leeeon.location)) return true;
+    }
+    }
+  } return false;
+  }
+
   public static void clearRows(int[][] blocks, int score){
     int startY = 0;
     for(int r = 0; r < blocks.length; r++){
@@ -246,6 +257,9 @@ public class Tetris {
           canRotateRight = true;
         }
       }
+
+      //
+      if (gameOver(Pieces)) running = false;
       Key key = screen.readInput();
       int totalshift = 0;
       //used for arrows
@@ -333,6 +347,7 @@ public class Tetris {
           }
         }
       }
+      screen.clear();
       Thread.sleep(1000);
       System.exit(0);
     }
