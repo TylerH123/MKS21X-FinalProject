@@ -34,26 +34,25 @@ public class Tetris {
   }
 
   public static void clearRows(int[][] blocks, int score){
-    int startY = 0;
     for(int r = 0; r < blocks.length; r++){
       boolean filledIn = true;
       for(int c = 0; c < blocks[r].length; c++){
+        //checks if the row the entire row is filled
         if(!hasBlock(blocks, c, r)) filledIn = false;
       }
+      //if the row is filled in, clear it, then move all the blocks above that row down by 1
       if (filledIn){
         for(int c = 0; c < blocks[r].length; c++){
           blocks[r][c] = 0;
-          startY = r;
+        }
+        for (int col = 0; col < blocks[r].length; col++){
+          for (int row = r; row > 0; row--){
+            int old = blocks[row-1][col];
+            blocks[row][col] = old;
+          }
         }
       }
       score += 10;
-    }
-    //slides the thin up to the top
-    for(int i = 0; startY > 0; startY--){
-      for(int x = 0; x < 10; x++){
-      blocks[startY][x] = blocks[startY - 1][x];
-
-    }
     }
   }
 
