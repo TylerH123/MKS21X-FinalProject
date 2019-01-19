@@ -39,6 +39,7 @@ x to rotate right
 - 1/14/19: fixed indentation. got rid of the bug that created an extra line at the bottom of the board.
 - 1/15/19: added different colors to each of the pieces. made code more modular. got rid of move left and right bugs. added check for rotation.
 - 1/16/19: added a border around the board. also fixed rotation check.
+- 1/18/19: fixed a rotation bug that made pieces rotate incorrectly. fixed clear rows so that multiple rows can be cleared at once" 
 
 ### Jude
 - 1/4/19 : worked on block methods
