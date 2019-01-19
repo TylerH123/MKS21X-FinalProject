@@ -12,9 +12,9 @@ public class block{
 
 
   //rightIdx is the index in direction thatright variable uses
-  private int rightIdx = 1;
+  private int rightIdx = 3;
   //leftIdx is the index of direction that left variable uses
-  private int leftIdx = 3;
+  private int leftIdx = 1;
   private int xcor, ycor;
   //left shows the direction if turnLeft happens
   //right shows the direction if turnRight happens
@@ -90,11 +90,11 @@ public class block{
   //param maxHeight is the maximum height of the board
   public void rotateRight(){
       current = right;
-      if (rightIdx == 3){
-        rightIdx = 0;
+      if (rightIdx == 0){
+        rightIdx = 3;
       }
       else{
-        rightIdx++;
+        rightIdx--;
       }
       right = direction[rightIdx];
       createBlock(piece);
@@ -105,11 +105,11 @@ public class block{
   //after rotation, clear the piece and then redraw using new location
   public void rotateLeft(){
       current = left;
-      if (leftIdx == 0){
-        leftIdx = 3;
+      if (leftIdx == 3){
+        leftIdx = 0;
       }
       else{
-        leftIdx--;
+        leftIdx++;
       }
       left = direction[leftIdx];
       createBlock(piece);
@@ -185,7 +185,7 @@ public class block{
     if (dir.equals("right")){
       for (int i = 0; i < location.length; i++){
         locArray[i][1] = xcor + whichAry[i][0];
-        locArray[i][0] = ycor + whichAry[i][1];
+        locArray[i][0] = ycor + whichAry[i][1] * -1;
       }
     }
     if (dir.equals("up")){
@@ -197,7 +197,7 @@ public class block{
     if (dir.equals("left")){
       for (int i = 0; i < location.length; i++){
         locArray[i][1] = xcor + whichAry[i][0] * -1;
-        locArray[i][0] = ycor + whichAry[i][1] * -1;
+        locArray[i][0] = ycor + whichAry[i][1];
       }
     }
   }
