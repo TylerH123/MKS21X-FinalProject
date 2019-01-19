@@ -255,6 +255,7 @@ public class Tetris {
           canMoveRight = true;
           canRotateLeft = true;
           canRotateRight = true;
+          System.out.println(score);
         }
       }
 
@@ -347,7 +348,6 @@ public class Tetris {
           }
         }
       }
-      screen.clear();
       Thread.sleep(1000);
       System.exit(0);
     }
