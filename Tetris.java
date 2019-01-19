@@ -138,7 +138,7 @@ public class Tetris {
   //fill in board Function
   public static void fillBoard(Screen x, int co, int ro, int colour){
     //array list with all the colors to color pieces
-    ArrayList<Terminal.Color> colors = new ArrayList();
+    ArrayList<Terminal.Color> colors = new ArrayList<Terminal.Color>();
     colors.add(Terminal.Color.BLACK);
     colors.add(Terminal.Color.YELLOW);
     colors.add(Terminal.Color.RED);
