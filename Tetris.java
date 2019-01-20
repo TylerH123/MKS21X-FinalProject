@@ -138,20 +138,19 @@ public class Tetris {
   //fill in board Function
   public static void fillBoard(Screen x, int co, int ro, int colour){
     //array list with all the colors to color pieces
-    ArrayList<Terminal.Color> colors = new ArrayList<Terminal.Color>();
-    colors.add(Terminal.Color.BLACK);
-    colors.add(Terminal.Color.YELLOW);
-    colors.add(Terminal.Color.RED);
-    colors.add(Terminal.Color.CYAN);
-    colors.add(Terminal.Color.WHITE);
-    colors.add(Terminal.Color.MAGENTA);
-    colors.add(Terminal.Color.BLUE);
-    colors.add(Terminal.Color.RED);
+    Terminal.Color colors = Terminal.Color.BLACK;
+    if(colour == 0) colors = Terminal.Color.BLACK;
+    if(colour == 1) colors = Terminal.Color.YELLOW;
+    if(colour == 2) colors = Terminal.Color.RED;
+    if(colour == 3) colors = Terminal.Color.CYAN;
+    if(colour == 4) colors = Terminal.Color.WHITE;
+    if(colour == 5) colors = Terminal.Color.MAGENTA;
+    if(colour == 6) colors = Terminal.Color.BLUE;
+    if(colour == 7) colors = Terminal.Color.RED;
     //the piece determines which color is used
-    Terminal.Color color = colors.get(colour);
     //creates the board
-    x.putString(co * 2 + 5, ro, " ", Terminal.Color.WHITE, color);
-    x.putString(co * 2 + 6, ro, " ", Terminal.Color.WHITE, color);
+    x.putString(co * 2 + 5, ro, " ", Terminal.Color.WHITE, colors);
+    x.putString(co * 2 + 6, ro, " ", Terminal.Color.WHITE, colors);
   }
 
   //method to check if a block can move right
@@ -224,15 +223,16 @@ public class Tetris {
     boolean running = true;
     //initiate new screen for terminal
     screen.startScreen();
+    clear(blocks);
     //create the first piece
     int color = Tetris.generateBlock(Pieces, blocks);
-    //setting the current block to the most recent piece created
-    //this block will be the player controlled piece
-    block current = Pieces.get(Pieces.size() - 1);
     //starting the game
     while(running){
-      screen.putString(40, 20, "Score: " + score, Terminal.Color.WHITE, Terminal.Color.DEFAULT);
       //Putting the score at the bottom middle
+      screen.putString(40, 20, "Score: " + score, Terminal.Color.WHITE, Terminal.Color.DEFAULT);
+      //setting the current block to the most recent piece created
+      //this block will be the player controlled piece
+      block current = Pieces.get(Pieces.size() - 1);
       counter++;
       //filling the board
       for(int ro = 0; ro < blocks.length; ro++){
@@ -242,6 +242,7 @@ public class Tetris {
       }
       //adding the border
       createBorder(screen);
+      screen.refresh();
       //auto falling code for the current piece
       if (counter % 5000 == 0){
         canMove = canMoveDown(current, Pieces, blocks);
@@ -270,7 +271,7 @@ public class Tetris {
       }
 
       //
-      if (gameOver(Pieces)) running = false;
+      //if (gameOver(Pieces)) running = false;
       Key key = screen.readInput();
       //used for arrows
       if(key == null){
