@@ -271,7 +271,7 @@ public class Tetris {
       }
 
       //
-      //if (gameOver(Pieces)) running = false;
+      if (gameOver(Pieces)) running = false;
       Key key = screen.readInput();
       //used for arrows
       if(key == null){
