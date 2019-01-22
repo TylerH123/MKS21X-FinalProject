@@ -64,6 +64,7 @@ public class Tetris {
   //checks through the left and right location arrays to make sure each coordinate is inside the board
   public static boolean canRotate(block b, String dir, int[][] blocks){
     int[][] ary = new int[4][2];
+    int[][] now = b.location;
     if (dir.equals("left")){
       ary = b.locationLeft;
     }
@@ -71,10 +72,12 @@ public class Tetris {
       ary = b.locationRight;
     }
     for (int i = 0; i < ary.length; i++){
-      if (blocks[ary[i][0]][ary[i][1]] > 0 ){
+
+      if (ary[i][0] < 0 || ary[i][0] > 23 || ary[i][1] < 0 || ary[i][1] > 9){
         return false;
       }
-      if (ary[i][0] < 0 || ary[i][0] > 23 || ary[i][1] < 0 || ary[i][1] > 9){
+
+      if (blocks[ary[i][0]][ary[i][1]] > 0 && blocks[now[i][0]][now[i][1]] == 0){
         return false;
       }
     }
