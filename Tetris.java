@@ -62,7 +62,7 @@ public class Tetris {
   }
 
   //checks through the left and right location arrays to make sure each coordinate is inside the board
-  public static boolean canRotate(block b, String dir){
+  public static boolean canRotate(block b, String dir, int[][] blocks){
     int[][] ary = new int[4][2];
     if (dir.equals("left")){
       ary = b.locationLeft;
@@ -71,6 +71,9 @@ public class Tetris {
       ary = b.locationRight;
     }
     for (int i = 0; i < ary.length; i++){
+      if (blocks[ary[i][0]][ary[i][1]] > 0 ){
+        return false;
+      }
       if (ary[i][0] < 0 || ary[i][0] > 23 || ary[i][1] < 0 || ary[i][1] > 9){
         return false;
       }
@@ -339,7 +342,7 @@ public class Tetris {
         }
         if(key.getCharacter() == 'z'){
           //rotate right by clearing its current position, changing the direction the block is facing, then updating location
-          canRotateLeft = canRotate(current, "left");
+          canRotateLeft = canRotate(current, "left", blocks);
           if(canRotateLeft){
             for(int i = 0; i < 4; i++){
               blocks[current.location[i][0]][current.location[i][1]] = 0;
@@ -352,7 +355,7 @@ public class Tetris {
         }
         if(key.getCharacter() == 'x'){
           //rotate left by clearing its current position, changing the direction the block is facing, then updating location
-          canRotateRight = canRotate(current, "right");
+          canRotateRight = canRotate(current, "right", blocks);
           if(canRotateRight){
             for(int i = 0; i < 4; i++){
               blocks[current.location[i][0]][current.location[i][1]] = 0;
