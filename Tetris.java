@@ -80,6 +80,7 @@ public class Tetris {
       if (blocks[ary[i][0]][ary[i][1]] > 0 && blocks[now[i][0]][now[i][1]] == 0){
         return false;
       }
+
     }
     return true;
   }
@@ -234,8 +235,10 @@ public class Tetris {
     int color = Tetris.generateBlock(Pieces, blocks);
     //starting the game
     while(running){
+
       //Putting the score at the bottom middle
       screen.putString(40, 20, "Score: " + score, Terminal.Color.WHITE, Terminal.Color.DEFAULT);
+
       //setting the current block to the most recent piece created
       //this block will be the player controlled piece
       block current = Pieces.get(Pieces.size() - 1);
@@ -275,6 +278,8 @@ public class Tetris {
           canRotateRight = true;
         }
       }
+
+
 
       //
       if (gameOver(Pieces)) running = false;
@@ -345,7 +350,8 @@ public class Tetris {
         }
         if(key.getCharacter() == 'z'){
           //rotate right by clearing its current position, changing the direction the block is facing, then updating location
-          canRotateLeft = canRotate(current, "left", blocks);
+          canRotateLeft = canRotate(current, "left", blocks) && checkLeft(Pieces, blocks);
+
           if(canRotateLeft){
             for(int i = 0; i < 4; i++){
               blocks[current.location[i][0]][current.location[i][1]] = 0;
@@ -358,7 +364,7 @@ public class Tetris {
         }
         if(key.getCharacter() == 'x'){
           //rotate left by clearing its current position, changing the direction the block is facing, then updating location
-          canRotateRight = canRotate(current, "right", blocks);
+          canRotateRight = canRotate(current, "right", blocks) && checkRight(Pieces, blocks);
           if(canRotateRight){
             for(int i = 0; i < 4; i++){
               blocks[current.location[i][0]][current.location[i][1]] = 0;
