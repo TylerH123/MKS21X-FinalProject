@@ -38,6 +38,7 @@ public class Tetris {
       }
       //if the row is filled in, clear it, then move all the blocks above that row down by 1
       if (filledIn){
+        score += 100;
         for(int c = 0; c < blocks[r].length; c++){
           blocks[r][c] = 0;
         }
@@ -48,7 +49,7 @@ public class Tetris {
           }
         }
       }
-      score += 10;
+
     }
   }
 
@@ -254,6 +255,7 @@ public class Tetris {
       screen.refresh();
       //auto falling code for the current piece
       if (counter % 5000 == 0){
+        score += 1;
         canMove = canMoveDown(current, Pieces, blocks);
         if (canMove){
           for(int i = 0; i < 4; i++){
@@ -293,7 +295,7 @@ public class Tetris {
           case Escape:
           screen.putString(5, 30, "You have exited the game, your score is: " + score, Terminal.Color.WHITE, Terminal.Color.YELLOW);
           screen.refresh();
-          Thread.sleep(1);
+          Thread.sleep(1000);
           running = false;
           break;
           case ArrowRight:
@@ -378,6 +380,8 @@ public class Tetris {
       }
       screen.refresh();
     }
+    screen.clear();
+
     Thread.sleep(1000);
     System.exit(0);
   }
