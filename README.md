@@ -40,6 +40,7 @@ clear method. using the new way to create shapes helped solve the rotation probl
 - 1/15/19: added different colors to each of the pieces. made code more modular. got rid of move left and right bugs. added check for rotation.
 - 1/16/19: added a border around the board. also fixed rotation check.
 - 1/18/19: fixed a rotation bug that made pieces rotate incorrectly. fixed clear rows so that multiple rows can be cleared at once. clearRows method is not a time efficient code. we need to find a better way to speed up the way clearRows works.
+- 1/21/19: fixed rotation so it doesn't rotate into other pieces.
 
 ### Jude
 - 1/4/19 : worked on block methods
