@@ -1,1 +1,1 @@
-java -cp lanterna.jar:. NewTetris 
+java -cp lanterna.jar:. Tetris 
