@@ -1,1 +1,1 @@
-javac -cp lanterna.jar:. NewTetris.java
+javac -cp lanterna.jar:. Tetris.java
